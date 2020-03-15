@@ -28,6 +28,7 @@ public class GameOptions
         createDigitalTimer();
         createScoreContainer();
         createOptions();
+        createBallMovementControls();
 
     }
 
@@ -104,28 +105,28 @@ public class GameOptions
 
     }
 
-    private JPanel createOptionItem(String content, MaterialLabel label)
+    private void createBallMovementControls()
     {
 
-        JPanel optionItemHolder = new JPanel();
-        optionItemHolder.setBackground(new Color(0, 0, 0, 0));
-        optionItemHolder.setPreferredSize(new Dimension(255, 30));
-        optionItemHolder.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
-        optionItemHolder.setLayout(new BorderLayout());
-
-        MaterialLabel contentLabel = materialElements.createLabel(content);
-        optionItemHolder.add(contentLabel, BorderLayout.WEST);
-
-        JPanel optionItemChoseHolder = new JPanel();
-        optionItemChoseHolder.setLayout(new GridBagLayout());
-        optionItemChoseHolder.setBackground(new Color(255, 255, 255));
-        optionItemChoseHolder.setPreferredSize(new Dimension(80, 25));
-        optionItemChoseHolder.add(label);
-        optionItemHolder.add(optionItemChoseHolder, BorderLayout.EAST);
-
-        return optionItemHolder;
+        GridLayout experimentLayout = new GridLayout(3,3);
+        JPanel compsToExperiment = new JPanel();
+        compsToExperiment.setBackground(new Color(0, 0, 0, 0));
+        compsToExperiment.setPreferredSize(new Dimension(255, 90));
+        compsToExperiment.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
+        compsToExperiment.setLayout(experimentLayout);
+        compsToExperiment.add(new JButton("Button 1"));
+        compsToExperiment.add(new JButton("Button 1"));
+        compsToExperiment.add(new JButton("Button 1"));
+        compsToExperiment.add(new JButton("Button 1"));
+        compsToExperiment.add(new JButton("Button 1"));
+        compsToExperiment.add(new JButton("Button 1"));
+        compsToExperiment.add(new JButton("Button 1"));
+        compsToExperiment.add(new JButton("Button 1"));
+        compsToExperiment.add(new JButton("Button 1"));
+        gameOptions.add(compsToExperiment);
 
     }
+
 
     private MaterialLabel createTimerElement(String text)
     {
@@ -164,6 +165,29 @@ public class GameOptions
     public JPanel getGameOptionsContainer()
     {
         return gameOptions;
+    }
+
+    private JPanel createOptionItem(String content, MaterialLabel label)
+    {
+
+        JPanel optionItemHolder = new JPanel();
+        optionItemHolder.setBackground(new Color(0, 0, 0, 0));
+        optionItemHolder.setPreferredSize(new Dimension(255, 30));
+        optionItemHolder.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
+        optionItemHolder.setLayout(new BorderLayout());
+
+        MaterialLabel contentLabel = materialElements.createLabel(content);
+        optionItemHolder.add(contentLabel, BorderLayout.WEST);
+
+        JPanel optionItemChoseHolder = new JPanel();
+        optionItemChoseHolder.setLayout(new GridBagLayout());
+        optionItemChoseHolder.setBackground(new Color(255, 255, 255));
+        optionItemChoseHolder.setPreferredSize(new Dimension(80, 25));
+        optionItemChoseHolder.add(label);
+        optionItemHolder.add(optionItemChoseHolder, BorderLayout.EAST);
+
+        return optionItemHolder;
+
     }
     
 }
