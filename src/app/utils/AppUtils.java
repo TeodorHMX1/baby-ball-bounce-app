@@ -19,4 +19,14 @@ public class AppUtils
         return mainActivityGlobal;
     }
 
+    private static int players = 2;
+    public static void setPlayers(int noPlayers)
+    {
+        players = noPlayers;
+    }
+    public static int getNoPlayers()
+    {
+        return players;
+    }
+
 }
