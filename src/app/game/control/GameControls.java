@@ -2,6 +2,7 @@ package app.game.control;
 
 import app.utils.material.MaterialButton;
 import app.utils.material.MaterialElements;
+import app.utils.material.MaterialLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,7 +82,7 @@ public class GameControls
 
     private void prepareSlider() {
 
-        JLabel sliderTitle = new JLabel("Speed:");
+        MaterialLabel sliderTitle = new MaterialLabel("Speed:");
         sliderTitle.setBorder(BorderFactory.createEmptyBorder(0, 150, 0, 0));
         gameControls.add(sliderTitle);
 
