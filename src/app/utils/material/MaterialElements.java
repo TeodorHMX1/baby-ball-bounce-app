@@ -1,6 +1,7 @@
 package app.utils.material;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
 
 public class MaterialElements
@@ -40,6 +41,7 @@ public class MaterialElements
         MaterialSlider materialSlider = new MaterialSlider(min, max);
         materialSlider.setMajorTickSpacing(1);
         materialSlider.setMinorTickSpacing(1);
+        materialSlider.setBackground(new Color(241, 241, 241));
         materialSlider.setPaintTicks(true);
         materialSlider.setPaintLabels(true);
         materialSlider.setValue(current);
