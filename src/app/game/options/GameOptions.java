@@ -185,7 +185,7 @@ public class GameOptions {
 
         btnPlayers2.addActionListener(actionEvent -> playersChoice(Players.TWO));
         btnPlayers4.addActionListener(actionEvent -> playersChoice(Players.FOUR));
-        btnMulti.addActionListener(actionEvent -> ballTo(Directions.LEFT));
+        btnMulti.addActionListener(actionEvent -> multiChoice());
         btnExit.addActionListener(actionEvent -> System.exit(0));
 
         GridLayout experimentLayout = new GridLayout(2, 2, 10, 10);
@@ -359,6 +359,11 @@ public class GameOptions {
                 break;
         }
 
+    }
+
+    private void multiChoice()
+    {
+        
     }
 
     public JPanel getGameOptionsContainer() {
