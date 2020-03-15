@@ -20,7 +20,7 @@ public class GameWorld {
         materialElements = new MaterialElements();
         gameWorld = new JPanel();
         gameWorld.setBorder(BorderFactory.createEmptyBorder(50, 20, 50, 20));
-        gameWorld.setLayout(new BorderLayout());
+//        gameWorld.setLayout(new BorderLayout());
         gameWorld.setPreferredSize(new Dimension(570, 440));
         gameWorld.setBackground(new Color(241, 241, 241));
 
@@ -31,6 +31,7 @@ public class GameWorld {
     private final int rows = 13;
     private final int columns = 16;
     private MaterialLabel[][] gameGrid = new MaterialLabel[rows][columns];
+    private MaterialLabel ball;
 
     private void initializeGameSubHolder() {
 
@@ -58,11 +59,24 @@ public class GameWorld {
             }
         }
         field.add(compsToExperiment);
+        gameWorld.add(field);
 
-        addBall();
+        Ball mBall = AppUtils.getBall();
+        ball = materialElements.createLabel("");
+        ball.setIcon(mBall.getBallImage());
+        ball.setBounds(100, 100, 100, 100);
+
+        JPanel ballHolder = new JPanel();
+        ballHolder.setPreferredSize(new Dimension(530, 360));
+        ballHolder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        ballHolder.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        ballHolder.setBackground(Color.white);
+        ballHolder.setLayout(null);
+        ballHolder.add(ball);
+        gameWorld.add(ballHolder);//, BorderLayout.SOUTH);
+
+//        addBall();
         addPlayers();
-
-        gameWorld.add(field, BorderLayout.CENTER);
 
     }
 
@@ -98,7 +112,7 @@ public class GameWorld {
     private void addBall() {
 
         Ball mBall = AppUtils.getBall();
-        gameGrid[mBall.getX()][mBall.getY()].setIcon(mBall.getBallImage());
+        ball.setIcon(mBall.getBallImage());
 
         AppUtils.addOnAutoMoveBallCallback(this::moveBallTo);
 
@@ -106,15 +120,10 @@ public class GameWorld {
 
     private void moveBallTo(Directions direction) {
 
+//        AppUtils.getBall().moveTo(direction);
         Ball mBall = AppUtils.getBall();
-        if (mBall.getY() == columns / 2 || mBall.getY() == columns / 2 - 1) {
-            gameGrid[mBall.getX()][mBall.getY()].setIcon(new ImageIcon("assets/images/bricks2.jpg"));
-        } else {
-            gameGrid[mBall.getX()][mBall.getY()].setIcon(new ImageIcon("assets/images/white32x32.jpg"));
-        }
-        AppUtils.getBall().moveTo(direction);
-        mBall = AppUtils.getBall();
-        gameGrid[mBall.getX()][mBall.getY()].setIcon(mBall.getBallImage());
+        gameGrid[mBall.getX()][mBall.getY()].setBounds(100, 100, 100, 100);
+//        gameGrid[mBall.getX()][mBall.getY()].setIcon(mBall.getBallImage());
 
     }
 
