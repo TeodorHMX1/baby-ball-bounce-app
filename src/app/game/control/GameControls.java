@@ -6,19 +6,19 @@ import java.awt.*;
 public class GameControls
 {
 
-    private JPanel gameOptions;
+    private JPanel gameControls;
 
     public GameControls()
     {
 
-        gameOptions = new JPanel();
-        gameOptions.setBackground(new Color(241, 241, 241));
+        gameControls = new JPanel();
+        gameControls.setBackground(new Color(241, 241, 241));
 
     }
 
     public JPanel getGameControlsContainer()
     {
-        return gameOptions;
+        return gameControls;
     }
     
 }
