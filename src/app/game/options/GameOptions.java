@@ -207,6 +207,8 @@ public class GameOptions
         optionItemChoseHolder.setBackground(new Color(255, 255, 255));
         optionItemChoseHolder.setPreferredSize(new Dimension(80, 25));
         MaterialLabel contentLabel = materialElements.createLabel("");
+        Icon iconAct = new ImageIcon("assets/images/ball.png");
+        contentLabel.setIcon(iconAct);
         optionItemChoseHolder.add(contentLabel);
 
         return optionItemChoseHolder;
