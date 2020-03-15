@@ -6,6 +6,8 @@ import app.utils.material.MaterialLabel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GameOptions
 {
@@ -15,6 +17,13 @@ public class GameOptions
     private MaterialLabel timerMinutes, timerSeconds, timerMilliseconds;
     private MaterialLabel scoreTeamLeft, scoreTeamRight;
     private int teamLeft = 0, teamRight = 0;
+    private MaterialLabel compassLabel;
+    enum Directions {
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN
+    }
 
     public GameOptions()
     {
@@ -30,6 +39,8 @@ public class GameOptions
         createScoreContainer();
         createOptions();
         createBallMovementControls();
+        createCompass();
+        createChoices();
 
     }
 
@@ -109,6 +120,17 @@ public class GameOptions
     private void createBallMovementControls()
     {
 
+
+        MaterialButton btnUp = createGridElementChoice("up");
+        MaterialButton btnDown = createGridElementChoice("down");
+        MaterialButton btnLeft = createGridElementChoice("left");
+        MaterialButton btnRight = createGridElementChoice("right");
+
+        btnUp.addActionListener(actionEvent -> ballTo(Directions.UP));
+        btnDown.addActionListener(actionEvent -> ballTo(Directions.DOWN));
+        btnLeft.addActionListener(actionEvent -> ballTo(Directions.LEFT));
+        btnRight.addActionListener(actionEvent -> ballTo(Directions.RIGHT));
+
         GridLayout experimentLayout = new GridLayout(3,3);
         JPanel compsToExperiment = new JPanel();
         compsToExperiment.setBackground(new Color(0, 0, 0, 0));
@@ -116,15 +138,48 @@ public class GameOptions
         compsToExperiment.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
         compsToExperiment.setLayout(experimentLayout);
         compsToExperiment.add(squareGridElement());
-        compsToExperiment.add(createGridElementChoice("up"));
+        compsToExperiment.add(btnUp);
         compsToExperiment.add(squareGridElement());
-        compsToExperiment.add(createGridElementChoice("left"));
+        compsToExperiment.add(btnLeft);
         compsToExperiment.add(createGridElementMiddle());
-        compsToExperiment.add(createGridElementChoice("right"));
+        compsToExperiment.add(btnRight);
         compsToExperiment.add(squareGridElement());
-        compsToExperiment.add(createGridElementChoice("down"));
+        compsToExperiment.add(btnDown);
         compsToExperiment.add(squareGridElement());
         gameOptions.add(compsToExperiment);
+
+    }
+
+    private void createCompass()
+    {
+
+        JPanel optionItemChoseHolder = new JPanel();
+        optionItemChoseHolder.setLayout(new GridBagLayout());
+        optionItemChoseHolder.setBackground(new Color(0, 0, 0, 0));
+        compassLabel = materialElements.createLabel("");
+        compassLabel.setBackground(new Color(0, 0, 0, 0));
+
+        ImageIcon imageIcon = new ImageIcon("assets/images/east.jpg");
+        Image image = imageIcon.getImage();
+        Image newimg = image.getScaledInstance(100, 100,  Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(newimg);
+        compassLabel.setIcon(imageIcon);
+
+        optionItemChoseHolder.add(compassLabel);
+
+        GridLayout experimentLayout = new GridLayout(1,1);
+        JPanel compsToExperiment = new JPanel();
+        compsToExperiment.setLayout(experimentLayout);
+        compsToExperiment.setBackground(new Color(0, 0, 0, 0));
+        compsToExperiment.setPreferredSize(new Dimension(255, 100));
+        compsToExperiment.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
+        compsToExperiment.add(optionItemChoseHolder);
+        gameOptions.add(compsToExperiment);
+
+    }
+
+    private void createChoices()
+    {
 
     }
 
@@ -228,5 +283,47 @@ public class GameOptions
         return optionItemChoseHolder;
 
     }
-    
+
+    private void ballTo(Directions direction)
+    {
+
+        ImageIcon imageIcon;
+        Image image;
+
+        switch(direction) {
+            case DOWN:
+                imageIcon = new ImageIcon("assets/images/south.jpg");
+                image = imageIcon.getImage();
+                image = image.getScaledInstance(100, 100,  Image.SCALE_SMOOTH);
+                imageIcon = new ImageIcon(image);
+                compassLabel.setIcon(imageIcon);
+                break;
+            case UP:
+                imageIcon = new ImageIcon("assets/images/north.jpg");
+                image = imageIcon.getImage();
+                image = image.getScaledInstance(100, 100,  Image.SCALE_SMOOTH);
+                imageIcon = new ImageIcon(image);
+                compassLabel.setIcon(imageIcon);
+                break;
+            case LEFT:
+                imageIcon = new ImageIcon("assets/images/west.jpg");
+                image = imageIcon.getImage();
+                image = image.getScaledInstance(100, 100,  Image.SCALE_SMOOTH);
+                imageIcon = new ImageIcon(image);
+                compassLabel.setIcon(imageIcon);
+                break;
+            case RIGHT:
+                imageIcon = new ImageIcon("assets/images/east.jpg");
+                image = imageIcon.getImage();
+                image = image.getScaledInstance(100, 100,  Image.SCALE_SMOOTH);
+                imageIcon = new ImageIcon(image);
+                compassLabel.setIcon(imageIcon);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+
 }
