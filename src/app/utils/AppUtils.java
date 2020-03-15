@@ -29,4 +29,18 @@ public class AppUtils
         return players;
     }
 
+    private static int seconds = 0;
+    public static void increaseSeconds()
+    {
+        seconds++;
+    }
+    public static void resetSeconds()
+    {
+        seconds = 0;
+    }
+    public static int getSeconds()
+    {
+        return seconds;
+    }
+
 }
