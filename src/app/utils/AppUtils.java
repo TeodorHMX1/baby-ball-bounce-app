@@ -1,6 +1,7 @@
 package app.utils;
 
 import app.interfaces.GameTimer;
+import app.models.Ball;
 import app.models.Player;
 
 import javax.swing.*;
@@ -21,6 +22,7 @@ public class AppUtils
     {
         mainActivityGlobal = mainActivity;
         initializePlayers();
+        initializeBall();
     }
     public static JFrame getAppWindow() {
         return mainActivityGlobal;
@@ -68,6 +70,17 @@ public class AppUtils
         return mPlayers;
     }
 
+    private static Ball mBall;
+    public static void initializeBall()
+    {
+        mBall = new Ball(6, 5);
+    }
+    public static Ball getBall()
+    {
+        return mBall;
+    }
+
+
     private static int seconds = 0;
     public static void increaseSeconds()
     {
@@ -81,6 +94,8 @@ public class AppUtils
         {
             mGameStarted.isRunning(gameStarted);
         }
+        initializePlayers();
+        initializeBall();
     }
     public static int getSeconds()
     {
