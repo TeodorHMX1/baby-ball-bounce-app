@@ -5,10 +5,15 @@ import javax.swing.*;
 public class AppUtils
 {
 
-    public static JFrame mainActivity;
-    public static void setMainActivity()
+    public AppUtils()
     {
 
+    }
+
+    public static JFrame mainActivityGlobal;
+    public static void setMainActivity(JFrame mainActivity)
+    {
+        mainActivityGlobal = mainActivity;
     }
 
 }

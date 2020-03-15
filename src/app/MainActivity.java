@@ -5,6 +5,8 @@ import app.menu.MenuActivity;
 import javax.swing.*;
 import java.awt.*;
 
+import static app.utils.AppUtils.setMainActivity;
+
 public class MainActivity extends JFrame
 {
 
@@ -25,6 +27,8 @@ public class MainActivity extends JFrame
         initializeWindow();
 
         createUIX();
+
+        setMainActivity(MainActivity.this);
 
     }
 
@@ -57,7 +61,7 @@ public class MainActivity extends JFrame
     private void createMenu() {
 
         //create app.menu
-        MenuActivity menuActivity = new MenuActivity(this);
+        MenuActivity menuActivity = new MenuActivity();
         menuActivity.prepareMenu();
 
     }
