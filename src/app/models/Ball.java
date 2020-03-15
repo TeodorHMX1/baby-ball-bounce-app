@@ -1,5 +1,7 @@
 package app.models;
 
+import app.utils.enums.Directions;
+
 import javax.swing.*;
 
 public class Ball {
@@ -25,4 +27,8 @@ public class Ball {
         return ballImage;
     }
 
+    public void moveTo(Directions direction)
+    {
+        this.y++;
+    }
 }

@@ -1,5 +1,6 @@
 package app.utils;
 
+import app.interfaces.BallCallback;
 import app.interfaces.GameTimer;
 import app.models.Ball;
 import app.models.Player;
@@ -84,7 +85,6 @@ public class AppUtils
         return mBall;
     }
 
-
     private static int seconds = 0;
     public static void increaseSeconds()
     {
@@ -123,6 +123,15 @@ public class AppUtils
     private static GameTimer.GameStarted mGameStarted;
     public static void addOnTimerCallback(GameTimer.GameStarted gameStarted) {
         mGameStarted = gameStarted;
+    }
+
+    private static BallCallback.AutoMoveBall mAutoMoveBall;
+    public static void addOnAutoMoveBallCallback(BallCallback.AutoMoveBall autoMoveBall) {
+        mAutoMoveBall = autoMoveBall;
+    }
+    public static BallCallback.AutoMoveBall getAutoMoveBall()
+    {
+        return mAutoMoveBall;
     }
 
 }
