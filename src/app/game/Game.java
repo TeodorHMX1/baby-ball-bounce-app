@@ -24,6 +24,8 @@ public class Game
         GameWorld gameWorld = new GameWorld();
         windowContainer.add(gameWorld.getGameWorldContainer(), BorderLayout.WEST);
 
+//        getAppWindow().pack();
+
     }
 
 }
