@@ -45,7 +45,6 @@ public class MenuActivity
 
         var eMenuItem = new JMenuItem("Exit");
         eMenuItem.setMnemonic(KeyEvent.VK_E);
-        eMenuItem.setToolTipText("Exit application");
         eMenuItem.addActionListener((event) -> System.exit(0));
         fileMenu.add(eMenuItem);
 
