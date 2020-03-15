@@ -54,7 +54,7 @@ public class MainActivity extends JFrame
 
         //create app.menu
         MenuActivity menuActivity = new MenuActivity(this);
-        menuActivity.load();
+        menuActivity.prepareMenu();
 
     }
 
