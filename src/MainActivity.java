@@ -19,8 +19,6 @@ public class MainActivity extends JFrame {
 
         initializeWindow();
 
-        createUIX();
-
     }
 
     private void initializeWindow() {
@@ -38,8 +36,5 @@ public class MainActivity extends JFrame {
 
     }
 
-    private void createUIX()
-    {
-    }
 
 }
