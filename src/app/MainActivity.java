@@ -16,7 +16,7 @@ public class MainActivity extends JFrame
 
         EventQueue.invokeLater(() -> {
 
-            new MainActivity().setVisible(true);
+            new MainActivity();
 
         });
 
@@ -41,8 +41,10 @@ public class MainActivity extends JFrame
         // make the screen to always be at the same size
         // is not resizable
         setResizable(false);
-        //close on 'x' clicked
+        // close on 'x' clicked
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        // set window visible
+        setVisible(true);
 
         // make the window to appear in the middle of the screen
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

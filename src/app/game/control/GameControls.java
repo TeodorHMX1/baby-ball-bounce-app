@@ -1,5 +1,7 @@
 package app.game.control;
 
+import app.utils.material.MaterialElements;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -35,9 +37,7 @@ public class GameControls
     private void loadActBtn() {
 
         Icon iconAct = new ImageIcon("assets/images/step.png");
-        JButton btnAct = new JButton(iconAct);
-        btnAct.setText("Act");
-        btnAct.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        JButton btnAct = new MaterialElements().newButton(iconAct, "Act");
         gameControls.add(btnAct);
 
     }
