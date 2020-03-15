@@ -28,7 +28,7 @@ public class Game
 
         //add the game options to the container
         GameOptions gameOptions = new GameOptions();
-        windowContainer.add(gameOptions.getGameOptionsContainer(), BorderLayout.WEST);
+        windowContainer.add(gameOptions.getGameOptionsContainer(), BorderLayout.SOUTH);
 
         //add the game controls to the container
         GameControls gameControls = new GameControls();
