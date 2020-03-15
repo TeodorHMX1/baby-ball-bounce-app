@@ -17,7 +17,7 @@ public class MenuActivity
     public void load()
     {
 
-        var menuBar = new JMenuBar();
+        var menuBar = new MenuUI();
 
         var fileMenu = new JMenu("File");
         fileMenu.setMnemonic(KeyEvent.VK_F);
