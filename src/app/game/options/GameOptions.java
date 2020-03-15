@@ -30,6 +30,7 @@ public class GameOptions
         createScoreContainer();
         createOptions();
         createBallMovementControls();
+        createCompass();
 
     }
 
@@ -125,6 +126,34 @@ public class GameOptions
         compsToExperiment.add(createGridElementChoice("down"));
         compsToExperiment.add(squareGridElement());
         gameOptions.add(compsToExperiment);
+
+    }
+
+    private void createCompass()
+    {
+
+        JPanel optionItemChoseHolder = new JPanel();
+        optionItemChoseHolder.setLayout(new GridBagLayout());
+        MaterialLabel contentLabel = materialElements.createLabel("");
+
+        ImageIcon imageIcon = new ImageIcon("assets/images/ball.png");
+        Image image = imageIcon.getImage(); // transform it
+        Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        imageIcon = new ImageIcon(newimg);  // transform it back
+        contentLabel.setIcon(imageIcon);
+
+        contentLabel.setPreferredSize(new Dimension(100, 100));
+        optionItemChoseHolder.add(contentLabel);
+
+        GridLayout experimentLayout = new GridLayout(1,1);
+        JPanel compsToExperiment = new JPanel();
+        compsToExperiment.setLayout(experimentLayout);
+        compsToExperiment.setBackground(new Color(0, 0, 0, 0));
+        compsToExperiment.setPreferredSize(new Dimension(255, 100));
+        compsToExperiment.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
+        compsToExperiment.add(optionItemChoseHolder);
+        gameOptions.add(compsToExperiment);
+
 
     }
 
