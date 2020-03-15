@@ -1,5 +1,7 @@
+package app.menu;
+import app.MainActivity;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class MenuActivity
@@ -16,12 +18,11 @@ public class MenuActivity
     {
 
         var menuBar = new JMenuBar();
-        var exitIcon = new ImageIcon("src/resources/exit.png");
 
         var fileMenu = new JMenu("File");
         fileMenu.setMnemonic(KeyEvent.VK_F);
 
-        var eMenuItem = new JMenuItem("Exit", exitIcon);
+        var eMenuItem = new JMenuItem("Exit");
         eMenuItem.setMnemonic(KeyEvent.VK_E);
         eMenuItem.setToolTipText("Exit application");
         eMenuItem.addActionListener((event) -> System.exit(0));

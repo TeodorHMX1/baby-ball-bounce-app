@@ -1,3 +1,7 @@
+package app;
+
+import app.menu.MenuActivity;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -48,7 +52,7 @@ public class MainActivity extends JFrame
 
     private void createMenu() {
 
-        //create menu
+        //create app.menu
         MenuActivity menuActivity = new MenuActivity(this);
         menuActivity.load();
 
