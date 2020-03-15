@@ -25,6 +25,14 @@ public class Game
         GameWorld gameWorld = new GameWorld();
         windowContainer.add(gameWorld.getGameWorldContainer(), BorderLayout.WEST);
 
+        //add the game options to the container
+        GameOptions gameOptions = new GameOptions();
+        windowContainer.add(gameOptions.getGameOptionsContainer(), BorderLayout.WEST);
+
+        //add the game controls to the container
+        GameControls gameControls = new GameControls();
+        windowContainer.add(gameControls.getGameControlsContainer(), BorderLayout.WEST);
+
 //        getAppWindow().pack();
 
     }
