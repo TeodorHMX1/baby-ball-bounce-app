@@ -8,6 +8,7 @@ public class MaterialSlider extends JSlider
     public MaterialSlider(int min, int max)
     {
         super(min, max);
+        
     }
 
 }

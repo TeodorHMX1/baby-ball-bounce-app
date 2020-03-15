@@ -83,10 +83,10 @@ public class GameControls
     private void prepareSlider() {
 
         MaterialLabel sliderTitle = materialElements.createLabel("Speed:");
-        sliderTitle.setBorder(BorderFactory.createEmptyBorder(0, 150, 0, 0));
+        sliderTitle.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 0));
         gameControls.add(sliderTitle);
 
-        MaterialSlider slider = materialElements.createHorizontalSlider(1, 5, 2);
+        MaterialSlider slider = materialElements.createHorizontalSlider(1, 5, 1);
         gameControls.add(slider);
 
     }
