@@ -1,5 +1,6 @@
 package app;
 
+import app.game.Game;
 import app.menu.MenuActivity;
 
 import javax.swing.*;
@@ -59,14 +60,23 @@ public class MainActivity extends JFrame
     {
 
         createMenu();
+        createGame();
 
     }
 
     private void createMenu() {
 
-        //create app.menu
+        //create app menu
         MenuActivity menuActivity = new MenuActivity();
         menuActivity.prepareMenu();
+
+    }
+
+    private void createGame() {
+
+        // create app game
+        Game game = new Game();
+        game.prepareGame();
 
     }
 
