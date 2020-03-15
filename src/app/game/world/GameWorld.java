@@ -6,13 +6,20 @@ import java.awt.*;
 public class GameWorld
 {
 
+    private JPanel gameWorld;
+
     public GameWorld()
     {
 
-        JPanel gameWorld = new JPanel();
-        gameWorld.setBorder(BorderFactory.createEmptyBorder(30, 20, 30, 20));
+        gameWorld = new JPanel();
         gameWorld.setBackground(Color.BLUE);
+        gameWorld.setPreferredSize(new Dimension(570, 440));
 
+    }
+
+    public JPanel getGameWorldContainer()
+    {
+        return gameWorld;
     }
 
 }
