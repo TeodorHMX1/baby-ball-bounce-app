@@ -19,7 +19,7 @@ public class GameOptions
 
         materialElements = new MaterialElements();
         gameOptions = new JPanel();
-        gameOptions.setLayout(new FlowLayout());
+        gameOptions.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         gameOptions.setBackground(new Color(238, 241, 93));
 //        gameOptions.setBackground(new Color(241, 241, 241));
         gameOptions.setPreferredSize(new Dimension(255, 585));
@@ -34,7 +34,7 @@ public class GameOptions
 
         JPanel timerLabelHolder = new JPanel();
         timerLabelHolder.setBackground(new Color(0, 0, 0, 0));
-        timerLabelHolder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        timerLabelHolder.setBorder(BorderFactory.createEmptyBorder(7, 0, 0, 0));
         timerLabelHolder.setLayout(new BorderLayout());
 
         MaterialLabel timerLabel = materialElements.createLabel("DIGITAL TIMER");
@@ -43,8 +43,8 @@ public class GameOptions
 
         JPanel timerHolder = new JPanel();
         timerHolder.setBackground(new Color(0, 0, 0, 0));
-        timerHolder.setPreferredSize(new Dimension(255, 15));
-        timerHolder.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
+        timerHolder.setPreferredSize(new Dimension(255, 18));
+        timerHolder.setBorder(BorderFactory.createEmptyBorder(-3, 0, 0, 0));
 
         timerMinutes = createTimerElement("00");
         timerSeconds = createTimerElement("00");
@@ -65,7 +65,7 @@ public class GameOptions
 
         JPanel scoreLabelHolder = new JPanel();
         scoreLabelHolder.setBackground(new Color(0, 0, 0, 0));
-        scoreLabelHolder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        scoreLabelHolder.setBorder(BorderFactory.createEmptyBorder(7, 0, 0, 0));
         scoreLabelHolder.setLayout(new BorderLayout());
 
         MaterialLabel scoreLabel = materialElements.createLabel("SCORE");
