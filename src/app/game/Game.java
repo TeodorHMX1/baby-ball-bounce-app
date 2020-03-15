@@ -29,13 +29,11 @@ public class Game
 
         //add the game options to the container
         GameOptions gameOptions = new GameOptions();
-        windowContainer.add(gameOptions.getGameOptionsContainer(), BorderLayout.SOUTH);
+        windowContainer.add(gameOptions.getGameOptionsContainer(), BorderLayout.EAST);
 
         //add the game controls to the container
         GameControls gameControls = new GameControls();
-        windowContainer.add(gameControls.getGameControlsContainer(), BorderLayout.EAST);
-
-//        getAppWindow().pack();
+        windowContainer.add(gameControls.getGameControlsContainer(), BorderLayout.SOUTH);
 
     }
 

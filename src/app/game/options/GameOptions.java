@@ -13,6 +13,7 @@ public class GameOptions
 
         gameOptions = new JPanel();
         gameOptions.setBackground(new Color(241, 241, 241));
+        gameOptions.setPreferredSize(new Dimension(255, 585));
 
     }
 

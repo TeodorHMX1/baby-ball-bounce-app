@@ -13,6 +13,7 @@ public class GameControls
 
         gameControls = new JPanel();
         gameControls.setBackground(new Color(241, 241, 241));
+        gameControls.setPreferredSize(new Dimension(570, 60));
 
     }
 
