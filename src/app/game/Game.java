@@ -19,6 +19,7 @@ public class Game
 
         Container windowContainer = getAppWindow().getContentPane();
         windowContainer.setLayout(new BorderLayout());
+        windowContainer.setBackground(new Color(241, 241, 241));
 
         //add the game world to the container
         GameWorld gameWorld = new GameWorld();
