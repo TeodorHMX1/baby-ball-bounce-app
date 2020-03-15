@@ -188,7 +188,7 @@ public class GameOptions
         btnPlayers2.addActionListener(actionEvent -> ballTo(Directions.UP));
         btnPlayers4.addActionListener(actionEvent -> ballTo(Directions.DOWN));
         btnMulti.addActionListener(actionEvent -> ballTo(Directions.LEFT));
-        btnExit.addActionListener(actionEvent -> ballTo(Directions.RIGHT));
+        btnExit.addActionListener(actionEvent -> System.exit(0));
 
         GridLayout experimentLayout = new GridLayout(2,2);
         JPanel compsToExperiment = new JPanel();
