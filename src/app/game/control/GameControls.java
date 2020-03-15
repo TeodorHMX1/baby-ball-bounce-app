@@ -81,7 +81,12 @@ public class GameControls
 
     private void prepareSlider() {
 
+        JLabel sliderTitle = new JLabel("Speed:");
+        sliderTitle.setBorder(BorderFactory.createEmptyBorder(0, 150, 0, 0));
+        gameControls.add(sliderTitle);
 
+        JSlider slider = new JSlider(JSlider.HORIZONTAL, 1, 5, 1);
+        gameControls.add(slider);
 
     }
 
