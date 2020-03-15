@@ -19,9 +19,6 @@ public class MainActivity extends JFrame {
 
         initializeWindow();
 
-        //close on 'x' clicked
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         createUIX();
 
     }
@@ -36,6 +33,8 @@ public class MainActivity extends JFrame {
         // make the screen to always be at the same size
         // is not resizable
         setResizable(false);
+        //close on 'x' clicked
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     }
 
