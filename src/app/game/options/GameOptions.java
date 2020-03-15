@@ -120,7 +120,6 @@ public class GameOptions
     private void createBallMovementControls()
     {
 
-
         MaterialButton btnUp = createGridElementChoice("up");
         MaterialButton btnDown = createGridElementChoice("down");
         MaterialButton btnLeft = createGridElementChoice("left");
@@ -181,6 +180,29 @@ public class GameOptions
     private void createChoices()
     {
 
+        MaterialButton btnPlayers2 = createGridElementChoice("2 Player");
+        MaterialButton btnPlayers4 = createGridElementChoice("4 Player");
+        MaterialButton btnMulti = createGridElementChoice("Multi");
+        MaterialButton btnExit = createGridElementChoice("Exit");
+
+        btnPlayers2.addActionListener(actionEvent -> ballTo(Directions.UP));
+        btnPlayers4.addActionListener(actionEvent -> ballTo(Directions.DOWN));
+        btnMulti.addActionListener(actionEvent -> ballTo(Directions.LEFT));
+        btnExit.addActionListener(actionEvent -> ballTo(Directions.RIGHT));
+
+        GridLayout experimentLayout = new GridLayout(2,2);
+        JPanel compsToExperiment = new JPanel();
+        compsToExperiment.setBackground(new Color(0, 0, 0, 0));
+        compsToExperiment.setPreferredSize(new Dimension(255, 60));
+        compsToExperiment.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
+        compsToExperiment.setLayout(experimentLayout);
+
+        compsToExperiment.add(btnPlayers2);
+        compsToExperiment.add(btnPlayers4);
+        compsToExperiment.add(btnMulti);
+        compsToExperiment.add(btnExit);
+        gameOptions.add(compsToExperiment);
+
     }
 
     private MaterialLabel createTimerElement(String text)
@@ -215,11 +237,6 @@ public class GameOptions
         materialLabel.setOpaque(true);
         materialLabel.setBackground(Color.white);
         return materialLabel;
-    }
-
-    public JPanel getGameOptionsContainer()
-    {
-        return gameOptions;
     }
 
     private JPanel createOptionItem(String content, MaterialLabel label)
@@ -325,5 +342,9 @@ public class GameOptions
 
     }
 
+    public JPanel getGameOptionsContainer()
+    {
+        return gameOptions;
+    }
 
 }
