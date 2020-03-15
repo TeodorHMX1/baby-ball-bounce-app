@@ -27,10 +27,24 @@ public class MaterialElements
         return btn;
     }
 
-    public MaterialSlider createSlider()
+    public MaterialLabel createLabel(String text)
     {
 
-        MaterialSlider materialSlider = new MaterialSlider(JSlider.HORIZONTAL, 1, 5, 1);
+        return new MaterialLabel(text);
+
+    }
+
+    public MaterialSlider createHorizontalSlider(int min, int max, int current)
+    {
+
+        MaterialSlider materialSlider = new MaterialSlider(min, max);
+        materialSlider.setMajorTickSpacing(1);
+        materialSlider.setMinorTickSpacing(1);
+        materialSlider.setPaintTicks(true);
+        materialSlider.setPaintLabels(true);
+        materialSlider.setValue(current);
+        Font font = new Font("Serif", Font.PLAIN, 13);
+        materialSlider.setFont(font);
         return materialSlider;
 
     }

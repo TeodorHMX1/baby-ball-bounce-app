@@ -5,9 +5,9 @@ import javax.swing.*;
 public class MaterialSlider extends JSlider
 {
 
-    public MaterialSlider(String text)
+    public MaterialSlider(int min, int max)
     {
-        super(text);
+        super(min, max);
     }
 
 }

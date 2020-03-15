@@ -86,7 +86,7 @@ public class GameControls
         sliderTitle.setBorder(BorderFactory.createEmptyBorder(0, 150, 0, 0));
         gameControls.add(sliderTitle);
 
-        MaterialSlider slider = materialElements.createSlider(JSlider.HORIZONTAL, 1, 5, 1);
+        MaterialSlider slider = materialElements.createHorizontalSlider(1, 5, 2);
         gameControls.add(slider);
 
     }
