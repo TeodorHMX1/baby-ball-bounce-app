@@ -1,7 +1,12 @@
+package app;
+
+import app.menu.MenuActivity;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class MainActivity extends JFrame {
+public class MainActivity extends JFrame
+{
 
     public static void main(String[] args)
     {
@@ -19,6 +24,8 @@ public class MainActivity extends JFrame {
 
         initializeWindow();
 
+        createUIX();
+
     }
 
     private void initializeWindow() {
@@ -33,6 +40,21 @@ public class MainActivity extends JFrame {
         setResizable(false);
         //close on 'x' clicked
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+    }
+
+    private void createUIX()
+    {
+
+        createMenu();
+
+    }
+
+    private void createMenu() {
+
+        //create app.menu
+        MenuActivity menuActivity = new MenuActivity(this);
+        menuActivity.prepareMenu();
 
     }
 
