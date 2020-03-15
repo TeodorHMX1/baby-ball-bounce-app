@@ -1,5 +1,6 @@
 package app.game;
 
+import app.game.options.GameOptions;
 import app.game.world.GameWorld;
 
 import java.awt.*;
@@ -27,7 +28,7 @@ public class Game
 
         //add the game options to the container
         GameOptions gameOptions = new GameOptions();
-        windowContainer.add(gameOptions.getGameOptionsContainer(), BorderLayout.WEST);
+        windowContainer.add(gameOptions.getGameOptionsContainer(), BorderLayout.SOUTH);
 
         //add the game controls to the container
         GameControls gameControls = new GameControls();
