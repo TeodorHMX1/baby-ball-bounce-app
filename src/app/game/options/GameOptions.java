@@ -11,7 +11,8 @@ public class GameOptions
 
     private JPanel gameOptions;
     private MaterialElements materialElements;
-    private MaterialLabel timerMinutes, timerSeconds, timerMiliseconds;
+    private MaterialLabel timerMinutes, timerSeconds, timerMilliseconds;
+    private MaterialLabel scoreTeamLeft, scoreTeamRight;
 
     public GameOptions()
     {
@@ -45,16 +46,15 @@ public class GameOptions
         timerHolder.setPreferredSize(new Dimension(255, 15));
         timerHolder.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
 
-
         timerMinutes = createTimerElement("00");
         timerSeconds = createTimerElement("00");
-        timerMiliseconds = createTimerElement("00");
+        timerMilliseconds = createTimerElement("00");
 
         timerHolder.add(timerMinutes);
         timerHolder.add(materialElements.createLabel(" : "));
         timerHolder.add(timerSeconds);
         timerHolder.add(materialElements.createLabel(" : "));
-        timerHolder.add(timerMiliseconds);
+        timerHolder.add(timerMilliseconds);
 
         gameOptions.add(timerHolder);
 
@@ -72,10 +72,30 @@ public class GameOptions
         scoreLabelHolder.add(scoreLabel, BorderLayout.CENTER);
         gameOptions.add(scoreLabelHolder);
 
+        JPanel scoreHolder = new JPanel();
+        scoreHolder.setBackground(new Color(0, 0, 0, 0));
+        scoreHolder.setPreferredSize(new Dimension(255, 15));
+        scoreHolder.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
+        scoreTeamLeft = createTimerElement("00");
+        scoreTeamRight = createTimerElement("00");
+        scoreHolder.add(scoreTeamLeft);
+        scoreHolder.add(scoreTeamRight);
+        gameOptions.add(scoreHolder);
+
 
     }
 
     public MaterialLabel createTimerElement(String text)
+    {
+        MaterialLabel materialLabel = materialElements.createLabel(text);
+        materialLabel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
+        materialLabel.setOpaque(true);
+        materialLabel.setBackground(Color.black);
+        materialLabel.setForeground(Color.white);
+        return materialLabel;
+    }
+
+    public MaterialLabel createScoreElement(String text)
     {
         MaterialLabel materialLabel = materialElements.createLabel(text);
         materialLabel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
