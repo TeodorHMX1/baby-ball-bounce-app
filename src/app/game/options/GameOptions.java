@@ -24,6 +24,7 @@ public class GameOptions
         gameOptions.setPreferredSize(new Dimension(255, 585));
 
         createDigitalTimer();
+        
 
     }
 
@@ -49,9 +50,9 @@ public class GameOptions
         timerMiliseconds = createTimerElement("00");
 
         timerHolder.add(timerMinutes);
-        timerHolder.add(new JLabel(" : "));
+        timerHolder.add(materialElements.createLabel(" : "));
         timerHolder.add(timerSeconds);
-        timerHolder.add(new JLabel(" : "));
+        timerHolder.add(materialElements.createLabel(" : "));
         timerHolder.add(timerMiliseconds);
 
         gameOptions.add(timerHolder);
