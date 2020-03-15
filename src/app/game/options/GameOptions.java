@@ -1,23 +1,23 @@
 package app.game.options;
 
+import app.utils.AppUtils;
 import app.utils.material.MaterialButton;
 import app.utils.material.MaterialElements;
 import app.utils.material.MaterialLabel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class GameOptions
-{
+public class GameOptions {
 
     private JPanel gameOptions;
     private MaterialElements materialElements;
     private MaterialLabel timerMinutes, timerSeconds, timerMilliseconds;
     private MaterialLabel scoreTeamLeft, scoreTeamRight;
+    private MaterialLabel optionLabel;
     private int teamLeft = 0, teamRight = 0;
     private MaterialLabel compassLabel;
+
     enum Directions {
         LEFT,
         RIGHT,
@@ -25,8 +25,12 @@ public class GameOptions
         DOWN
     }
 
-    public GameOptions()
-    {
+    enum Players {
+        TWO,
+        FOUR
+    }
+
+    public GameOptions() {
 
         materialElements = new MaterialElements();
         gameOptions = new JPanel();
@@ -44,8 +48,7 @@ public class GameOptions
 
     }
 
-    private void createDigitalTimer()
-    {
+    private void createDigitalTimer() {
 
         JPanel timerLabelHolder = new JPanel();
         timerLabelHolder.setBackground(new Color(0, 0, 0, 0));
@@ -75,8 +78,7 @@ public class GameOptions
 
     }
 
-    private void createScoreContainer()
-    {
+    private void createScoreContainer() {
 
         JPanel scoreLabelHolder = new JPanel();
         scoreLabelHolder.setBackground(new Color(0, 0, 0, 0));
@@ -103,10 +105,9 @@ public class GameOptions
 
     }
 
-    private void createOptions()
-    {
+    private void createOptions() {
 
-        MaterialLabel optionLabel = createOptionItem("2 Player");
+        optionLabel = createOptionItem("2 Player");
         gameOptions.add(createOptionItem("Option:", optionLabel));
 
         MaterialLabel squareLabel = createOptionItem("101");
@@ -117,9 +118,7 @@ public class GameOptions
 
     }
 
-    private void createBallMovementControls()
-    {
-
+    private void createBallMovementControls() {
 
         MaterialButton btnUp = createGridElementChoice("up");
         MaterialButton btnDown = createGridElementChoice("down");
@@ -131,7 +130,7 @@ public class GameOptions
         btnLeft.addActionListener(actionEvent -> ballTo(Directions.LEFT));
         btnRight.addActionListener(actionEvent -> ballTo(Directions.RIGHT));
 
-        GridLayout experimentLayout = new GridLayout(3,3);
+        GridLayout experimentLayout = new GridLayout(3, 3);
         JPanel compsToExperiment = new JPanel();
         compsToExperiment.setBackground(new Color(0, 0, 0, 0));
         compsToExperiment.setPreferredSize(new Dimension(255, 90));
@@ -150,8 +149,7 @@ public class GameOptions
 
     }
 
-    private void createCompass()
-    {
+    private void createCompass() {
 
         JPanel optionItemChoseHolder = new JPanel();
         optionItemChoseHolder.setLayout(new GridBagLayout());
@@ -161,30 +159,51 @@ public class GameOptions
 
         ImageIcon imageIcon = new ImageIcon("assets/images/east.jpg");
         Image image = imageIcon.getImage();
-        Image newimg = image.getScaledInstance(100, 100,  Image.SCALE_SMOOTH);
+        Image newimg = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(newimg);
         compassLabel.setIcon(imageIcon);
 
         optionItemChoseHolder.add(compassLabel);
 
-        GridLayout experimentLayout = new GridLayout(1,1);
+        GridLayout experimentLayout = new GridLayout(1, 1);
         JPanel compsToExperiment = new JPanel();
         compsToExperiment.setLayout(experimentLayout);
         compsToExperiment.setBackground(new Color(0, 0, 0, 0));
-        compsToExperiment.setPreferredSize(new Dimension(255, 100));
+        compsToExperiment.setPreferredSize(new Dimension(255, 110));
         compsToExperiment.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
         compsToExperiment.add(optionItemChoseHolder);
         gameOptions.add(compsToExperiment);
 
     }
 
-    private void createChoices()
-    {
+    private void createChoices() {
+
+        MaterialButton btnPlayers2 = createOptionChoice("2 Player");
+        MaterialButton btnPlayers4 = createOptionChoice("4 Player");
+        MaterialButton btnMulti = createOptionChoice("Multi");
+        MaterialButton btnExit = createOptionChoice("Exit");
+
+        btnPlayers2.addActionListener(actionEvent -> playersChoice(Players.TWO));
+        btnPlayers4.addActionListener(actionEvent -> playersChoice(Players.FOUR));
+        btnMulti.addActionListener(actionEvent -> multiChoice());
+        btnExit.addActionListener(actionEvent -> System.exit(0));
+
+        GridLayout experimentLayout = new GridLayout(2, 2, 10, 10);
+        JPanel compsToExperiment = new JPanel();
+        compsToExperiment.setBackground(new Color(0, 0, 0, 0));
+        compsToExperiment.setPreferredSize(new Dimension(255, 70));
+        compsToExperiment.setBorder(BorderFactory.createEmptyBorder(20, 35, 0, 20));
+        compsToExperiment.setLayout(experimentLayout);
+
+        compsToExperiment.add(btnPlayers2);
+        compsToExperiment.add(btnPlayers4);
+        compsToExperiment.add(btnMulti);
+        compsToExperiment.add(btnExit);
+        gameOptions.add(compsToExperiment);
 
     }
 
-    private MaterialLabel createTimerElement(String text)
-    {
+    private MaterialLabel createTimerElement(String text) {
         MaterialLabel materialLabel = materialElements.createLabel(text);
         materialLabel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
         materialLabel.setOpaque(true);
@@ -193,11 +212,9 @@ public class GameOptions
         return materialLabel;
     }
 
-    private MaterialLabel createScoreElement(int score)
-    {
+    private MaterialLabel createScoreElement(int score) {
         String content = String.valueOf(score);
-        if (score<10)
-        {
+        if (score < 10) {
             content = "0" + content;
         }
         MaterialLabel materialLabel = materialElements.createLabel(content);
@@ -208,8 +225,7 @@ public class GameOptions
         return materialLabel;
     }
 
-    private MaterialLabel createOptionItem(String text)
-    {
+    private MaterialLabel createOptionItem(String text) {
         MaterialLabel materialLabel = materialElements.createLabel(text);
         materialLabel.setBorder(BorderFactory.createEmptyBorder(2, 3, 2, 3));
         materialLabel.setOpaque(true);
@@ -217,13 +233,7 @@ public class GameOptions
         return materialLabel;
     }
 
-    public JPanel getGameOptionsContainer()
-    {
-        return gameOptions;
-    }
-
-    private JPanel createOptionItem(String content, MaterialLabel label)
-    {
+    private JPanel createOptionItem(String content, MaterialLabel label) {
 
         JPanel optionItemHolder = new JPanel();
         optionItemHolder.setBackground(new Color(0, 0, 0, 0));
@@ -245,8 +255,7 @@ public class GameOptions
 
     }
 
-    private JPanel squareGridElement()
-    {
+    private JPanel squareGridElement() {
 
         JPanel squareElement = new JPanel();
         squareElement.setBackground(new Color(0, 0, 0, 0));
@@ -254,8 +263,7 @@ public class GameOptions
 
     }
 
-    private JPanel createGridElementMiddle()
-    {
+    private JPanel createGridElementMiddle() {
 
         JPanel optionItemChoseHolder = new JPanel();
         optionItemChoseHolder.setLayout(new GridBagLayout());
@@ -270,8 +278,7 @@ public class GameOptions
 
     }
 
-    private MaterialButton createGridElementChoice(String content)
-    {
+    private MaterialButton createGridElementChoice(String content) {
 
         MaterialButton optionItemChoseHolder = materialElements.createButton(null, "");
         optionItemChoseHolder.setLayout(new GridBagLayout());
@@ -284,38 +291,37 @@ public class GameOptions
 
     }
 
-    private void ballTo(Directions direction)
-    {
+    private void ballTo(Directions direction) {
 
         ImageIcon imageIcon;
         Image image;
 
-        switch(direction) {
+        switch (direction) {
             case DOWN:
                 imageIcon = new ImageIcon("assets/images/south.jpg");
                 image = imageIcon.getImage();
-                image = image.getScaledInstance(100, 100,  Image.SCALE_SMOOTH);
+                image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
                 compassLabel.setIcon(imageIcon);
                 break;
             case UP:
                 imageIcon = new ImageIcon("assets/images/north.jpg");
                 image = imageIcon.getImage();
-                image = image.getScaledInstance(100, 100,  Image.SCALE_SMOOTH);
+                image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
                 compassLabel.setIcon(imageIcon);
                 break;
             case LEFT:
                 imageIcon = new ImageIcon("assets/images/west.jpg");
                 image = imageIcon.getImage();
-                image = image.getScaledInstance(100, 100,  Image.SCALE_SMOOTH);
+                image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
                 compassLabel.setIcon(imageIcon);
                 break;
             case RIGHT:
                 imageIcon = new ImageIcon("assets/images/east.jpg");
                 image = imageIcon.getImage();
-                image = image.getScaledInstance(100, 100,  Image.SCALE_SMOOTH);
+                image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
                 compassLabel.setIcon(imageIcon);
                 break;
@@ -325,5 +331,43 @@ public class GameOptions
 
     }
 
+    private MaterialButton createOptionChoice(String content) {
+
+        MaterialButton optionItemChoseHolder = materialElements.createButton(null, "");
+        optionItemChoseHolder.setLayout(new GridBagLayout());
+        optionItemChoseHolder.setBackground(new Color(255, 255, 255));
+        optionItemChoseHolder.setPreferredSize(new Dimension(80, 30));
+        MaterialLabel contentLabel = materialElements.createLabel(content);
+        optionItemChoseHolder.add(contentLabel);
+
+        return optionItemChoseHolder;
+
+    }
+
+    private void playersChoice(Players choice) {
+
+        switch (choice) {
+            case TWO:
+                optionLabel.setText("2 Player");
+                AppUtils.setPlayers(2);
+                break;
+            case FOUR:
+                optionLabel.setText("4 Player");
+                AppUtils.setPlayers(4);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    private void multiChoice()
+    {
+        
+    }
+
+    public JPanel getGameOptionsContainer() {
+        return gameOptions;
+    }
 
 }
