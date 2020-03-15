@@ -40,6 +40,7 @@ public class GameOptions
         createOptions();
         createBallMovementControls();
         createCompass();
+        createChoices();
 
     }
 
@@ -174,6 +175,11 @@ public class GameOptions
         compsToExperiment.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
         compsToExperiment.add(optionItemChoseHolder);
         gameOptions.add(compsToExperiment);
+
+    }
+
+    private void createChoices()
+    {
 
     }
 
