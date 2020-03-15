@@ -138,10 +138,10 @@ public class GameOptions
         MaterialLabel contentLabel = materialElements.createLabel("");
         contentLabel.setBackground(new Color(0, 0, 0, 0));
 
-        ImageIcon imageIcon = new ImageIcon("assets/images/ball.png");
-        Image image = imageIcon.getImage(); // transform it
-        Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-        imageIcon = new ImageIcon(newimg);  // transform it back
+        ImageIcon imageIcon = new ImageIcon("assets/images/east.jpg");
+        Image image = imageIcon.getImage();
+        Image newimg = image.getScaledInstance(100, 100,  Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(newimg);
         contentLabel.setIcon(imageIcon);
 
         optionItemChoseHolder.add(contentLabel);
