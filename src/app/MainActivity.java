@@ -25,10 +25,8 @@ public class MainActivity extends JFrame
     {
 
         initializeWindow();
-
+        initializeAppUtils();
         createUIX();
-
-        setMainActivity(MainActivity.this);
 
     }
 
@@ -48,6 +46,12 @@ public class MainActivity extends JFrame
         // make the window to appear in the middle of the screen
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+
+    }
+
+    private void initializeAppUtils() {
+
+        setMainActivity(MainActivity.this);
 
     }
 

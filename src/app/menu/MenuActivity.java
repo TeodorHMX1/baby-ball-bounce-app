@@ -4,14 +4,14 @@ import app.MainActivity;
 import javax.swing.*;
 import java.awt.event.*;
 
+import static app.utils.AppUtils.getAppWindow;
+
 public class MenuActivity
 {
 
-    private MainActivity mainActivity;
-
-    public MenuActivity(MainActivity mainActivityN)
+    public MenuActivity()
     {
-        this.mainActivity = mainActivityN;
+
     }
 
     public void prepareMenu()
@@ -34,7 +34,7 @@ public class MenuActivity
         //prepare help option from menu
         menuBar.add(helpOptionMenu());
 
-        mainActivity.setJMenuBar(menuBar);
+        getAppWindow().setJMenuBar(menuBar);
 
     }
 
