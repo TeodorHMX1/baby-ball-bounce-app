@@ -27,6 +27,7 @@ public class GameOptions
 
         createDigitalTimer();
         createScoreContainer();
+        createOptions();
 
     }
 
@@ -86,6 +87,23 @@ public class GameOptions
         scoreHolder.add(scoreTeamRight);
 
         gameOptions.add(scoreHolder);
+
+    }
+
+    private void createOptions()
+    {
+
+        JPanel scoreLabelHolder = new JPanel();
+        scoreLabelHolder.setBackground(new Color(0, 0, 0, 0));
+        scoreLabelHolder.setPreferredSize(new Dimension(255, 20));
+        scoreLabelHolder.setBorder(BorderFactory.createEmptyBorder(7, 20, 0, 0));
+        scoreLabelHolder.setLayout(new BorderLayout());
+
+        MaterialLabel scoreLabel = materialElements.createLabel("Option:");
+        scoreLabelHolder.add(scoreLabel, BorderLayout.WEST);
+        MaterialLabel scoreLabel2 = materialElements.createLabel("SCOREww");
+        scoreLabelHolder.add(scoreLabel2, BorderLayout.EAST);
+        gameOptions.add(scoreLabelHolder);
 
     }
 
