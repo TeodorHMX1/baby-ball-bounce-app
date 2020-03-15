@@ -134,7 +134,9 @@ public class GameOptions
 
         JPanel optionItemChoseHolder = new JPanel();
         optionItemChoseHolder.setLayout(new GridBagLayout());
+        optionItemChoseHolder.setBackground(new Color(0, 0, 0, 0));
         MaterialLabel contentLabel = materialElements.createLabel("");
+        contentLabel.setBackground(new Color(0, 0, 0, 0));
 
         ImageIcon imageIcon = new ImageIcon("assets/images/ball.png");
         Image image = imageIcon.getImage(); // transform it
@@ -142,7 +144,6 @@ public class GameOptions
         imageIcon = new ImageIcon(newimg);  // transform it back
         contentLabel.setIcon(imageIcon);
 
-        contentLabel.setPreferredSize(new Dimension(100, 100));
         optionItemChoseHolder.add(contentLabel);
 
         GridLayout experimentLayout = new GridLayout(1,1);
