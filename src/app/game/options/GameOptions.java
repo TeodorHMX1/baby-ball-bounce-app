@@ -7,12 +7,15 @@ import app.utils.material.MaterialLabel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 public class GameOptions {
 
     private JPanel gameOptions;
     private MaterialElements materialElements;
-    private MaterialLabel timerMinutes, timerSeconds, timerMilliseconds;
+    private MaterialLabel timerHours, timerMinutes, timerSeconds;
     private MaterialLabel scoreTeamLeft, scoreTeamRight;
     private MaterialLabel optionLabel;
     private int teamLeft = 0, teamRight = 0;
@@ -35,8 +38,7 @@ public class GameOptions {
         materialElements = new MaterialElements();
         gameOptions = new JPanel();
         gameOptions.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        gameOptions.setBackground(new Color(238, 241, 93));
-//        gameOptions.setBackground(new Color(241, 241, 241));
+        gameOptions.setBackground(new Color(241, 241, 241));
         gameOptions.setPreferredSize(new Dimension(255, 585));
 
         createDigitalTimer();
@@ -64,18 +66,55 @@ public class GameOptions {
         timerHolder.setPreferredSize(new Dimension(255, 18));
         timerHolder.setBorder(BorderFactory.createEmptyBorder(-3, 0, 0, 0));
 
+        timerHours = createTimerElement("00");
         timerMinutes = createTimerElement("00");
         timerSeconds = createTimerElement("00");
-        timerMilliseconds = createTimerElement("00");
 
+        timerHolder.add(timerHours);
+        timerHolder.add(materialElements.createLabel(" : "));
         timerHolder.add(timerMinutes);
         timerHolder.add(materialElements.createLabel(" : "));
         timerHolder.add(timerSeconds);
-        timerHolder.add(materialElements.createLabel(" : "));
-        timerHolder.add(timerMilliseconds);
 
         gameOptions.add(timerHolder);
 
+        Timer timer = new Timer(1000, actionEvent -> {
+            if(AppUtils.isGameStarted()) {
+                setTime();
+            }
+        });
+        timer.setInitialDelay(0);
+        AppUtils.addOnTimerCallback(running -> {
+            if (running)
+            {
+                timer.start();
+            }
+            else
+            {
+                timer.restart();
+                timerHours.setText(timeBased(AppUtils.getSeconds()/(60*60)));
+                timerMinutes.setText(timeBased(AppUtils.getSeconds()/(60) % 60));
+                timerSeconds.setText(timeBased(AppUtils.getSeconds() % 60));
+            }
+        });
+
+
+    }
+
+    private void setTime() {
+        AppUtils.increaseSeconds();
+        timerHours.setText(timeBased(AppUtils.getSeconds()/(60*60)));
+        timerMinutes.setText(timeBased(AppUtils.getSeconds()/(60) % 60));
+        timerSeconds.setText(timeBased(AppUtils.getSeconds() % 60));
+    }
+
+    private String timeBased(int time)
+    {
+        if(time<10)
+        {
+            return "0" + time;
+        }
+        return String.valueOf(time);
     }
 
     private void createScoreContainer() {
@@ -361,9 +400,8 @@ public class GameOptions {
 
     }
 
-    private void multiChoice()
-    {
-        
+    private void multiChoice() {
+
     }
 
     public JPanel getGameOptionsContainer() {
