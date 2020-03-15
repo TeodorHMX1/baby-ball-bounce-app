@@ -1,5 +1,6 @@
 package app.game.options;
 
+import app.utils.material.MaterialButton;
 import app.utils.material.MaterialElements;
 import app.utils.material.MaterialLabel;
 
@@ -115,13 +116,13 @@ public class GameOptions
         compsToExperiment.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
         compsToExperiment.setLayout(experimentLayout);
         compsToExperiment.add(squareGridElement());
-        compsToExperiment.add(createGridElement("up"));
+        compsToExperiment.add(createGridElementChoice("up"));
         compsToExperiment.add(squareGridElement());
-        compsToExperiment.add(createGridElement("left"));
+        compsToExperiment.add(createGridElementChoice("left"));
+        compsToExperiment.add(createGridElementMiddle());
+        compsToExperiment.add(createGridElementChoice("right"));
         compsToExperiment.add(squareGridElement());
-        compsToExperiment.add(createGridElement("right"));
-        compsToExperiment.add(squareGridElement());
-        compsToExperiment.add(createGridElement("down"));
+        compsToExperiment.add(createGridElementChoice("down"));
         compsToExperiment.add(squareGridElement());
         gameOptions.add(compsToExperiment);
 
@@ -198,10 +199,24 @@ public class GameOptions
 
     }
 
-    private JButton createGridElement(String content)
+    private JPanel createGridElementMiddle()
     {
 
-        JButton optionItemChoseHolder = new JButton();
+        JPanel optionItemChoseHolder = new JPanel();
+        optionItemChoseHolder.setLayout(new GridBagLayout());
+        optionItemChoseHolder.setBackground(new Color(255, 255, 255));
+        optionItemChoseHolder.setPreferredSize(new Dimension(80, 25));
+        MaterialLabel contentLabel = materialElements.createLabel("");
+        optionItemChoseHolder.add(contentLabel);
+
+        return optionItemChoseHolder;
+
+    }
+
+    private MaterialButton createGridElementChoice(String content)
+    {
+
+        MaterialButton optionItemChoseHolder = materialElements.createButton(null, "");
         optionItemChoseHolder.setLayout(new GridBagLayout());
         optionItemChoseHolder.setBackground(new Color(255, 255, 255));
         optionItemChoseHolder.setPreferredSize(new Dimension(80, 25));
