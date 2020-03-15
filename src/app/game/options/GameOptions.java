@@ -7,8 +7,9 @@ import app.utils.material.MaterialLabel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 public class GameOptions {
 
@@ -77,13 +78,26 @@ public class GameOptions {
 
         gameOptions.add(timerHolder);
 
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
+        Timer timer = new Timer(1000, actionEvent -> {
+            if(AppUtils.isGameStarted()) {
                 setTime();
             }
-        }, 0, 1000);
+        });
+        timer.setInitialDelay(0);
+        AppUtils.addOnTimerCallback(running -> {
+            if (running)
+            {
+                timer.start();
+            }
+            else
+            {
+                timer.restart();
+                timerHours.setText(timeBased(AppUtils.getSeconds()/(60*60)));
+                timerMinutes.setText(timeBased(AppUtils.getSeconds()/(60) % 60));
+                timerSeconds.setText(timeBased(AppUtils.getSeconds() % 60));
+            }
+        });
+
 
     }
 
