@@ -1,5 +1,8 @@
 package app.game.control;
 
+import app.utils.material.MaterialButton;
+import app.utils.material.MaterialElements;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -35,9 +38,8 @@ public class GameControls
     private void loadActBtn() {
 
         Icon iconAct = new ImageIcon("assets/images/step.png");
-        JButton btnAct = new JButton(iconAct);
-        btnAct.setText("Act");
-        btnAct.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        MaterialButton btnAct = new MaterialElements()
+                .newButton(iconAct, "Act");
         gameControls.add(btnAct);
 
     }
@@ -45,8 +47,8 @@ public class GameControls
     private void loadStateBtn() {
 
         Icon iconAct = new ImageIcon("assets/images/run.png");
-        JButton btnState = new JButton(iconAct);
-        btnState.setText("Run");
+        MaterialButton btnState = new MaterialElements()
+                .newButton(iconAct, "Run");
         btnState.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -71,8 +73,8 @@ public class GameControls
     private void loadResetBtn() {
 
         Icon iconAct = new ImageIcon("assets/images/reset.png");
-        JButton btnReset = new JButton(iconAct);
-        btnReset.setText("Reset");
+        MaterialButton btnReset = new MaterialElements()
+                .newButton(iconAct, "Reset");
         gameControls.add(btnReset);
 
     }
