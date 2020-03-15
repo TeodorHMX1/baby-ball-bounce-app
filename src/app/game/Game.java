@@ -1,5 +1,6 @@
 package app.game;
 
+import app.game.options.GameOptions;
 import app.game.world.GameWorld;
 
 import java.awt.*;
