@@ -95,14 +95,20 @@ public class GameOptions
 
         JPanel scoreLabelHolder = new JPanel();
         scoreLabelHolder.setBackground(new Color(0, 0, 0, 0));
-        scoreLabelHolder.setPreferredSize(new Dimension(255, 20));
-        scoreLabelHolder.setBorder(BorderFactory.createEmptyBorder(7, 20, 0, 0));
+        scoreLabelHolder.setPreferredSize(new Dimension(255, 30));
+        scoreLabelHolder.setBorder(BorderFactory.createEmptyBorder(7, 30, 0, 10));
         scoreLabelHolder.setLayout(new BorderLayout());
 
         MaterialLabel scoreLabel = materialElements.createLabel("Option:");
         scoreLabelHolder.add(scoreLabel, BorderLayout.WEST);
-        MaterialLabel scoreLabel2 = materialElements.createLabel("SCOREww");
-        scoreLabelHolder.add(scoreLabel2, BorderLayout.EAST);
+
+        JPanel scoreLabelHolder2 = new JPanel();
+        scoreLabelHolder2.setLayout(new GridBagLayout());
+        scoreLabelHolder2.setBackground(new Color(255, 255, 255));
+        scoreLabelHolder2.setPreferredSize(new Dimension(100, 25));
+        MaterialLabel scoreLabel2 = createOptionItem("SCOREww");
+        scoreLabelHolder2.add(scoreLabel2);
+        scoreLabelHolder.add(scoreLabelHolder2, BorderLayout.EAST);
         gameOptions.add(scoreLabelHolder);
 
     }
@@ -129,6 +135,15 @@ public class GameOptions
         materialLabel.setOpaque(true);
         materialLabel.setBackground(Color.black);
         materialLabel.setForeground(Color.white);
+        return materialLabel;
+    }
+
+    public MaterialLabel createOptionItem(String text)
+    {
+        MaterialLabel materialLabel = materialElements.createLabel(text);
+        materialLabel.setBorder(BorderFactory.createEmptyBorder(2, 3, 2, 3));
+        materialLabel.setOpaque(true);
+        materialLabel.setBackground(Color.white);
         return materialLabel;
     }
 
