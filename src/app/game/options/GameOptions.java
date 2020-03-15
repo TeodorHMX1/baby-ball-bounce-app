@@ -93,27 +93,42 @@ public class GameOptions
     private void createOptions()
     {
 
+        MaterialLabel optionLabel = createOptionItem("Option:");
+        gameOptions.add(createOptionItem("Option:", optionLabel));
+
+        MaterialLabel squareLabel = createOptionItem("Square:");
+        gameOptions.add(createOptionItem("Square:", squareLabel));
+
+        MaterialLabel directionLabel = createOptionItem("Direction:");
+        gameOptions.add(createOptionItem("Direction:", directionLabel));
+
+    }
+
+    private JPanel createOptionItem(String content, MaterialLabel label)
+    {
+
         JPanel scoreLabelHolder = new JPanel();
         scoreLabelHolder.setBackground(new Color(0, 0, 0, 0));
         scoreLabelHolder.setPreferredSize(new Dimension(255, 30));
-        scoreLabelHolder.setBorder(BorderFactory.createEmptyBorder(7, 30, 0, 10));
+        scoreLabelHolder.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
         scoreLabelHolder.setLayout(new BorderLayout());
 
-        MaterialLabel scoreLabel = materialElements.createLabel("Option:");
-        scoreLabelHolder.add(scoreLabel, BorderLayout.WEST);
+        MaterialLabel contentLabel = materialElements.createLabel(content);
+        scoreLabelHolder.add(contentLabel, BorderLayout.WEST);
 
         JPanel scoreLabelHolder2 = new JPanel();
         scoreLabelHolder2.setLayout(new GridBagLayout());
         scoreLabelHolder2.setBackground(new Color(255, 255, 255));
-        scoreLabelHolder2.setPreferredSize(new Dimension(100, 25));
-        MaterialLabel scoreLabel2 = createOptionItem("SCOREww");
+        scoreLabelHolder2.setPreferredSize(new Dimension(80, 25));
+        MaterialLabel scoreLabel2 = createOptionItem(content);
         scoreLabelHolder2.add(scoreLabel2);
         scoreLabelHolder.add(scoreLabelHolder2, BorderLayout.EAST);
-        gameOptions.add(scoreLabelHolder);
+
+        return scoreLabelHolder;
 
     }
 
-    public MaterialLabel createTimerElement(String text)
+    private MaterialLabel createTimerElement(String text)
     {
         MaterialLabel materialLabel = materialElements.createLabel(text);
         materialLabel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
@@ -123,7 +138,7 @@ public class GameOptions
         return materialLabel;
     }
 
-    public MaterialLabel createScoreElement(int score)
+    private MaterialLabel createScoreElement(int score)
     {
         String content = String.valueOf(score);
         if (score<10)
@@ -138,7 +153,7 @@ public class GameOptions
         return materialLabel;
     }
 
-    public MaterialLabel createOptionItem(String text)
+    private MaterialLabel createOptionItem(String text)
     {
         MaterialLabel materialLabel = materialElements.createLabel(text);
         materialLabel.setBorder(BorderFactory.createEmptyBorder(2, 3, 2, 3));
