@@ -13,6 +13,7 @@ public class GameOptions
     private MaterialElements materialElements;
     private MaterialLabel timerMinutes, timerSeconds, timerMilliseconds;
     private MaterialLabel scoreTeamLeft, scoreTeamRight;
+    private int teamLeft = 0, teamRight = 0;
 
     public GameOptions()
     {
@@ -74,11 +75,11 @@ public class GameOptions
 
         JPanel scoreHolder = new JPanel();
         scoreHolder.setBackground(new Color(0, 0, 0, 0));
-        scoreHolder.setPreferredSize(new Dimension(255, 15));
+        scoreHolder.setPreferredSize(new Dimension(255, 16));
         scoreHolder.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
 
-        scoreTeamLeft = createScoreElement("00");
-        scoreTeamRight = createScoreElement("00");
+        scoreTeamLeft = createScoreElement(teamLeft);
+        scoreTeamRight = createScoreElement(teamRight);
 
         scoreHolder.add(scoreTeamLeft);
         scoreHolder.add(materialElements.createLabel(" < L : R > "));
@@ -98,9 +99,14 @@ public class GameOptions
         return materialLabel;
     }
 
-    public MaterialLabel createScoreElement(String text)
+    public MaterialLabel createScoreElement(int score)
     {
-        MaterialLabel materialLabel = materialElements.createLabel(text);
+        String content = String.valueOf(score);
+        if (score<10)
+        {
+            content = "0" + content;
+        }
+        MaterialLabel materialLabel = materialElements.createLabel(content);
         materialLabel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
         materialLabel.setOpaque(true);
         materialLabel.setBackground(Color.black);
