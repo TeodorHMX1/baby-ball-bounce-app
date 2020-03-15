@@ -114,19 +114,18 @@ public class GameOptions
         compsToExperiment.setPreferredSize(new Dimension(255, 90));
         compsToExperiment.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
         compsToExperiment.setLayout(experimentLayout);
-        compsToExperiment.add(new JButton("Button 1"));
-        compsToExperiment.add(new JButton("Button 1"));
-        compsToExperiment.add(new JButton("Button 1"));
-        compsToExperiment.add(new JButton("Button 1"));
-        compsToExperiment.add(new JButton("Button 1"));
-        compsToExperiment.add(new JButton("Button 1"));
-        compsToExperiment.add(new JButton("Button 1"));
-        compsToExperiment.add(new JButton("Button 1"));
-        compsToExperiment.add(new JButton("Button 1"));
+        compsToExperiment.add(squareGridElement());
+        compsToExperiment.add(createGridElement("up"));
+        compsToExperiment.add(squareGridElement());
+        compsToExperiment.add(createGridElement("left"));
+        compsToExperiment.add(squareGridElement());
+        compsToExperiment.add(createGridElement("right"));
+        compsToExperiment.add(squareGridElement());
+        compsToExperiment.add(createGridElement("down"));
+        compsToExperiment.add(squareGridElement());
         gameOptions.add(compsToExperiment);
 
     }
-
 
     private MaterialLabel createTimerElement(String text)
     {
@@ -187,6 +186,29 @@ public class GameOptions
         optionItemHolder.add(optionItemChoseHolder, BorderLayout.EAST);
 
         return optionItemHolder;
+
+    }
+
+    private JPanel squareGridElement()
+    {
+
+        JPanel squareElement = new JPanel();
+        squareElement.setBackground(new Color(0, 0, 0, 0));
+        return squareElement;
+
+    }
+
+    private JButton createGridElement(String content)
+    {
+
+        JButton optionItemChoseHolder = new JButton();
+        optionItemChoseHolder.setLayout(new GridBagLayout());
+        optionItemChoseHolder.setBackground(new Color(255, 255, 255));
+        optionItemChoseHolder.setPreferredSize(new Dimension(80, 25));
+        MaterialLabel contentLabel = materialElements.createLabel(content);
+        optionItemChoseHolder.add(contentLabel);
+
+        return optionItemChoseHolder;
 
     }
     
