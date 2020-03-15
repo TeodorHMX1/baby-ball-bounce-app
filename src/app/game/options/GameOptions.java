@@ -24,11 +24,12 @@ public class GameOptions
         gameOptions.setPreferredSize(new Dimension(255, 585));
 
         createDigitalTimer();
-        
+        createScoreContainer();
 
     }
 
-    private void createDigitalTimer() {
+    private void createDigitalTimer()
+    {
 
         JPanel timerLabelHolder = new JPanel();
         timerLabelHolder.setBackground(new Color(0, 0, 0, 0));
@@ -56,6 +57,21 @@ public class GameOptions
         timerHolder.add(timerMiliseconds);
 
         gameOptions.add(timerHolder);
+
+    }
+
+    private void createScoreContainer()
+    {
+
+        JPanel scoreLabelHolder = new JPanel();
+        scoreLabelHolder.setBackground(new Color(0, 0, 0, 0));
+        scoreLabelHolder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        scoreLabelHolder.setLayout(new BorderLayout());
+
+        MaterialLabel scoreLabel = materialElements.createLabel("SCORE");
+        scoreLabelHolder.add(scoreLabel, BorderLayout.CENTER);
+        gameOptions.add(scoreLabelHolder);
+
 
     }
 
