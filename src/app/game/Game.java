@@ -33,7 +33,7 @@ public class Game
 
         //add the game controls to the container
         GameControls gameControls = new GameControls();
-        windowContainer.add(gameControls.getGameControlsContainer(), BorderLayout.WEST);
+        windowContainer.add(gameControls.getGameControlsContainer(), BorderLayout.EAST);
 
 //        getAppWindow().pack();
 
