@@ -76,12 +76,15 @@ public class GameOptions
         scoreHolder.setBackground(new Color(0, 0, 0, 0));
         scoreHolder.setPreferredSize(new Dimension(255, 15));
         scoreHolder.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
-        scoreTeamLeft = createTimerElement("00");
-        scoreTeamRight = createTimerElement("00");
-        scoreHolder.add(scoreTeamLeft);
-        scoreHolder.add(scoreTeamRight);
-        gameOptions.add(scoreHolder);
 
+        scoreTeamLeft = createScoreElement("00");
+        scoreTeamRight = createScoreElement("00");
+
+        scoreHolder.add(scoreTeamLeft);
+        scoreHolder.add(materialElements.createLabel(" < L : R > "));
+        scoreHolder.add(scoreTeamRight);
+
+        gameOptions.add(scoreHolder);
 
     }
 
