@@ -93,13 +93,13 @@ public class GameOptions
     private void createOptions()
     {
 
-        MaterialLabel optionLabel = createOptionItem("Option:");
+        MaterialLabel optionLabel = createOptionItem("2 Player");
         gameOptions.add(createOptionItem("Option:", optionLabel));
 
-        MaterialLabel squareLabel = createOptionItem("Square:");
+        MaterialLabel squareLabel = createOptionItem("101");
         gameOptions.add(createOptionItem("Square:", squareLabel));
 
-        MaterialLabel directionLabel = createOptionItem("Direction:");
+        MaterialLabel directionLabel = createOptionItem("SE");
         gameOptions.add(createOptionItem("Direction:", directionLabel));
 
     }
@@ -107,24 +107,23 @@ public class GameOptions
     private JPanel createOptionItem(String content, MaterialLabel label)
     {
 
-        JPanel scoreLabelHolder = new JPanel();
-        scoreLabelHolder.setBackground(new Color(0, 0, 0, 0));
-        scoreLabelHolder.setPreferredSize(new Dimension(255, 30));
-        scoreLabelHolder.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
-        scoreLabelHolder.setLayout(new BorderLayout());
+        JPanel optionItemHolder = new JPanel();
+        optionItemHolder.setBackground(new Color(0, 0, 0, 0));
+        optionItemHolder.setPreferredSize(new Dimension(255, 30));
+        optionItemHolder.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
+        optionItemHolder.setLayout(new BorderLayout());
 
         MaterialLabel contentLabel = materialElements.createLabel(content);
-        scoreLabelHolder.add(contentLabel, BorderLayout.WEST);
+        optionItemHolder.add(contentLabel, BorderLayout.WEST);
 
-        JPanel scoreLabelHolder2 = new JPanel();
-        scoreLabelHolder2.setLayout(new GridBagLayout());
-        scoreLabelHolder2.setBackground(new Color(255, 255, 255));
-        scoreLabelHolder2.setPreferredSize(new Dimension(80, 25));
-        MaterialLabel scoreLabel2 = createOptionItem(content);
-        scoreLabelHolder2.add(scoreLabel2);
-        scoreLabelHolder.add(scoreLabelHolder2, BorderLayout.EAST);
+        JPanel optionItemChoseHolder = new JPanel();
+        optionItemChoseHolder.setLayout(new GridBagLayout());
+        optionItemChoseHolder.setBackground(new Color(255, 255, 255));
+        optionItemChoseHolder.setPreferredSize(new Dimension(80, 25));
+        optionItemChoseHolder.add(label);
+        optionItemHolder.add(optionItemChoseHolder, BorderLayout.EAST);
 
-        return scoreLabelHolder;
+        return optionItemHolder;
 
     }
 
