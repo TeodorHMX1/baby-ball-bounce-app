@@ -1,5 +1,8 @@
 package app.game.world;
 
+import app.models.Ball;
+import app.models.Player;
+import app.utils.AppUtils;
 import app.utils.material.MaterialElements;
 import app.utils.material.MaterialLabel;
 
@@ -38,39 +41,84 @@ public class GameWorld
         field.setBackground(Color.white);
         FlowLayout layout = (FlowLayout)field.getLayout();
         layout.setVgap(0);
+
+        initializeGameGrid();
+
+        GridLayout experimentLayout = new GridLayout(13, 16, 0, 0);
+        JPanel compsToExperiment = new JPanel();
+        compsToExperiment.setLayout(experimentLayout);
+        compsToExperiment.setBackground(new Color(0, 0, 0, 0));
+        compsToExperiment.setPreferredSize(new Dimension(530, 360));
+        compsToExperiment.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+
         int i, j;
         for(i=0; i<rows; i++)
         {
             for(j=0; j<columns; j++)
             {
-                if(i == 6 && j == 4)
-                {
-                    gameGrid[i][j] = materialElements.createLabel("");
-                    ImageIcon imageIcon = new ImageIcon("assets/images/baby1.png");
-                    Image image = imageIcon.getImage();
-                    Image newimg = image.getScaledInstance(31, 31, Image.SCALE_SMOOTH);
-                    imageIcon = new ImageIcon(newimg);
-                    gameGrid[i][j].setIcon(imageIcon);
-                }
-                else if(i == 6 && j == 11)
-                {
-                    gameGrid[i][j] = materialElements.createLabel("");
-                    ImageIcon imageIcon = new ImageIcon("assets/images/baby2.png");
-                    Image image = imageIcon.getImage();
-                    Image newimg = image.getScaledInstance(31, 31, Image.SCALE_SMOOTH);
-                    imageIcon = new ImageIcon(newimg);
-                    gameGrid[i][j].setIcon(imageIcon);
-                }
-                else if(i == 6 && j == 5)
-                {
-                    gameGrid[i][j] = materialElements.createLabel("");
-                    ImageIcon imageIcon = new ImageIcon("assets/images/ball.png");
-                    Image image = imageIcon.getImage();
-                    Image newimg = image.getScaledInstance(23, 23, Image.SCALE_SMOOTH);
-                    imageIcon = new ImageIcon(newimg);
-                    gameGrid[i][j].setIcon(imageIcon);
-                }
-                else if(j == columns/2 || j == columns/2 - 1)
+                compsToExperiment.add(gameGrid[i][j]);
+            }
+        }
+        field.add(compsToExperiment);
+
+        addBall();
+        addPlayers();
+
+        gameWorld.add(field, BorderLayout.CENTER);
+
+    }
+
+    private void addPlayers()
+    {
+
+        addTeamA();
+        addTeamB();
+
+    }
+
+    private void addTeamA()
+    {
+
+        Player mPlayer1 = AppUtils.getPlayer(1);
+        gameGrid[mPlayer1.getX()][mPlayer1.getY()].setIcon(mPlayer1.getBabyImage());
+        if(AppUtils.getNoPlayers() == 4)
+        {
+            Player mPlayer2 = AppUtils.getPlayer(3);
+            gameGrid[mPlayer2.getX()][mPlayer2.getY()].setIcon(mPlayer2.getBabyImage());
+        }
+
+    }
+
+    private void addTeamB()
+    {
+
+        Player mPlayer1 = AppUtils.getPlayer(2);
+        gameGrid[mPlayer1.getX()][mPlayer1.getY()].setIcon(mPlayer1.getBabyImage());
+        if(AppUtils.getNoPlayers() == 4)
+        {
+            Player mPlayer2 = AppUtils.getPlayer(4);
+            gameGrid[mPlayer2.getX()][mPlayer2.getY()].setIcon(mPlayer2.getBabyImage());
+        }
+
+    }
+
+    private void addBall()
+    {
+
+        Ball mBall = AppUtils.getBall();
+        gameGrid[mBall.getX()][mBall.getY()].setIcon(mBall.getBallImage());
+
+    }
+
+    private void initializeGameGrid()
+    {
+
+        int i, j;
+        for(i=0; i<rows; i++)
+        {
+            for(j=0; j<columns; j++)
+            {
+                if(j == columns/2 || j == columns/2 - 1)
                 {
                     gameGrid[i][j] = materialElements.createLabel("");
                     gameGrid[i][j].setIcon(new ImageIcon("assets/images/bricks2.jpg"));
@@ -82,23 +130,6 @@ public class GameWorld
                 }
             }
         }
-
-        GridLayout experimentLayout = new GridLayout(13, 16, 0, 0);
-        JPanel compsToExperiment = new JPanel();
-        compsToExperiment.setLayout(experimentLayout);
-        compsToExperiment.setBackground(new Color(0, 0, 0, 0));
-        compsToExperiment.setPreferredSize(new Dimension(530, 360));
-        compsToExperiment.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        for(i=0; i<rows; i++)
-        {
-            for(j=0; j<columns; j++)
-            {
-                compsToExperiment.add(gameGrid[i][j]);
-            }
-        }
-        field.add(compsToExperiment);
-
-        gameWorld.add(field, BorderLayout.CENTER);
 
     }
 

@@ -73,7 +73,11 @@ public class AppUtils
     private static Ball mBall;
     public static void initializeBall()
     {
-        mBall = new Ball(6, 5);
+        ImageIcon imageIcon = new ImageIcon("assets/images/ball.png");
+        Image image = imageIcon.getImage();
+        Image newimg = image.getScaledInstance(23, 23, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(newimg);
+        mBall = new Ball(6, 5, imageIcon);
     }
     public static Ball getBall()
     {
