@@ -11,7 +11,7 @@ public class MaterialElements
 
     }
 
-    public MaterialButton newButton(Icon icon, String text)
+    public MaterialButton createButton(Icon icon, String text)
     {
         MaterialButton btn = new MaterialButton(text);
         btn.setBackground(new Color(255, 255, 255));
@@ -26,4 +26,13 @@ public class MaterialElements
         );
         return btn;
     }
+
+    public MaterialSlider createSlider()
+    {
+
+        MaterialSlider materialSlider = new MaterialSlider(JSlider.HORIZONTAL, 1, 5, 1);
+        return materialSlider;
+
+    }
+
 }
