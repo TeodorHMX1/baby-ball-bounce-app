@@ -19,6 +19,7 @@ public class GameControls
     private JPanel gameControls;
     private MaterialElements materialElements;
     private MaterialButton btnState;
+    private MaterialSlider slider;
 
     public GameControls()
     {
@@ -92,16 +93,15 @@ public class GameControls
         sliderTitle.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 0));
         gameControls.add(sliderTitle);
 
-        MaterialSlider slider = materialElements.createHorizontalSlider(1, 5, 1);
-        slider.addChangeListener(this::sliderChanged);
+        slider = materialElements.createHorizontalSlider(1, 5, AppUtils.getGameSpeed());
+        slider.addChangeListener(changed -> sliderChanged());
         gameControls.add(slider);
 
     }
 
-    private void sliderChanged(ChangeEvent changeEvent)
+    private void sliderChanged()
     {
-
-
+        AppUtils.setGameSpeed(slider.getValue());
     }
 
     public JPanel getGameControlsContainer()

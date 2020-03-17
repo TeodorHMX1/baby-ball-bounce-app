@@ -134,4 +134,14 @@ public class AppUtils
         return mAutoMoveBall;
     }
 
+    private static int gameSpeed = 1;
+    public static int getGameSpeed()
+    {
+        return gameSpeed;
+    }
+    public static void setGameSpeed(int speed)
+    {
+        gameSpeed = speed;
+    }
+
 }
