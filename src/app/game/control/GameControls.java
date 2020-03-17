@@ -7,6 +7,8 @@ import app.utils.material.MaterialLabel;
 import app.utils.material.MaterialSlider;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -83,14 +85,22 @@ public class GameControls
 
     }
 
-    private void prepareSlider() {
+    private void prepareSlider()
+    {
 
         MaterialLabel sliderTitle = materialElements.createLabel("Speed:");
         sliderTitle.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 0));
         gameControls.add(sliderTitle);
 
         MaterialSlider slider = materialElements.createHorizontalSlider(1, 5, 1);
+        slider.addChangeListener(this::sliderChanged);
         gameControls.add(slider);
+
+    }
+
+    private void sliderChanged(ChangeEvent changeEvent)
+    {
+
 
     }
 
