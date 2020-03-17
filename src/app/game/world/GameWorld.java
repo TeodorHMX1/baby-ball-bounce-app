@@ -15,13 +15,17 @@ public class GameWorld {
 
     private JPanel gameWorld;
     private MaterialElements materialElements;
+    private JLayeredPane gameWorldHolder;
+    private final int rows = 13;
+    private final int columns = 16;
+    private MaterialLabel[][] gameGrid = new MaterialLabel[rows][columns];
+    private JPanel mBallObj;
 
     public GameWorld() {
 
         materialElements = new MaterialElements();
         gameWorld = new JPanel();
         gameWorld.setBorder(BorderFactory.createEmptyBorder(50, 20, 50, 20));
-//        gameWorld.setLayout(new BorderLayout());
         gameWorld.setPreferredSize(new Dimension(570, 440));
         gameWorld.setBackground(new Color(241, 241, 241));
 
@@ -29,40 +33,10 @@ public class GameWorld {
 
     }
 
-    private final int rows = 13;
-    private final int columns = 16;
-    private MaterialLabel[][] gameGrid = new MaterialLabel[rows][columns];
-    private JPanel mBallObj;
-
     private void initializeGameSubHolder() {
 
+        initializeGameWorldHolder();
         initializeGameGrid();
-
-        GridLayout experimentLayout = new GridLayout(13, 16, 0, 0);
-        JPanel compsToExperiment = new JPanel();
-        compsToExperiment.setLayout(experimentLayout);
-        compsToExperiment.setBackground(new Color(0, 0, 0, 0));
-        compsToExperiment.setPreferredSize(new Dimension(530, 360));
-        compsToExperiment.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-
-        int i, j;
-        for (i = 0; i < rows; i++) {
-            for (j = 0; j < columns; j++) {
-                compsToExperiment.add(gameGrid[i][j]);
-            }
-        }
-
-        JPanel field = new JPanel();
-        field.setBounds(0, 0, 530, 360);
-        field.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        field.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        field.setBackground(Color.white);
-        field.setOpaque(true);
-        FlowLayout layout = (FlowLayout) field.getLayout();
-        layout.setVgap(0);
-        field.add(compsToExperiment);
-        field.setLocation(0, 0);
-//        gameWorld.add(field);
 
         JPanel ballHolder = new JPanel();
         ballHolder.setBounds(0, 0, 530, 360);
@@ -84,18 +58,8 @@ public class GameWorld {
         mBallObj.add(ball);
         ballHolder.add(mBallObj);
 
-//        gameWorld.add(ballHolder);//, BorderLayout.SOUTH);
-        JLayeredPane lp = new JLayeredPane();
-        lp.setPreferredSize(new Dimension(530, 360));
-        lp.setBackground(Color.white);
-        lp.setOpaque(true);
-        lp.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        lp.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-//        lp.add(field, 1);
-
-        lp.add(field, Integer.valueOf(1));
-        lp.add(ballHolder, Integer.valueOf(2));
-        gameWorld.add(lp);
+        gameWorldHolder.add(ballHolder, Integer.valueOf(2));
+        gameWorld.add(gameWorldHolder);
 
 //        addBall();
         addPlayers();
@@ -112,6 +76,18 @@ public class GameWorld {
                 timer.setDelay(1000 - AppUtils.getGameSpeed() * 200);
             }
         });
+
+    }
+
+    private void initializeGameWorldHolder()
+    {
+        
+        gameWorldHolder = new JLayeredPane();
+        gameWorldHolder.setPreferredSize(new Dimension(530, 360));
+        gameWorldHolder.setBackground(Color.white);
+        gameWorldHolder.setOpaque(true);
+        gameWorldHolder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        gameWorldHolder.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
     }
 
@@ -175,6 +151,32 @@ public class GameWorld {
                 }
             }
         }
+
+        GridLayout experimentLayout = new GridLayout(13, 16, 0, 0);
+        JPanel compsToExperiment = new JPanel();
+        compsToExperiment.setLayout(experimentLayout);
+        compsToExperiment.setBackground(new Color(0, 0, 0, 0));
+        compsToExperiment.setPreferredSize(new Dimension(530, 360));
+        compsToExperiment.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+
+        for (i = 0; i < rows; i++) {
+            for (j = 0; j < columns; j++) {
+                compsToExperiment.add(gameGrid[i][j]);
+            }
+        }
+
+        JPanel field = new JPanel();
+        field.setBounds(0, 0, 530, 360);
+        field.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        field.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        field.setBackground(Color.white);
+        field.setOpaque(true);
+        FlowLayout layout = (FlowLayout) field.getLayout();
+        layout.setVgap(0);
+        field.add(compsToExperiment);
+        field.setLocation(0, 0);
+
+        gameWorldHolder.add(field, Integer.valueOf(1));
 
     }
 
