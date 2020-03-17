@@ -81,7 +81,7 @@ public class GameWorld {
 
     private void initializeGameWorldHolder()
     {
-        
+
         gameWorldHolder = new JLayeredPane();
         gameWorldHolder.setPreferredSize(new Dimension(530, 360));
         gameWorldHolder.setBackground(Color.white);
