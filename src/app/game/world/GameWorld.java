@@ -32,7 +32,7 @@ public class GameWorld {
     private final int rows = 13;
     private final int columns = 16;
     private MaterialLabel[][] gameGrid = new MaterialLabel[rows][columns];
-    private MaterialLabel ball;
+    private JPanel mBallObj;
 
     private void initializeGameSubHolder() {
 
@@ -64,15 +64,26 @@ public class GameWorld {
         field.setLocation(0, 0);
 //        gameWorld.add(field);
 
-        Ball mBall = AppUtils.getBall();
-        ball = materialElements.createLabel("");
-        ball.setIcon(mBall.getBallImage());
-        ball.setBounds(100, 100, 100, 100);
-
         JPanel ballHolder = new JPanel();
         ballHolder.setBounds(0, 0, 530, 360);
-        ballHolder.add(ball);
         ballHolder.setLocation(0, 0);
+        ballHolder.setOpaque(false);
+        ballHolder.setLayout(null);
+
+        Ball mBall = AppUtils.getBall();
+        MaterialLabel ball = materialElements.createLabel("");
+        ball.setIcon(mBall.getBallImage());
+        ball.setLocation(0, 0);
+
+        mBallObj = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        mBallObj.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mBallObj.setBounds(0, 0, 23, 23);
+        mBallObj.setOpaque(false);
+        mBallObj.setBackground(Color.BLUE);
+        mBallObj.setLocation(120, 200);
+        mBallObj.add(ball);
+        ballHolder.add(mBallObj);
+
 //        gameWorld.add(ballHolder);//, BorderLayout.SOUTH);
         JLayeredPane lp = new JLayeredPane();
         lp.setPreferredSize(new Dimension(530, 360));
@@ -83,7 +94,7 @@ public class GameWorld {
 //        lp.add(field, 1);
 
         lp.add(field, Integer.valueOf(1));
-//        lp.add(ballHolder, Integer.valueOf(2));
+        lp.add(ballHolder, Integer.valueOf(2));
         gameWorld.add(lp);
 
 //        addBall();
@@ -136,7 +147,6 @@ public class GameWorld {
     private void addBall() {
 
         Ball mBall = AppUtils.getBall();
-        ball.setIcon(mBall.getBallImage());
 
         AppUtils.addOnAutoMoveBallCallback(this::moveBallTo);
 
