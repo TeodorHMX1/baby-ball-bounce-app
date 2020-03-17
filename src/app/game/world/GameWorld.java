@@ -37,6 +37,7 @@ public class GameWorld {
 
         initializeGameWorldHolder();
         initializeGameGrid();
+        initializeGameObjects();
 
         JPanel ballHolder = new JPanel();
         ballHolder.setBounds(0, 0, 530, 360);
@@ -76,6 +77,13 @@ public class GameWorld {
                 timer.setDelay(1000 - AppUtils.getGameSpeed() * 200);
             }
         });
+
+    }
+
+    private void initializeGameObjects()
+    {
+
+        
 
     }
 
