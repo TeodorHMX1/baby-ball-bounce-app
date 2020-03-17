@@ -1,6 +1,5 @@
 package app.game.world;
 
-import app.interfaces.GameSpeed;
 import app.models.Ball;
 import app.models.Player;
 import app.utils.AppUtils;
@@ -37,32 +36,9 @@ public class GameWorld {
 
         initializeGameWorldHolder();
         initializeGameGrid();
-        initializeGameObjects();
-
-        JPanel ballHolder = new JPanel();
-        ballHolder.setBounds(0, 0, 530, 360);
-        ballHolder.setLocation(0, 0);
-        ballHolder.setOpaque(false);
-        ballHolder.setLayout(null);
-
-        Ball mBall = AppUtils.getBall();
-        MaterialLabel ball = materialElements.createLabel("");
-        ball.setIcon(mBall.getBallImage());
-        ball.setLocation(0, 0);
-
-        mBallObj = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mBallObj.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        mBallObj.setBounds(0, 0, 23, 23);
-        mBallObj.setOpaque(false);
-        mBallObj.setBackground(Color.BLUE);
-        mBallObj.setLocation(120, 200);
-        mBallObj.add(ball);
-        ballHolder.add(mBallObj);
-
-        gameWorldHolder.add(ballHolder, Integer.valueOf(2));
+        addGameObjects();
         gameWorld.add(gameWorldHolder);
 
-//        addBall();
         addPlayers();
 
         Timer timer = new Timer(1000 - AppUtils.getGameSpeed() * 200, actionEvent -> {
@@ -80,10 +56,10 @@ public class GameWorld {
 
     }
 
-    private void initializeGameObjects()
+    private void addGameObjects()
     {
 
-        
+        addBall();
 
     }
 
@@ -130,9 +106,29 @@ public class GameWorld {
 
     private void addBall() {
 
-        Ball mBall = AppUtils.getBall();
+        JPanel ballHolder = new JPanel();
+        ballHolder.setBounds(0, 0, 530, 360);
+        ballHolder.setLocation(0, 0);
+        ballHolder.setOpaque(false);
+        ballHolder.setLayout(null);
 
-        AppUtils.addOnAutoMoveBallCallback(this::moveBallTo);
+        Ball mBall = AppUtils.getBall();
+        MaterialLabel ball = materialElements.createLabel("");
+        ball.setIcon(mBall.getBallImage());
+        ball.setLocation(0, 0);
+
+        mBallObj = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        mBallObj.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mBallObj.setBounds(0, 0, 23, 23);
+        mBallObj.setOpaque(false);
+        mBallObj.setBackground(Color.BLUE);
+        mBallObj.setLocation(120, 200);
+        mBallObj.add(ball);
+        ballHolder.add(mBallObj);
+
+        gameWorldHolder.add(ballHolder, Integer.valueOf(2));
+
+//        AppUtils.addOnAutoMoveBallCallback(this::moveBallTo);
 
     }
 
