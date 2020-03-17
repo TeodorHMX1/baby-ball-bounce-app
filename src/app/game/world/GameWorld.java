@@ -60,8 +60,8 @@ public class GameWorld {
             }
         }
         field.add(compsToExperiment);
-        
-        gameWorld.add(field);
+        field.setLocation(0, 0);
+//        gameWorld.add(field);
 
         Ball mBall = AppUtils.getBall();
         ball = materialElements.createLabel("");
@@ -73,9 +73,17 @@ public class GameWorld {
         ballHolder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         ballHolder.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         ballHolder.setBackground(Color.white);
-        ballHolder.setLayout(null);
         ballHolder.add(ball);
-        gameWorld.add(ballHolder);//, BorderLayout.SOUTH);
+        ballHolder.setLocation(0, 0);
+//        gameWorld.add(ballHolder);//, BorderLayout.SOUTH);
+        JLayeredPane lp = new JLayeredPane();
+        lp.setPreferredSize(new Dimension(530, 360));
+        lp.setBackground(Color.white);
+        lp.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        lp.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+//        lp.add(field, 1);
+        lp.add(field, 0);
+        gameWorld.add(lp);
 
 //        addBall();
         addPlayers();
