@@ -32,17 +32,9 @@ public class GameWorld {
     private final int rows = 13;
     private final int columns = 16;
     private MaterialLabel[][] gameGrid = new MaterialLabel[rows][columns];
-    private MaterialLabel ball;
+    private JPanel mBallObj;
 
     private void initializeGameSubHolder() {
-
-        JPanel field = new JPanel();
-        field.setPreferredSize(new Dimension(530, 360));
-        field.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        field.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        field.setBackground(Color.white);
-        FlowLayout layout = (FlowLayout) field.getLayout();
-        layout.setVgap(0);
 
         initializeGameGrid();
 
@@ -59,23 +51,51 @@ public class GameWorld {
                 compsToExperiment.add(gameGrid[i][j]);
             }
         }
-        field.add(compsToExperiment);
-        
-        gameWorld.add(field);
 
-        Ball mBall = AppUtils.getBall();
-        ball = materialElements.createLabel("");
-        ball.setIcon(mBall.getBallImage());
-        ball.setBounds(100, 100, 100, 100);
+        JPanel field = new JPanel();
+        field.setBounds(0, 0, 530, 360);
+        field.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        field.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        field.setBackground(Color.white);
+        field.setOpaque(true);
+        FlowLayout layout = (FlowLayout) field.getLayout();
+        layout.setVgap(0);
+        field.add(compsToExperiment);
+        field.setLocation(0, 0);
+//        gameWorld.add(field);
 
         JPanel ballHolder = new JPanel();
-        ballHolder.setPreferredSize(new Dimension(530, 360));
-        ballHolder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        ballHolder.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        ballHolder.setBackground(Color.white);
+        ballHolder.setBounds(0, 0, 530, 360);
+        ballHolder.setLocation(0, 0);
+        ballHolder.setOpaque(false);
         ballHolder.setLayout(null);
-        ballHolder.add(ball);
-        gameWorld.add(ballHolder);//, BorderLayout.SOUTH);
+
+        Ball mBall = AppUtils.getBall();
+        MaterialLabel ball = materialElements.createLabel("");
+        ball.setIcon(mBall.getBallImage());
+        ball.setLocation(0, 0);
+
+        mBallObj = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        mBallObj.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mBallObj.setBounds(0, 0, 23, 23);
+        mBallObj.setOpaque(false);
+        mBallObj.setBackground(Color.BLUE);
+        mBallObj.setLocation(120, 200);
+        mBallObj.add(ball);
+        ballHolder.add(mBallObj);
+
+//        gameWorld.add(ballHolder);//, BorderLayout.SOUTH);
+        JLayeredPane lp = new JLayeredPane();
+        lp.setPreferredSize(new Dimension(530, 360));
+        lp.setBackground(Color.white);
+        lp.setOpaque(true);
+        lp.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        lp.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+//        lp.add(field, 1);
+
+        lp.add(field, Integer.valueOf(1));
+        lp.add(ballHolder, Integer.valueOf(2));
+        gameWorld.add(lp);
 
 //        addBall();
         addPlayers();
@@ -127,7 +147,6 @@ public class GameWorld {
     private void addBall() {
 
         Ball mBall = AppUtils.getBall();
-        ball.setIcon(mBall.getBallImage());
 
         AppUtils.addOnAutoMoveBallCallback(this::moveBallTo);
 
