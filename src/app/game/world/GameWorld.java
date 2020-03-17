@@ -1,5 +1,6 @@
 package app.game.world;
 
+import app.interfaces.GameSpeed;
 import app.models.Ball;
 import app.models.Player;
 import app.utils.AppUtils;
@@ -77,6 +78,19 @@ public class GameWorld {
 
 //        addBall();
         addPlayers();
+
+        Timer timer = new Timer(1000 - AppUtils.getGameSpeed() * 200, actionEvent -> {
+            if(AppUtils.isGameStarted()) {
+                System.out.println("h");
+            }
+        });
+        timer.setInitialDelay(0);
+        timer.start();
+        AppUtils.addOnGameSpeedCallback(() -> {
+            if(AppUtils.isGameStarted()) {
+                timer.setDelay(1000 - AppUtils.getGameSpeed() * 200);
+            }
+        });
 
     }
 
