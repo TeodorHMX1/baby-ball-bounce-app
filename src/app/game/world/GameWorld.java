@@ -60,6 +60,7 @@ public class GameWorld {
             }
         }
         field.add(compsToExperiment);
+        
         gameWorld.add(field);
 
         Ball mBall = AppUtils.getBall();
@@ -81,7 +82,7 @@ public class GameWorld {
 
         Timer timer = new Timer(1000 - AppUtils.getGameSpeed() * 200, actionEvent -> {
             if(AppUtils.isGameStarted()) {
-                System.out.println("h");
+                moveBallTo(Directions.RIGHT);
             }
         });
         timer.setInitialDelay(0);
