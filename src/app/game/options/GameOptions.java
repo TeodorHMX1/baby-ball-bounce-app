@@ -1,5 +1,6 @@
 package app.game.options;
 
+import app.interfaces.GameSpeed;
 import app.utils.AppUtils;
 import app.utils.enums.*;
 import app.utils.material.MaterialButton;

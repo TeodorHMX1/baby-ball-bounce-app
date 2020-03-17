@@ -1,6 +1,7 @@
 package app.utils;
 
 import app.interfaces.BallCallback;
+import app.interfaces.GameSpeed;
 import app.interfaces.GameTimer;
 import app.models.Ball;
 import app.models.Player;
@@ -132,6 +133,29 @@ public class AppUtils
     public static BallCallback.AutoMoveBall getAutoMoveBall()
     {
         return mAutoMoveBall;
+    }
+
+    private static int gameSpeed = 1;
+    public static int getGameSpeed()
+    {
+        return gameSpeed;
+    }
+    public static void setGameSpeed(int speed)
+    {
+        gameSpeed = speed;
+        if (mGameSpeedCallback != null)
+        {
+            mGameSpeedCallback.onSpeedChanged();
+        }
+    }
+
+    private static GameSpeed mGameSpeedCallback;
+    public static void addOnGameSpeedCallback(GameSpeed gameSpeed) {
+        mGameSpeedCallback = gameSpeed;
+    }
+    public static GameSpeed getGameSpeedCallback()
+    {
+        return mGameSpeedCallback;
     }
 
 }

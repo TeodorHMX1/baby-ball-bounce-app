@@ -1,5 +1,6 @@
 package app.game.world;
 
+import app.interfaces.GameSpeed;
 import app.models.Ball;
 import app.models.Player;
 import app.utils.AppUtils;
@@ -59,6 +60,7 @@ public class GameWorld {
             }
         }
         field.add(compsToExperiment);
+        
         gameWorld.add(field);
 
         Ball mBall = AppUtils.getBall();
@@ -77,6 +79,19 @@ public class GameWorld {
 
 //        addBall();
         addPlayers();
+
+        Timer timer = new Timer(1000 - AppUtils.getGameSpeed() * 200, actionEvent -> {
+            if(AppUtils.isGameStarted()) {
+                moveBallTo(Directions.RIGHT);
+            }
+        });
+        timer.setInitialDelay(0);
+        timer.start();
+        AppUtils.addOnGameSpeedCallback(() -> {
+            if(AppUtils.isGameStarted()) {
+                timer.setDelay(1000 - AppUtils.getGameSpeed() * 200);
+            }
+        });
 
     }
 
