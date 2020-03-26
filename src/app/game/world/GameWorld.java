@@ -83,16 +83,16 @@ public class GameWorld {
             }
         }
 
-        GridLayout experimentLayout = new GridLayout(13, 16, 0, 0);
-        JPanel compsToExperiment = new JPanel();
-        compsToExperiment.setLayout(experimentLayout);
-        compsToExperiment.setBackground(new Color(0, 0, 0, 0));
-        compsToExperiment.setPreferredSize(new Dimension(530, 360));
-        compsToExperiment.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        GridLayout mGridLayoutGameWord = new GridLayout(13, 16, 0, 0);
+        JPanel mGameWorldHolder = new JPanel();
+        mGameWorldHolder.setLayout(mGridLayoutGameWord);
+        mGameWorldHolder.setBackground(new Color(0, 0, 0, 0));
+        mGameWorldHolder.setPreferredSize(new Dimension(530, 360));
+        mGameWorldHolder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
         for (i = 0; i < rows; i++) {
             for (j = 0; j < columns; j++) {
-                compsToExperiment.add(gameGrid[i][j]);
+                mGameWorldHolder.add(gameGrid[i][j]);
             }
         }
 
@@ -104,7 +104,7 @@ public class GameWorld {
         field.setOpaque(true);
         FlowLayout layout = (FlowLayout) field.getLayout();
         layout.setVgap(0);
-        field.add(compsToExperiment);
+        field.add(mGameWorldHolder);
         field.setLocation(0, 0);
 
         gameWorldHolder.add(field, Integer.valueOf(1));
