@@ -31,6 +31,9 @@ public class MenuActivity
         //prepare controls option from menu
         menuBar.add(controlsOptionMenu());
 
+        //prepare controls option from menu
+        menuBar.add(toolsOptionMenu());
+
         //prepare help option from menu
         menuBar.add(helpOptionMenu());
 
@@ -72,6 +75,14 @@ public class MenuActivity
 
         var controlsMenu = new JMenu("Controls");
         controlsMenu.setMnemonic(KeyEvent.VK_C);
+        return controlsMenu;
+
+    }
+
+    private JMenu toolsOptionMenu() {
+
+        var controlsMenu = new JMenu("Tools");
+        controlsMenu.setMnemonic(KeyEvent.VK_T);
         return controlsMenu;
 
     }

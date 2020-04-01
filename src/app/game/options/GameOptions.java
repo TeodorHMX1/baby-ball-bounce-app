@@ -1,14 +1,14 @@
 package app.game.options;
 
+import app.interfaces.GameSpeed;
 import app.utils.AppUtils;
+import app.utils.enums.*;
 import app.utils.material.MaterialButton;
 import app.utils.material.MaterialElements;
 import app.utils.material.MaterialLabel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 public class GameOptions {
@@ -20,13 +20,6 @@ public class GameOptions {
     private MaterialLabel optionLabel;
     private int teamLeft = 0, teamRight = 0;
     private MaterialLabel compassLabel;
-
-    enum Directions {
-        LEFT,
-        RIGHT,
-        UP,
-        DOWN
-    }
 
     enum Players {
         TWO,
@@ -106,6 +99,10 @@ public class GameOptions {
         timerHours.setText(timeBased(AppUtils.getSeconds()/(60*60)));
         timerMinutes.setText(timeBased(AppUtils.getSeconds()/(60) % 60));
         timerSeconds.setText(timeBased(AppUtils.getSeconds() % 60));
+        if(AppUtils.getAutoMoveBall() != null)
+        {
+            AppUtils.getAutoMoveBall().moveTo(Directions.DOWN);
+        }
     }
 
     private String timeBased(int time)
