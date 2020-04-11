@@ -1,8 +1,7 @@
 package app.utils;
 
-import app.interfaces.BallCallback;
-import app.interfaces.GameSpeed;
-import app.interfaces.GameTimer;
+import app.enumerations.TeamMembers;
+import app.interfaces.*;
 import app.models.Ball;
 import app.models.Player;
 
@@ -30,15 +29,30 @@ public class AppUtils
         return mainActivityGlobal;
     }
 
-    private static int players = 2;
-    public static void setPlayers(int noPlayers)
+    private static TeamMembersNumber mTeamMembersNumber;
+    public static void addOnTeamMembersListener(TeamMembersNumber teamMembersNumber) {
+        mTeamMembersNumber = teamMembersNumber;
+    }
+
+    private static TeamMembers players = TeamMembers.players_2;
+    public static void setPlayers(TeamMembers noPlayers)
     {
         players = noPlayers;
+        if(mTeamMembersNumber != null)
+        {
+            mTeamMembersNumber.onMembersChanged(noPlayers);
+        }
     }
     public static int getNoPlayers()
     {
-        return players;
+        if (players == TeamMembers.players_2) {
+            return 2;
+        } else if (players == TeamMembers.players_4) {
+            return 4;
+        }
+        return 2;
     }
+
 
     private static List<Player> mPlayers = new ArrayList<>();
     public static void initializePlayers()
