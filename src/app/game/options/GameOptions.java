@@ -1,5 +1,6 @@
 package app.game.options;
 
+import app.enumerations.TeamMembers;
 import app.interfaces.GameSpeed;
 import app.utils.AppUtils;
 import app.utils.enums.*;
@@ -385,11 +386,11 @@ public class GameOptions {
         switch (choice) {
             case TWO:
                 optionLabel.setText("2 Player");
-                AppUtils.setPlayers(2);
+                AppUtils.setPlayers(TeamMembers.players_2);
                 break;
             case FOUR:
                 optionLabel.setText("4 Player");
-                AppUtils.setPlayers(4);
+                AppUtils.setPlayers(TeamMembers.players_4);
                 break;
             default:
                 break;

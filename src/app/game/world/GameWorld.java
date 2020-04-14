@@ -42,22 +42,21 @@ public class GameWorld {
         gameWorld.add(gameWorldHolder);
 
         Timer timer = new Timer(1000 - AppUtils.getGameSpeed() * 200, actionEvent -> {
-            if(AppUtils.isGameStarted()) {
+            if (AppUtils.isGameStarted()) {
                 moveBallTo(Directions.RIGHT);
             }
         });
         timer.setInitialDelay(0);
         timer.start();
         AppUtils.addOnGameSpeedCallback(() -> {
-            if(AppUtils.isGameStarted()) {
+            if (AppUtils.isGameStarted()) {
                 timer.setDelay(1000 - AppUtils.getGameSpeed() * 200);
             }
         });
 
     }
 
-    private void initializeGameWorldHolder()
-    {
+    private void initializeGameWorldHolder() {
 
         gameWorldHolder = new JLayeredPane();
         gameWorldHolder.setPreferredSize(new Dimension(530, 360));
@@ -111,8 +110,7 @@ public class GameWorld {
 
     }
 
-    private void addGameObjects()
-    {
+    private void addGameObjects() {
 
         addBall();
         addPlayers();
@@ -180,26 +178,23 @@ public class GameWorld {
 
         gameWorldHolder.add(mPlayers.get(0), Integer.valueOf(3));
 
-        Player mPlayer3 = AppUtils.getPlayer(1);
+        if (AppUtils.getNoPlayers() == 4) {
+            Player mPlayer3 = AppUtils.getPlayer(3);
 
-        mPlayerLabel = materialElements.createLabel("");
-        mPlayerLabel.setIcon(mPlayer3.getBabyImage());
-        mPlayerLabel.setLocation(0, 0);
+            mPlayerLabel = materialElements.createLabel("");
+            mPlayerLabel.setIcon(mPlayer3.getBabyImage());
+            mPlayerLabel.setLocation(0, 0);
 
-        JPanel mPlayerJPanel3 = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mPlayerJPanel3.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        mPlayerJPanel3.setBounds(0, 0, 31, 31);
-        mPlayerJPanel3.setOpaque(false);
-        mPlayerJPanel3.setLocation(35, 0);
-        mPlayerJPanel3.add(mPlayerLabel);
-        mPlayers.add(mPlayerJPanel3);
+            JPanel mPlayerJPanel3 = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+            mPlayerJPanel3.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+            mPlayerJPanel3.setBounds(0, 0, 31, 31);
+            mPlayerJPanel3.setOpaque(false);
+            mPlayerJPanel3.setLocation(35, 0);
+            mPlayerJPanel3.add(mPlayerLabel);
+            mPlayers.add(mPlayerJPanel3);
 
-        gameWorldHolder.add(mPlayers.get(1), Integer.valueOf(4));
-
-//        if (AppUtils.getNoPlayers() == 4) {
-//            Player mPlayer2 = AppUtils.getPlayer(3);
-//            gameGrid[mPlayer2.getX()][mPlayer2.getY()].setIcon(mPlayer2.getBabyImage());
-//        }
+            gameWorldHolder.add(mPlayers.get(1), Integer.valueOf(4));
+        }
 
     }
 
@@ -221,21 +216,23 @@ public class GameWorld {
 
         gameWorldHolder.add(mPlayers.get(2), Integer.valueOf(5));
 
-        Player mPlayer3 = AppUtils.getPlayer(4);
+        if (AppUtils.getNoPlayers() == 4) {
+            Player mPlayer3 = AppUtils.getPlayer(4);
 
-        mPlayerLabel = materialElements.createLabel("");
-        mPlayerLabel.setIcon(mPlayer3.getBabyImage());
-        mPlayerLabel.setLocation(0, 0);
+            mPlayerLabel = materialElements.createLabel("");
+            mPlayerLabel.setIcon(mPlayer3.getBabyImage());
+            mPlayerLabel.setLocation(0, 0);
 
-        JPanel mPlayerJPanel3 = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mPlayerJPanel3.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        mPlayerJPanel3.setBounds(0, 0, 31, 31);
-        mPlayerJPanel3.setOpaque(false);
-        mPlayerJPanel3.setLocation(35, 35);
-        mPlayerJPanel3.add(mPlayerLabel);
-        mPlayers.add(mPlayerJPanel3);
+            JPanel mPlayerJPanel3 = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+            mPlayerJPanel3.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+            mPlayerJPanel3.setBounds(0, 0, 31, 31);
+            mPlayerJPanel3.setOpaque(false);
+            mPlayerJPanel3.setLocation(35, 35);
+            mPlayerJPanel3.add(mPlayerLabel);
+            mPlayers.add(mPlayerJPanel3);
 
-        gameWorldHolder.add(mPlayers.get(3), Integer.valueOf(6));
+            gameWorldHolder.add(mPlayers.get(3), Integer.valueOf(6));
+        }
 
 //        Player mPlayer1 = AppUtils.getPlayer(2);
 //        gameGrid[mPlayer1.getX()][mPlayer1.getY()].setIcon(mPlayer1.getBabyImage());
