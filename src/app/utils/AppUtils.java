@@ -113,6 +113,7 @@ public class AppUtils
         {
             mGameStarted.isRunning(gameStarted);
         }
+        setPlayers(players);
         initializePlayers();
         initializeBall();
     }

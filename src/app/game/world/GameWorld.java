@@ -59,14 +59,28 @@ public class GameWorld {
             @Override
             public void onMembersChanged(TeamMembers players) {
                 if (players == TeamMembers.players_2) {
+                    mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2);
                     mPlayers.get(1).setVisible(false);
                     mPlayers.get(3).setVisible(false);
+                    mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2);
+                    mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2);
                 } else if (players == TeamMembers.players_4) {
+                    mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2 - 60);
                     mPlayers.get(1).setVisible(true);
                     mPlayers.get(3).setVisible(true);
+                    mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2 - 60);
+                    mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2 - 60);
+                    mPlayers.get(1).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2 + 60);
+                    mPlayers.get(3).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2 + 60);
                 }
             }
         });
+
+        mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2);
+        mPlayers.get(1).setVisible(false);
+        mPlayers.get(3).setVisible(false);
+        mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2);
+        mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2);
 
     }
 
@@ -148,7 +162,6 @@ public class GameWorld {
         mBallObj.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         mBallObj.setBounds(0, 0, 23, 23);
         mBallObj.setOpaque(false);
-        mBallObj.setLocation(20, 70);
         mBallObj.add(ball);
         ballHolder.add(mBallObj);
 
@@ -186,7 +199,6 @@ public class GameWorld {
         mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         mPlayerJPanel.setBounds(0, 0, 31, 31);
         mPlayerJPanel.setOpaque(false);
-        mPlayerJPanel.setLocation(530/2 - 150 - 31/2, 360/2-31/2);
         mPlayerJPanel.add(mPlayerLabel);
         mPlayers.add(mPlayerJPanel);
 
@@ -202,7 +214,6 @@ public class GameWorld {
         mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         mPlayerJPanel.setBounds(0, 0, 31, 31);
         mPlayerJPanel.setOpaque(false);
-        mPlayerJPanel.setLocation(0, 35);
         mPlayerJPanel.add(mPlayerLabel);
         mPlayers.add(mPlayerJPanel);
 
@@ -226,7 +237,6 @@ public class GameWorld {
         mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         mPlayerJPanel.setBounds(0, 0, 31, 31);
         mPlayerJPanel.setOpaque(false);
-        mPlayerJPanel.setLocation(530/2 + 150 - 31/2, 360/2-31/2);
         mPlayerJPanel.add(mPlayerLabel);
         mPlayers.add(mPlayerJPanel);
 
@@ -242,7 +252,6 @@ public class GameWorld {
         mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         mPlayerJPanel.setBounds(0, 0, 31, 31);
         mPlayerJPanel.setOpaque(false);
-        mPlayerJPanel.setLocation(35, 35);
         mPlayerJPanel.add(mPlayerLabel);
         mPlayers.add(mPlayerJPanel);
 
