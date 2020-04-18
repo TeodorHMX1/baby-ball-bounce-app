@@ -1,5 +1,7 @@
 package app.game.world;
 
+import app.enumerations.TeamMembers;
+import app.interfaces.TeamMembersNumber;
 import app.models.Ball;
 import app.models.Player;
 import app.utils.AppUtils;
@@ -53,6 +55,32 @@ public class GameWorld {
                 timer.setDelay(1000 - AppUtils.getGameSpeed() * 200);
             }
         });
+        AppUtils.addOnTeamMembersListener(new TeamMembersNumber() {
+            @Override
+            public void onMembersChanged(TeamMembers players) {
+                if (players == TeamMembers.players_2) {
+                    mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2);
+                    mPlayers.get(1).setVisible(false);
+                    mPlayers.get(3).setVisible(false);
+                    mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2);
+                    mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2);
+                } else if (players == TeamMembers.players_4) {
+                    mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2 - 60);
+                    mPlayers.get(1).setVisible(true);
+                    mPlayers.get(3).setVisible(true);
+                    mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2 - 60);
+                    mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2 - 60);
+                    mPlayers.get(1).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2 + 60);
+                    mPlayers.get(3).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2 + 60);
+                }
+            }
+        });
+
+        mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2);
+        mPlayers.get(1).setVisible(false);
+        mPlayers.get(3).setVisible(false);
+        mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2);
+        mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2);
 
     }
 
@@ -134,7 +162,6 @@ public class GameWorld {
         mBallObj.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         mBallObj.setBounds(0, 0, 23, 23);
         mBallObj.setOpaque(false);
-        mBallObj.setLocation(20, 70);
         mBallObj.add(ball);
         ballHolder.add(mBallObj);
 
@@ -168,32 +195,32 @@ public class GameWorld {
         mPlayerLabel.setIcon(mPlayer1.getBabyImage());
         mPlayerLabel.setLocation(0, 0);
 
-        JPanel mPlayerJPanel1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mPlayerJPanel1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        mPlayerJPanel1.setBounds(0, 0, 31, 31);
-        mPlayerJPanel1.setOpaque(false);
-        mPlayerJPanel1.setLocation(0, 0);
-        mPlayerJPanel1.add(mPlayerLabel);
-        mPlayers.add(mPlayerJPanel1);
+        JPanel mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mPlayerJPanel.setBounds(0, 0, 31, 31);
+        mPlayerJPanel.setOpaque(false);
+        mPlayerJPanel.add(mPlayerLabel);
+        mPlayers.add(mPlayerJPanel);
 
         gameWorldHolder.add(mPlayers.get(0), Integer.valueOf(3));
 
+        Player mPlayer3 = AppUtils.getPlayer(3);
+
+        mPlayerLabel = materialElements.createLabel("");
+        mPlayerLabel.setIcon(mPlayer3.getBabyImage());
+        mPlayerLabel.setLocation(0, 0);
+
+        mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mPlayerJPanel.setBounds(0, 0, 31, 31);
+        mPlayerJPanel.setOpaque(false);
+        mPlayerJPanel.add(mPlayerLabel);
+        mPlayers.add(mPlayerJPanel);
+
+        gameWorldHolder.add(mPlayers.get(1), Integer.valueOf(4));
+
         if (AppUtils.getNoPlayers() == 4) {
-            Player mPlayer3 = AppUtils.getPlayer(3);
 
-            mPlayerLabel = materialElements.createLabel("");
-            mPlayerLabel.setIcon(mPlayer3.getBabyImage());
-            mPlayerLabel.setLocation(0, 0);
-
-            JPanel mPlayerJPanel3 = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-            mPlayerJPanel3.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-            mPlayerJPanel3.setBounds(0, 0, 31, 31);
-            mPlayerJPanel3.setOpaque(false);
-            mPlayerJPanel3.setLocation(35, 0);
-            mPlayerJPanel3.add(mPlayerLabel);
-            mPlayers.add(mPlayerJPanel3);
-
-            gameWorldHolder.add(mPlayers.get(1), Integer.valueOf(4));
         }
 
     }
@@ -206,32 +233,32 @@ public class GameWorld {
         mPlayerLabel.setIcon(mPlayer1.getBabyImage());
         mPlayerLabel.setLocation(0, 0);
 
-        JPanel mPlayerJPanel1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mPlayerJPanel1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        mPlayerJPanel1.setBounds(0, 0, 31, 31);
-        mPlayerJPanel1.setOpaque(false);
-        mPlayerJPanel1.setLocation(0, 35);
-        mPlayerJPanel1.add(mPlayerLabel);
-        mPlayers.add(mPlayerJPanel1);
+        JPanel mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mPlayerJPanel.setBounds(0, 0, 31, 31);
+        mPlayerJPanel.setOpaque(false);
+        mPlayerJPanel.add(mPlayerLabel);
+        mPlayers.add(mPlayerJPanel);
 
         gameWorldHolder.add(mPlayers.get(2), Integer.valueOf(5));
 
+        Player mPlayer3 = AppUtils.getPlayer(4);
+
+        mPlayerLabel = materialElements.createLabel("");
+        mPlayerLabel.setIcon(mPlayer3.getBabyImage());
+        mPlayerLabel.setLocation(0, 0);
+
+        mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mPlayerJPanel.setBounds(0, 0, 31, 31);
+        mPlayerJPanel.setOpaque(false);
+        mPlayerJPanel.add(mPlayerLabel);
+        mPlayers.add(mPlayerJPanel);
+
+        gameWorldHolder.add(mPlayers.get(3), Integer.valueOf(6));
+
         if (AppUtils.getNoPlayers() == 4) {
-            Player mPlayer3 = AppUtils.getPlayer(4);
 
-            mPlayerLabel = materialElements.createLabel("");
-            mPlayerLabel.setIcon(mPlayer3.getBabyImage());
-            mPlayerLabel.setLocation(0, 0);
-
-            JPanel mPlayerJPanel3 = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-            mPlayerJPanel3.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-            mPlayerJPanel3.setBounds(0, 0, 31, 31);
-            mPlayerJPanel3.setOpaque(false);
-            mPlayerJPanel3.setLocation(35, 35);
-            mPlayerJPanel3.add(mPlayerLabel);
-            mPlayers.add(mPlayerJPanel3);
-
-            gameWorldHolder.add(mPlayers.get(3), Integer.valueOf(6));
         }
 
 //        Player mPlayer1 = AppUtils.getPlayer(2);
