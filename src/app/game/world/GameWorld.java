@@ -1,5 +1,7 @@
 package app.game.world;
 
+import app.enumerations.TeamMembers;
+import app.interfaces.TeamMembersNumber;
 import app.models.Ball;
 import app.models.Player;
 import app.utils.AppUtils;
@@ -51,6 +53,18 @@ public class GameWorld {
         AppUtils.addOnGameSpeedCallback(() -> {
             if (AppUtils.isGameStarted()) {
                 timer.setDelay(1000 - AppUtils.getGameSpeed() * 200);
+            }
+        });
+        AppUtils.addOnTeamMembersListener(new TeamMembersNumber() {
+            @Override
+            public void onMembersChanged(TeamMembers players) {
+                if (players == TeamMembers.players_2) {
+                    mPlayers.get(1).setVisible(false);
+                    mPlayers.get(3).setVisible(false);
+                } else if (players == TeamMembers.players_4) {
+                    mPlayers.get(1).setVisible(true);
+                    mPlayers.get(3).setVisible(true);
+                }
             }
         });
 
@@ -172,7 +186,7 @@ public class GameWorld {
         mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         mPlayerJPanel.setBounds(0, 0, 31, 31);
         mPlayerJPanel.setOpaque(false);
-        mPlayerJPanel.setLocation(0, 0);
+        mPlayerJPanel.setLocation(530/2 - 150 - 31/2, 360/2-31/2);
         mPlayerJPanel.add(mPlayerLabel);
         mPlayers.add(mPlayerJPanel);
 
@@ -188,7 +202,7 @@ public class GameWorld {
         mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         mPlayerJPanel.setBounds(0, 0, 31, 31);
         mPlayerJPanel.setOpaque(false);
-        mPlayerJPanel.setLocation(0, 0);
+        mPlayerJPanel.setLocation(0, 35);
         mPlayerJPanel.add(mPlayerLabel);
         mPlayers.add(mPlayerJPanel);
 
@@ -212,7 +226,7 @@ public class GameWorld {
         mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         mPlayerJPanel.setBounds(0, 0, 31, 31);
         mPlayerJPanel.setOpaque(false);
-        mPlayerJPanel.setLocation(0, 0);
+        mPlayerJPanel.setLocation(530/2 + 150 - 31/2, 360/2-31/2);
         mPlayerJPanel.add(mPlayerLabel);
         mPlayers.add(mPlayerJPanel);
 
@@ -228,7 +242,7 @@ public class GameWorld {
         mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         mPlayerJPanel.setBounds(0, 0, 31, 31);
         mPlayerJPanel.setOpaque(false);
-        mPlayerJPanel.setLocation(0, 0);
+        mPlayerJPanel.setLocation(35, 35);
         mPlayerJPanel.add(mPlayerLabel);
         mPlayers.add(mPlayerJPanel);
 
