@@ -1,6 +1,7 @@
 package app.game.world;
 
 import app.enumerations.TeamMembers;
+import app.interfaces.BallCallback;
 import app.interfaces.TeamMembersNumber;
 import app.models.Ball;
 import app.models.Player;
@@ -72,12 +73,24 @@ public class GameWorld {
                 mPlayers.get(3).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2 + 60);
             }
         });
+        AppUtils.addOnAutoMoveBallCallback(new BallCallback.AutoMoveBall() {
+            @Override
+            public void moveTo(Directions direction) {
+                moveBallTo(direction);
+            }
+        });
 
         mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2);
         mPlayers.get(1).setVisible(false);
         mPlayers.get(3).setVisible(false);
         mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2);
         mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2);
+
+    }
+
+    private void moveBallTo(Directions direction) {
+
+        mBallObj.setLocation(mBallObj.getLocation().x + 33, mBallObj.getLocation().y);
 
     }
 
@@ -163,17 +176,6 @@ public class GameWorld {
         ballHolder.add(mBallObj);
 
         gameWorldHolder.add(ballHolder, Integer.valueOf(2));
-
-//        AppUtils.addOnAutoMoveBallCallback(this::moveBallTo);
-
-    }
-
-    private void moveBallTo(Directions direction) {
-
-//        AppUtils.getBall().moveTo(direction);
-//        Ball mBall = AppUtils.getBall();
-//        gameGrid[mBall.getX()][mBall.getY()].setBounds(100, 100, 100, 100);
-//        gameGrid[mBall.getX()][mBall.getY()].setIcon(mBall.getBallImage());
 
     }
 
