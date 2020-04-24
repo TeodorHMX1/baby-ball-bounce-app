@@ -1,10 +1,10 @@
 package app.game.world;
 
 import app.enumerations.TeamMembers;
-import app.interfaces.TeamMembersNumber;
 import app.models.Ball;
 import app.models.Player;
 import app.utils.AppUtils;
+import app.utils.AssetsUtils;
 import app.utils.enums.Directions;
 import app.utils.material.MaterialElements;
 import app.utils.material.MaterialLabel;
@@ -12,6 +12,9 @@ import app.utils.material.MaterialLabel;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+
+import static app.utils.AssetsUtils.IMG_BRICKS;
+import static app.utils.AssetsUtils.IMG_WHITE_SQUARE;
 
 public class GameWorld {
 
@@ -55,32 +58,36 @@ public class GameWorld {
                 timer.setDelay(1000 - AppUtils.getGameSpeed() * 200);
             }
         });
-        AppUtils.addOnTeamMembersListener(new TeamMembersNumber() {
-            @Override
-            public void onMembersChanged(TeamMembers players) {
-                if (players == TeamMembers.players_2) {
-                    mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2);
-                    mPlayers.get(1).setVisible(false);
-                    mPlayers.get(3).setVisible(false);
-                    mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2);
-                    mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2);
-                } else if (players == TeamMembers.players_4) {
-                    mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2 - 60);
-                    mPlayers.get(1).setVisible(true);
-                    mPlayers.get(3).setVisible(true);
-                    mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2 - 60);
-                    mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2 - 60);
-                    mPlayers.get(1).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2 + 60);
-                    mPlayers.get(3).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2 + 60);
-                }
+        AppUtils.addOnTeamMembersListener(players -> {
+            if (players == TeamMembers.players_2) {
+                mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2);
+                mPlayers.get(1).setVisible(false);
+                mPlayers.get(3).setVisible(false);
+                mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2);
+                mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2);
+            } else if (players == TeamMembers.players_4) {
+                mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2 - 60);
+                mPlayers.get(1).setVisible(true);
+                mPlayers.get(3).setVisible(true);
+                mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2 - 60);
+                mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2 - 60);
+                mPlayers.get(1).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2 + 60);
+                mPlayers.get(3).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2 + 60);
             }
         });
+        AppUtils.addOnAutoMoveBallCallback(this::moveBallTo);
 
         mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2);
         mPlayers.get(1).setVisible(false);
         mPlayers.get(3).setVisible(false);
         mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2);
         mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2);
+
+    }
+
+    private void moveBallTo(Directions direction) {
+
+        mBallObj.setLocation(mBallObj.getLocation().x + 33, mBallObj.getLocation().y);
 
     }
 
@@ -102,10 +109,10 @@ public class GameWorld {
             for (j = 0; j < columns; j++) {
                 if (j == columns / 2 || j == columns / 2 - 1) {
                     gameGrid[i][j] = materialElements.createLabel("");
-                    gameGrid[i][j].setIcon(new ImageIcon("assets/images/bricks2.jpg"));
+                    gameGrid[i][j].setIcon(new AssetsUtils().getImageIcon(IMG_BRICKS));
                 } else {
                     gameGrid[i][j] = materialElements.createLabel("");
-                    gameGrid[i][j].setIcon(new ImageIcon("assets/images/white32x32.jpg"));
+                    gameGrid[i][j].setIcon(new AssetsUtils().getImageIcon(IMG_WHITE_SQUARE));
                 }
             }
         }
@@ -116,6 +123,7 @@ public class GameWorld {
         mGameWorldHolder.setBackground(new Color(0, 0, 0, 0));
         mGameWorldHolder.setPreferredSize(new Dimension(530, 360));
         mGameWorldHolder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mGameWorldHolder.setVisible(false);
 
         for (i = 0; i < rows; i++) {
             for (j = 0; j < columns; j++) {
@@ -166,17 +174,6 @@ public class GameWorld {
         ballHolder.add(mBallObj);
 
         gameWorldHolder.add(ballHolder, Integer.valueOf(2));
-
-//        AppUtils.addOnAutoMoveBallCallback(this::moveBallTo);
-
-    }
-
-    private void moveBallTo(Directions direction) {
-
-//        AppUtils.getBall().moveTo(direction);
-//        Ball mBall = AppUtils.getBall();
-//        gameGrid[mBall.getX()][mBall.getY()].setBounds(100, 100, 100, 100);
-//        gameGrid[mBall.getX()][mBall.getY()].setIcon(mBall.getBallImage());
 
     }
 
