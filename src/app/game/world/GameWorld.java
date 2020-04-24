@@ -1,11 +1,10 @@
 package app.game.world;
 
 import app.enumerations.TeamMembers;
-import app.interfaces.BallCallback;
-import app.interfaces.TeamMembersNumber;
 import app.models.Ball;
 import app.models.Player;
 import app.utils.AppUtils;
+import app.utils.AssetsUtils;
 import app.utils.enums.Directions;
 import app.utils.material.MaterialElements;
 import app.utils.material.MaterialLabel;
@@ -13,6 +12,9 @@ import app.utils.material.MaterialLabel;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+
+import static app.utils.AssetsUtils.IMG_BRICKS;
+import static app.utils.AssetsUtils.IMG_WHITE_SQUARE;
 
 public class GameWorld {
 
@@ -73,12 +75,7 @@ public class GameWorld {
                 mPlayers.get(3).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2 + 60);
             }
         });
-        AppUtils.addOnAutoMoveBallCallback(new BallCallback.AutoMoveBall() {
-            @Override
-            public void moveTo(Directions direction) {
-                moveBallTo(direction);
-            }
-        });
+        AppUtils.addOnAutoMoveBallCallback(this::moveBallTo);
 
         mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2);
         mPlayers.get(1).setVisible(false);
@@ -112,10 +109,10 @@ public class GameWorld {
             for (j = 0; j < columns; j++) {
                 if (j == columns / 2 || j == columns / 2 - 1) {
                     gameGrid[i][j] = materialElements.createLabel("");
-                    gameGrid[i][j].setIcon(new ImageIcon("assets/images/bricks2.jpg"));
+                    gameGrid[i][j].setIcon(new AssetsUtils().getImageIcon(IMG_BRICKS));
                 } else {
                     gameGrid[i][j] = materialElements.createLabel("");
-                    gameGrid[i][j].setIcon(new ImageIcon("assets/images/white32x32.jpg"));
+                    gameGrid[i][j].setIcon(new AssetsUtils().getImageIcon(IMG_WHITE_SQUARE));
                 }
             }
         }
@@ -126,6 +123,7 @@ public class GameWorld {
         mGameWorldHolder.setBackground(new Color(0, 0, 0, 0));
         mGameWorldHolder.setPreferredSize(new Dimension(530, 360));
         mGameWorldHolder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mGameWorldHolder.setVisible(false);
 
         for (i = 0; i < rows; i++) {
             for (j = 0; j < columns; j++) {
