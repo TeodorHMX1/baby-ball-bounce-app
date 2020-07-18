@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import static app.utils.AssetsUtils.IMG_BRICKS;
 import static app.utils.AssetsUtils.IMG_WHITE_SQUARE;
+import static java.lang.String.valueOf;
 
 public class GameWorld
 {
@@ -95,6 +96,18 @@ public class GameWorld
 
     }
 
+    private boolean isCollidingA(Point mPlayer, Point mBallObj)
+    {
+        return mBallObj.x >= mPlayer.x && mBallObj.x <= mPlayer.x + 32 &&
+                mBallObj.y >= mPlayer.y && mBallObj.y <= mPlayer.y + 32;
+    }
+
+    private boolean isCollidingB(Point mPlayer, Point mBallObj)
+    {
+        return mBallObj.x >= mPlayer.x - 32 && mBallObj.x <= mPlayer.x &&
+                mBallObj.y >= mPlayer.y && mBallObj.y <= mPlayer.y + 32;
+    }
+
     private void moveBallTo(Directions direction)
     {
 
@@ -150,7 +163,48 @@ public class GameWorld
             default:
                 break;
         }
+        for (int i = 0; i < 4; i++)
+        {
+            if (mPlayers.get(i).isVisible())
+            {
+                if (i == 0 || i == 1)
+                {
+                    if (isCollidingA(mPlayers.get(i).getLocation(), mBallObj.getLocation()))
+                    {
+                        bounceBall();
+                    }
+                }
+                else
+                {
+                    if (isCollidingB(mPlayers.get(i).getLocation(), mBallObj.getLocation()))
+                    {
+                        bounceBall();
+                    }
+                }
+            }
+        }
 
+    }
+
+    private void bounceBall()
+    {
+        if (AppUtils.getDirection() == Directions.RIGHT)
+        {
+            moveBallTo(Directions.LEFT);
+            moveBallTo(Directions.LEFT);
+        } else if (AppUtils.getDirection() == Directions.LEFT)
+        {
+            moveBallTo(Directions.RIGHT);
+            moveBallTo(Directions.RIGHT);
+        } else if (AppUtils.getDirection() == Directions.UP)
+        {
+            moveBallTo(Directions.DOWN);
+            moveBallTo(Directions.DOWN);
+        } else if (AppUtils.getDirection() == Directions.DOWN)
+        {
+            moveBallTo(Directions.UP);
+            moveBallTo(Directions.UP);
+        }
     }
 
     private void initializeGameWorldHolder()
