@@ -1,3 +1,15 @@
+/**
+ * Program: Assignment 2: Application – Baby Ball Bounce
+ * Filename: CBabyBallBounce.java
+ *
+ * @author: © Teodor Grigor (GitHub - TeodorHMX1)
+ * Course: BSc Computing Year 1
+ * Module: CSY1020 Problem Solving & Programming
+ * Tutor: Gary Hill
+ * @version: 1.5 Menu Added
+ * Date: 16/06/20
+ */
+
 package app;
 
 import app.game.Game;
@@ -17,12 +29,14 @@ public class CBabyBallBounce extends JFrame
         EventQueue.invokeLater(() ->
         {
 
+            //creating the app screen
             new CBabyBallBounce();
 
         });
 
     }
 
+    //the class method
     public CBabyBallBounce()
     {
 
