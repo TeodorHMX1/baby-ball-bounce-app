@@ -173,8 +173,8 @@ public class GameWorld
         field.setBounds(0, 0, 530, 360);
         field.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         field.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
-        field.setBackground(Color.black);
-        field.setOpaque(false);
+        field.setBackground(Color.white);
+        field.setOpaque(true);
         field.setLocation(0, 0);
         field.add(mGameWorldHolder);
 
