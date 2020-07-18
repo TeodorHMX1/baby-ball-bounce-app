@@ -36,6 +36,7 @@ public class AppUtils
 
     private static Directions ballDirection = Directions.RIGHT;
     private static JFrame mainActivityGlobal;
+    public static JPanel mBallObj;
 
     public static void setMainActivity(JFrame mainActivity)
     {
@@ -228,6 +229,28 @@ public class AppUtils
     public static GameSpeed getGameSpeedCallback()
     {
         return mGameSpeedCallback;
+    }
+
+    public static String getBallPosition()
+    {
+        return mBallObj.getLocation().x/23 + "x" + mBallObj.getLocation().y/23;
+    }
+
+    public static void setBallObj(JPanel ballObj)
+    {
+        mBallObj = ballObj;
+    }
+
+    private static BallSquare mBallSquare;
+
+    public static void addBallSquareCallback(BallSquare ballSquare)
+    {
+        mBallSquare = ballSquare;
+    }
+
+    public static BallSquare getBallSquare()
+    {
+        return mBallSquare;
     }
 
 }

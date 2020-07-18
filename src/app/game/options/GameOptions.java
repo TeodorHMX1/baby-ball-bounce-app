@@ -12,6 +12,7 @@
 package app.game.options;
 
 import app.enumerations.TeamMembers;
+import app.interfaces.BallSquare;
 import app.utils.AppUtils;
 import app.utils.enums.Directions;
 import app.utils.material.MaterialButton;
@@ -21,6 +22,8 @@ import app.utils.material.MaterialLabel;
 import javax.swing.*;
 import java.awt.*;
 
+import static app.utils.AppUtils.getBallPosition;
+
 public class GameOptions
 {
 
@@ -28,7 +31,7 @@ public class GameOptions
     private MaterialElements materialElements;
     private MaterialLabel timerHours, timerMinutes, timerSeconds;
     private MaterialLabel scoreTeamLeft, scoreTeamRight;
-    private MaterialLabel optionLabel, directionLabel;
+    private MaterialLabel optionLabel, directionLabel, squareLabel;
     private int teamLeft = 0, teamRight = 0;
     private MaterialLabel compassLabel;
 
@@ -161,8 +164,10 @@ public class GameOptions
         optionLabel = createOptionItem("2 Player");
         gameOptions.add(createOptionItem("Option:", optionLabel));
 
-        MaterialLabel squareLabel = createOptionItem("101");
+        squareLabel = createOptionItem(getBallPosition());
         gameOptions.add(createOptionItem("Square:", squareLabel));
+
+        AppUtils.addBallSquareCallback((BallSquare) () -> squareLabel.setText(getBallPosition()));
 
         directionLabel = createOptionItem("E");
         gameOptions.add(createOptionItem("Direction:", directionLabel));

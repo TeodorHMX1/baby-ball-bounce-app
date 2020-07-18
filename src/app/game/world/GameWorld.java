@@ -193,6 +193,11 @@ public class GameWorld
             }
         }
 
+        if (AppUtils.getBallSquare() != null)
+        {
+            AppUtils.getBallSquare().newSquare();
+        }
+
     }
 
     private void bounceBall()
@@ -305,6 +310,7 @@ public class GameWorld
         mBallObj.setOpaque(false);
         mBallObj.add(ball);
         ballHolder.add(mBallObj);
+        AppUtils.setBallObj(mBallObj);
 
         gameWorldHolder.add(ballHolder, Integer.valueOf(2));
 
