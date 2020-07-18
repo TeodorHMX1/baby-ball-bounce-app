@@ -53,7 +53,7 @@ public class GameWorld
         {
             if (AppUtils.isGameStarted())
             {
-                moveBallTo(Directions.RIGHT);
+                moveBallTo(Directions.DEFAULT);
             }
         });
         timer.setInitialDelay(0);
@@ -101,19 +101,51 @@ public class GameWorld
         switch (direction)
         {
             case DOWN:
-                mBallObj.setLocation(mBallObj.getLocation().x, mBallObj.getLocation().y + 33);
+                if (mBallObj.getLocation().y + 33 <= 334)
+                {
+                    mBallObj.setLocation(mBallObj.getLocation().x, mBallObj.getLocation().y + 33);
+                    AppUtils.setDirection(direction);
+                } else
+                {
+                    AppUtils.setDirection(Directions.UP);
+                    moveBallTo(AppUtils.getDirection());
+                }
                 break;
             case UP:
-                mBallObj.setLocation(mBallObj.getLocation().x, mBallObj.getLocation().y - 33);
+                if (mBallObj.getLocation().y - 33 >= 4)
+                {
+                    mBallObj.setLocation(mBallObj.getLocation().x, mBallObj.getLocation().y - 33);
+                    AppUtils.setDirection(direction);
+                } else
+                {
+                    AppUtils.setDirection(Directions.DOWN);
+                    moveBallTo(AppUtils.getDirection());
+                }
                 break;
             case LEFT:
-                mBallObj.setLocation(mBallObj.getLocation().x - 33, mBallObj.getLocation().y);
+                if (mBallObj.getLocation().x - 33 >= 2)
+                {
+                    mBallObj.setLocation(mBallObj.getLocation().x - 33, mBallObj.getLocation().y);
+                    AppUtils.setDirection(direction);
+                } else
+                {
+                    AppUtils.setDirection(Directions.RIGHT);
+                    moveBallTo(AppUtils.getDirection());
+                }
                 break;
             case RIGHT:
-                mBallObj.setLocation(mBallObj.getLocation().x + 33, mBallObj.getLocation().y);
+                if (mBallObj.getLocation().x + 33 <= 497)
+                {
+                    mBallObj.setLocation(mBallObj.getLocation().x + 33, mBallObj.getLocation().y);
+                    AppUtils.setDirection(direction);
+                } else
+                {
+                    AppUtils.setDirection(Directions.LEFT);
+                    moveBallTo(AppUtils.getDirection());
+                }
                 break;
             case DEFAULT:
-                mBallObj.setLocation(mBallObj.getLocation().x + 33, mBallObj.getLocation().y);
+                moveBallTo(AppUtils.getDirection());
                 break;
             default:
                 break;

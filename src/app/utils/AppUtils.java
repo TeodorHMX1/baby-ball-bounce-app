@@ -4,6 +4,7 @@ import app.enumerations.TeamMembers;
 import app.interfaces.*;
 import app.models.Ball;
 import app.models.Player;
+import app.utils.enums.Directions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,7 @@ public class AppUtils
 
     }
 
+    private static Directions direction = Directions.RIGHT;
     private static JFrame mainActivityGlobal;
 
     public static void setMainActivity(JFrame mainActivity)
@@ -98,6 +100,16 @@ public class AppUtils
         return mPlayers;
     }
 
+    public static void setDirection(Directions directionN)
+    {
+        direction = directionN;
+    }
+
+    public static Directions getDirection()
+    {
+        return direction;
+    }
+
     private static Ball mBall;
 
     public static void initializeBall()
@@ -125,6 +137,7 @@ public class AppUtils
     {
         seconds = 0;
         gameStarted = false;
+        direction = Directions.RIGHT;
         if (mGameStarted != null)
         {
             mGameStarted.isRunning(gameStarted);
