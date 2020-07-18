@@ -1,3 +1,14 @@
+/**
+ * Program: Assignment 2: Application – Baby Ball Bounce
+ * Filename: Game.java
+ *
+ * @author: © Teodor Grigor (GitHub - TeodorHMX1)
+ * Course: BSc Computing Year 1
+ * Module: CSY1020 Problem Solving & Programming
+ * Tutor: Gary Hill
+ * @version: 1.2 game controls added
+ * Date: 14/06/20
+ */
 package app.game;
 
 import app.game.control.GameControls;

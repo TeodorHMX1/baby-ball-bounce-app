@@ -1,3 +1,14 @@
+/**
+ * Program: Assignment 2: Application – Baby Ball Bounce
+ * Filename: GameWorld.java
+ *
+ * @author: © Teodor Grigor (GitHub - TeodorHMX1)
+ * Course: BSc Computing Year 1
+ * Module: CSY1020 Problem Solving & Programming
+ * Tutor: Gary Hill
+ * @version: 2.3 middle wall added
+ * Date: 19/06/20
+ */
 package app.game.world;
 
 import app.enumerations.TeamMembers;
@@ -15,7 +26,6 @@ import java.util.ArrayList;
 
 import static app.utils.AssetsUtils.IMG_BRICKS;
 import static app.utils.AssetsUtils.IMG_WHITE_SQUARE;
-import static java.lang.String.valueOf;
 
 public class GameWorld
 {
@@ -173,8 +183,7 @@ public class GameWorld
                     {
                         bounceBall();
                     }
-                }
-                else
+                } else
                 {
                     if (isCollidingB(mPlayers.get(i).getLocation(), mBallObj.getLocation()))
                     {
