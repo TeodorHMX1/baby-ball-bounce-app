@@ -98,29 +98,32 @@ public class GameWorld
     private void moveBallTo(Directions direction)
     {
 
-        System.out.print(mBallObj.getLocation().x + ";" + mBallObj.getLocation().y);
+//        System.out.print(mBallObj.getLocation().x + " - " + mBallObj.getLocation().y + "\n");
         switch (direction)
         {
             case DOWN:
-                if(mBallObj.getLocation().y + 33 <= 37)
+                if(mBallObj.getLocation().y + 33 <= 334)
                 {
                     mBallObj.setLocation(mBallObj.getLocation().x, mBallObj.getLocation().y + 33);
                 }
                 break;
             case UP:
-                if(mBallObj.getLocation().y - 33 >= 37)
+                if(mBallObj.getLocation().y - 33 >= 4)
                 {
                     mBallObj.setLocation(mBallObj.getLocation().x, mBallObj.getLocation().y - 33);
                 }
                 break;
             case LEFT:
-                if(mBallObj.getLocation().x - 33 >= 37)
+                if(mBallObj.getLocation().x - 33 >= 2)
                 {
                     mBallObj.setLocation(mBallObj.getLocation().x - 33, mBallObj.getLocation().y);
                 }
                 break;
             case RIGHT:
-                mBallObj.setLocation(mBallObj.getLocation().x + 33, mBallObj.getLocation().y);
+                if(mBallObj.getLocation().x + 33 <= 497)
+                {
+                    mBallObj.setLocation(mBallObj.getLocation().x + 33, mBallObj.getLocation().y);
+                }
                 break;
             case DEFAULT:
                 mBallObj.setLocation(mBallObj.getLocation().x + 33, mBallObj.getLocation().y);
