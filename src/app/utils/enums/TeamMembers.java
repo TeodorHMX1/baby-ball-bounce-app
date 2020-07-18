@@ -9,7 +9,7 @@
  * @version: 1.0 File created
  * Date: 26/05/20
  */
-package app.enumerations;
+package app.utils.enums;
 
 public enum TeamMembers
 {

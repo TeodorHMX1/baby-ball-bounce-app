@@ -11,12 +11,12 @@
  */
 package app.game.world;
 
-import app.enumerations.TeamMembers;
 import app.models.Ball;
 import app.models.Player;
 import app.utils.AppUtils;
 import app.utils.AssetsUtils;
 import app.utils.enums.Directions;
+import app.utils.enums.TeamMembers;
 import app.utils.material.MaterialElements;
 import app.utils.material.MaterialLabel;
 
@@ -65,6 +65,7 @@ public class GameWorld
             if (AppUtils.isGameStarted())
             {
                 moveBallTo(Directions.DEFAULT);
+                movePlayers();
             }
         });
         timer.setInitialDelay(0);
@@ -104,6 +105,55 @@ public class GameWorld
         mPlayers.get(0).setLocation(530 / 2 - 150 - 31 / 2, 360 / 2 - 31 / 2);
         mPlayers.get(2).setLocation(530 / 2 + 150 - 31 / 2, 360 / 2 - 31 / 2);
 
+    }
+
+    private void movePlayerToBall(JPanel player)
+    {
+        if (mBallObj.getLocation().y <= player.getLocation().y)
+        {
+            player.setLocation(player.getLocation().x, player.getLocation().y - 15);
+        } else
+        {
+            player.setLocation(player.getLocation().x, player.getLocation().y + 15);
+        }
+    }
+
+    private void movePlayerToBall(JPanel player, boolean limitUp)
+    {
+        if (limitUp && (player.getLocation().y < 160 || player.getLocation().y > mBallObj.getLocation().y))
+        {
+            if (mBallObj.getLocation().y <= player.getLocation().y)
+            {
+                player.setLocation(player.getLocation().x, player.getLocation().y - 15);
+            } else
+            {
+                player.setLocation(player.getLocation().x, player.getLocation().y + 15);
+            }
+        } else if(!limitUp && (player.getLocation().y > 200 || player.getLocation().y < mBallObj.getLocation().y))
+        {
+            if (mBallObj.getLocation().y <= player.getLocation().y)
+            {
+                player.setLocation(player.getLocation().x, player.getLocation().y - 15);
+            } else
+            {
+                player.setLocation(player.getLocation().x, player.getLocation().y + 15);
+            }
+        }
+    }
+
+    private void movePlayers()
+    {
+        if (AppUtils.getNoPlayers() == 2)
+        {
+            movePlayerToBall(mPlayers.get(0));
+            movePlayerToBall(mPlayers.get(2));
+        } else if (AppUtils.getNoPlayers() == 4)
+        {
+            movePlayerToBall(mPlayers.get(0), true);
+            movePlayerToBall(mPlayers.get(1), false);
+            movePlayerToBall(mPlayers.get(2), true);
+            movePlayerToBall(mPlayers.get(3), false);
+        }
     }
 
     private boolean isCollidingA(Point mPlayer, Point mBallObj)

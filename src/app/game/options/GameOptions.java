@@ -11,7 +11,7 @@
  */
 package app.game.options;
 
-import app.enumerations.TeamMembers;
+import app.utils.enums.TeamMembers;
 import app.interfaces.BallSquare;
 import app.utils.AppUtils;
 import app.utils.enums.Directions;

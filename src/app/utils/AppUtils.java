@@ -11,7 +11,7 @@
  */
 package app.utils;
 
-import app.enumerations.TeamMembers;
+import app.utils.enums.TeamMembers;
 import app.interfaces.*;
 import app.models.Ball;
 import app.models.Player;
@@ -233,7 +233,7 @@ public class AppUtils
 
     public static String getBallPosition()
     {
-        return mBallObj.getLocation().x/23 + "x" + mBallObj.getLocation().y/23;
+        return mBallObj.getLocation().x/33 + "x" + (mBallObj.getLocation().y/26);
     }
 
     public static void setBallObj(JPanel ballObj)

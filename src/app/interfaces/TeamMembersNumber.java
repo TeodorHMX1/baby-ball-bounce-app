@@ -11,7 +11,7 @@
  */
 package app.interfaces;
 
-import app.enumerations.TeamMembers;
+import app.utils.enums.TeamMembers;
 
 public interface TeamMembersNumber
 {
