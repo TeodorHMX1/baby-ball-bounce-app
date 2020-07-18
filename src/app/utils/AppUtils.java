@@ -1,3 +1,14 @@
+/**
+ * Program: Assignment 2: Application – Baby Ball Bounce
+ * Filename: AppUtils.java
+ *
+ * @author: © Teodor Grigor (GitHub - TeodorHMX1)
+ * Course: BSc Computing Year 1
+ * Module: CSY1020 Problem Solving & Programming
+ * Tutor: Gary Hill
+ * @version: 2.6 Ball Direction added
+ * Date: 23/06/20
+ */
 package app.utils;
 
 import app.enumerations.TeamMembers;
@@ -11,6 +22,10 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * AppUtils is the static class that keeps the values of the current
+ * launch in the same place
+ */
 public class AppUtils
 {
 
@@ -19,7 +34,7 @@ public class AppUtils
 
     }
 
-    private static Directions direction = Directions.RIGHT;
+    private static Directions ballDirection = Directions.RIGHT;
     private static JFrame mainActivityGlobal;
 
     public static void setMainActivity(JFrame mainActivity)
@@ -100,14 +115,14 @@ public class AppUtils
         return mPlayers;
     }
 
-    public static void setDirection(Directions directionN)
+    public static void setBallDirection(Directions directionN)
     {
-        direction = directionN;
+        ballDirection = directionN;
     }
 
-    public static Directions getDirection()
+    public static Directions getBallDirection()
     {
-        return direction;
+        return ballDirection;
     }
 
     private static Ball mBall;
@@ -137,7 +152,7 @@ public class AppUtils
     {
         seconds = 0;
         gameStarted = false;
-        direction = Directions.RIGHT;
+        ballDirection = Directions.RIGHT;
         if (mGameStarted != null)
         {
             mGameStarted.isRunning(gameStarted);

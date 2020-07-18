@@ -117,48 +117,48 @@ public class GameWorld
                 if (mBallObj.getLocation().y + 33 <= 334)
                 {
                     mBallObj.setLocation(mBallObj.getLocation().x, mBallObj.getLocation().y + 33);
-                    AppUtils.setDirection(direction);
+                    AppUtils.setBallDirection(direction);
                 } else
                 {
-                    AppUtils.setDirection(Directions.UP);
-                    moveBallTo(AppUtils.getDirection());
+                    AppUtils.setBallDirection(Directions.UP);
+                    moveBallTo(AppUtils.getBallDirection());
                 }
                 break;
             case UP:
                 if (mBallObj.getLocation().y - 33 >= 4)
                 {
                     mBallObj.setLocation(mBallObj.getLocation().x, mBallObj.getLocation().y - 33);
-                    AppUtils.setDirection(direction);
+                    AppUtils.setBallDirection(direction);
                 } else
                 {
-                    AppUtils.setDirection(Directions.DOWN);
-                    moveBallTo(AppUtils.getDirection());
+                    AppUtils.setBallDirection(Directions.DOWN);
+                    moveBallTo(AppUtils.getBallDirection());
                 }
                 break;
             case LEFT:
                 if (mBallObj.getLocation().x - 33 >= 2)
                 {
                     mBallObj.setLocation(mBallObj.getLocation().x - 33, mBallObj.getLocation().y);
-                    AppUtils.setDirection(direction);
+                    AppUtils.setBallDirection(direction);
                 } else
                 {
-                    AppUtils.setDirection(Directions.RIGHT);
-                    moveBallTo(AppUtils.getDirection());
+                    AppUtils.setBallDirection(Directions.RIGHT);
+                    moveBallTo(AppUtils.getBallDirection());
                 }
                 break;
             case RIGHT:
                 if (mBallObj.getLocation().x + 33 <= 497)
                 {
                     mBallObj.setLocation(mBallObj.getLocation().x + 33, mBallObj.getLocation().y);
-                    AppUtils.setDirection(direction);
+                    AppUtils.setBallDirection(direction);
                 } else
                 {
-                    AppUtils.setDirection(Directions.LEFT);
-                    moveBallTo(AppUtils.getDirection());
+                    AppUtils.setBallDirection(Directions.LEFT);
+                    moveBallTo(AppUtils.getBallDirection());
                 }
                 break;
             case DEFAULT:
-                moveBallTo(AppUtils.getDirection());
+                moveBallTo(AppUtils.getBallDirection());
                 break;
             default:
                 break;
@@ -188,19 +188,19 @@ public class GameWorld
 
     private void bounceBall()
     {
-        if (AppUtils.getDirection() == Directions.RIGHT)
+        if (AppUtils.getBallDirection() == Directions.RIGHT)
         {
             moveBallTo(Directions.LEFT);
             moveBallTo(Directions.LEFT);
-        } else if (AppUtils.getDirection() == Directions.LEFT)
+        } else if (AppUtils.getBallDirection() == Directions.LEFT)
         {
             moveBallTo(Directions.RIGHT);
             moveBallTo(Directions.RIGHT);
-        } else if (AppUtils.getDirection() == Directions.UP)
+        } else if (AppUtils.getBallDirection() == Directions.UP)
         {
             moveBallTo(Directions.DOWN);
             moveBallTo(Directions.DOWN);
-        } else if (AppUtils.getDirection() == Directions.DOWN)
+        } else if (AppUtils.getBallDirection() == Directions.DOWN)
         {
             moveBallTo(Directions.UP);
             moveBallTo(Directions.UP);
