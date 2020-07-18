@@ -28,7 +28,7 @@ public class GameOptions
     private MaterialElements materialElements;
     private MaterialLabel timerHours, timerMinutes, timerSeconds;
     private MaterialLabel scoreTeamLeft, scoreTeamRight;
-    private MaterialLabel optionLabel;
+    private MaterialLabel optionLabel, directionLabel;
     private int teamLeft = 0, teamRight = 0;
     private MaterialLabel compassLabel;
 
@@ -164,7 +164,7 @@ public class GameOptions
         MaterialLabel squareLabel = createOptionItem("101");
         gameOptions.add(createOptionItem("Square:", squareLabel));
 
-        MaterialLabel directionLabel = createOptionItem("SE");
+        directionLabel = createOptionItem("E");
         gameOptions.add(createOptionItem("Direction:", directionLabel));
 
     }
@@ -367,6 +367,7 @@ public class GameOptions
                 image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
                 compassLabel.setIcon(imageIcon);
+                directionLabel.setText("S");
                 break;
             case UP:
                 imageIcon = new ImageIcon("assets/images/north.jpg");
@@ -374,6 +375,7 @@ public class GameOptions
                 image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
                 compassLabel.setIcon(imageIcon);
+                directionLabel.setText("N");
                 break;
             case LEFT:
                 imageIcon = new ImageIcon("assets/images/west.jpg");
@@ -381,6 +383,7 @@ public class GameOptions
                 image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
                 compassLabel.setIcon(imageIcon);
+                directionLabel.setText("W");
                 break;
             case RIGHT:
                 imageIcon = new ImageIcon("assets/images/east.jpg");
@@ -388,6 +391,7 @@ public class GameOptions
                 image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
                 compassLabel.setIcon(imageIcon);
+                directionLabel.setText("E");
                 break;
             default:
                 break;
