@@ -111,6 +111,15 @@ public class MenuActivity
 
         var helpMenu = new JMenu("Help");
         helpMenu.setMnemonic(KeyEvent.VK_H);
+
+        var hMenuItem1 = new JMenuItem("Help Topic");
+        hMenuItem1.setMnemonic(KeyEvent.VK_H);
+        helpMenu.add(hMenuItem1);
+
+        var hMenuItem2 = new JMenuItem("About");
+        hMenuItem2.setMnemonic(KeyEvent.VK_A);
+        helpMenu.add(hMenuItem2);
+
         return helpMenu;
 
     }

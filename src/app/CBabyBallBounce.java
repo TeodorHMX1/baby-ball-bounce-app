@@ -6,19 +6,21 @@
  * Course: BSc Computing Year 1
  * Module: CSY1020 Problem Solving & Programming
  * Tutor: Gary Hill
- * @version: 1.5 Menu Added
- * Date: 16/06/20
+ * @version: 1.6 Icon added to the JFrame
+ * Date: 18/06/20
  */
 
 package app;
 
 import app.game.Game;
 import app.menu.MenuActivity;
+import app.utils.AssetsUtils;
 
 import javax.swing.*;
 import java.awt.*;
 
 import static app.utils.AppUtils.setMainActivity;
+import static app.utils.AssetsUtils.IMG_BRICKS;
 
 public class CBabyBallBounce extends JFrame
 {
@@ -61,6 +63,8 @@ public class CBabyBallBounce extends JFrame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         // set window visible
         setVisible(true);
+        // setting the JFrame Icon
+        setIconImage(new AssetsUtils().getImageIcon(IMG_BRICKS).getImage());
 
         // make the window to appear in the middle of the screen
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
