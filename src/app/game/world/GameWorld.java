@@ -315,7 +315,7 @@ public class GameWorld
         Player mPlayer1 = AppUtils.getPlayer(1);
 
         MaterialLabel mPlayerLabel = materialElements.createLabel("");
-        mPlayerLabel.setIcon(mPlayer1.getBabyImage());
+        mPlayerLabel.setIcon(mPlayer1.getPlayerImg());
         mPlayerLabel.setLocation(0, 0);
 
         JPanel mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -330,7 +330,7 @@ public class GameWorld
         Player mPlayer3 = AppUtils.getPlayer(3);
 
         mPlayerLabel = materialElements.createLabel("");
-        mPlayerLabel.setIcon(mPlayer3.getBabyImage());
+        mPlayerLabel.setIcon(mPlayer3.getPlayerImg());
         mPlayerLabel.setLocation(0, 0);
 
         mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -355,7 +355,7 @@ public class GameWorld
         Player mPlayer1 = AppUtils.getPlayer(2);
 
         MaterialLabel mPlayerLabel = materialElements.createLabel("");
-        mPlayerLabel.setIcon(mPlayer1.getBabyImage());
+        mPlayerLabel.setIcon(mPlayer1.getPlayerImg());
         mPlayerLabel.setLocation(0, 0);
 
         JPanel mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -370,7 +370,7 @@ public class GameWorld
         Player mPlayer3 = AppUtils.getPlayer(4);
 
         mPlayerLabel = materialElements.createLabel("");
-        mPlayerLabel.setIcon(mPlayer3.getBabyImage());
+        mPlayerLabel.setIcon(mPlayer3.getPlayerImg());
         mPlayerLabel.setLocation(0, 0);
 
         mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));

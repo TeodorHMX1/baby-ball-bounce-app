@@ -95,13 +95,13 @@ public class AppUtils
         imageIcon2 = new ImageIcon(newimg2);
 
         mPlayers.clear();
-        Player mPlayer1 = new Player(6, 4, imageIcon1, 1, 1);
+        Player mPlayer1 = new Player(imageIcon1);
         mPlayers.add(mPlayer1);
-        Player mPlayer2 = new Player(6, 11, imageIcon2, 2, 2);
+        Player mPlayer2 = new Player(imageIcon2);
         mPlayers.add(mPlayer2);
-        Player mPlayer3 = new Player(6, 4, imageIcon1, 1, 3);
+        Player mPlayer3 = new Player(imageIcon1);
         mPlayers.add(mPlayer3);
-        Player mPlayer4 = new Player(6, 11, imageIcon2, 2, 4);
+        Player mPlayer4 = new Player(imageIcon2);
         mPlayers.add(mPlayer4);
     }
 
@@ -133,7 +133,7 @@ public class AppUtils
         Image image = imageIcon.getImage();
         Image newimg = image.getScaledInstance(23, 23, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(newimg);
-        mBall = new Ball(6, 5, imageIcon);
+        mBall = new Ball(imageIcon);
     }
 
     public static Ball getBall()
