@@ -11,7 +11,9 @@
  */
 package app.game.options;
 
-import app.enumerations.TeamMembers;
+import app.interfaces.GoalScored;
+import app.utils.enums.TeamMembers;
+import app.interfaces.BallSquare;
 import app.utils.AppUtils;
 import app.utils.enums.Directions;
 import app.utils.material.MaterialButton;
@@ -21,6 +23,8 @@ import app.utils.material.MaterialLabel;
 import javax.swing.*;
 import java.awt.*;
 
+import static app.utils.AppUtils.getBallPosition;
+
 public class GameOptions
 {
 
@@ -28,8 +32,7 @@ public class GameOptions
     private MaterialElements materialElements;
     private MaterialLabel timerHours, timerMinutes, timerSeconds;
     private MaterialLabel scoreTeamLeft, scoreTeamRight;
-    private MaterialLabel optionLabel;
-    private int teamLeft = 0, teamRight = 0;
+    private MaterialLabel optionLabel, directionLabel, squareLabel;
     private MaterialLabel compassLabel;
 
     enum Players
@@ -144,12 +147,22 @@ public class GameOptions
         scoreHolder.setPreferredSize(new Dimension(255, 16));
         scoreHolder.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
 
-        scoreTeamLeft = createScoreElement(teamLeft);
-        scoreTeamRight = createScoreElement(teamRight);
+        scoreTeamLeft = createScoreElement(AppUtils.teamA);
+        scoreTeamRight = createScoreElement(AppUtils.teamB);
 
         scoreHolder.add(scoreTeamLeft);
         scoreHolder.add(materialElements.createLabel(" < L : R > "));
         scoreHolder.add(scoreTeamRight);
+
+        AppUtils.addGoalScoredCallback(new GoalScored()
+        {
+            @Override
+            public void scored()
+            {
+                scoreTeamLeft.setText(String.valueOf(AppUtils.teamA));
+                scoreTeamRight.setText(String.valueOf(AppUtils.teamB));
+            }
+        });
 
         gameOptions.add(scoreHolder);
 
@@ -161,10 +174,12 @@ public class GameOptions
         optionLabel = createOptionItem("2 Player");
         gameOptions.add(createOptionItem("Option:", optionLabel));
 
-        MaterialLabel squareLabel = createOptionItem("101");
+        squareLabel = createOptionItem(getBallPosition());
         gameOptions.add(createOptionItem("Square:", squareLabel));
 
-        MaterialLabel directionLabel = createOptionItem("SE");
+        AppUtils.addBallSquareCallback((BallSquare) () -> squareLabel.setText(getBallPosition()));
+
+        directionLabel = createOptionItem("E");
         gameOptions.add(createOptionItem("Direction:", directionLabel));
 
     }
@@ -367,6 +382,7 @@ public class GameOptions
                 image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
                 compassLabel.setIcon(imageIcon);
+                directionLabel.setText("S");
                 break;
             case UP:
                 imageIcon = new ImageIcon("assets/images/north.jpg");
@@ -374,6 +390,7 @@ public class GameOptions
                 image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
                 compassLabel.setIcon(imageIcon);
+                directionLabel.setText("N");
                 break;
             case LEFT:
                 imageIcon = new ImageIcon("assets/images/west.jpg");
@@ -381,6 +398,7 @@ public class GameOptions
                 image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
                 compassLabel.setIcon(imageIcon);
+                directionLabel.setText("W");
                 break;
             case RIGHT:
                 imageIcon = new ImageIcon("assets/images/east.jpg");
@@ -388,6 +406,7 @@ public class GameOptions
                 image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
                 compassLabel.setIcon(imageIcon);
+                directionLabel.setText("E");
                 break;
             default:
                 break;

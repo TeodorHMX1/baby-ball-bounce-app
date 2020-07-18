@@ -11,12 +11,12 @@
  */
 package app.game.world;
 
-import app.enumerations.TeamMembers;
 import app.models.Ball;
 import app.models.Player;
 import app.utils.AppUtils;
 import app.utils.AssetsUtils;
 import app.utils.enums.Directions;
+import app.utils.enums.TeamMembers;
 import app.utils.material.MaterialElements;
 import app.utils.material.MaterialLabel;
 
@@ -24,8 +24,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static app.utils.AppUtils.goalScored;
 import static app.utils.AssetsUtils.IMG_BRICKS;
 import static app.utils.AssetsUtils.IMG_WHITE_SQUARE;
+import static app.utils.enums.Directions.*;
 
 public class GameWorld
 {
@@ -65,6 +67,7 @@ public class GameWorld
             if (AppUtils.isGameStarted())
             {
                 moveBallTo(Directions.DEFAULT);
+                movePlayers();
             }
         });
         timer.setInitialDelay(0);
@@ -106,6 +109,55 @@ public class GameWorld
 
     }
 
+    private void movePlayerToBall(JPanel player)
+    {
+        if (mBallObj.getLocation().y <= player.getLocation().y)
+        {
+            player.setLocation(player.getLocation().x, player.getLocation().y - 15);
+        } else
+        {
+            player.setLocation(player.getLocation().x, player.getLocation().y + 15);
+        }
+    }
+
+    private void movePlayerToBall(JPanel player, boolean limitUp)
+    {
+        if (limitUp && (player.getLocation().y < 160 || player.getLocation().y > mBallObj.getLocation().y))
+        {
+            if (mBallObj.getLocation().y <= player.getLocation().y)
+            {
+                player.setLocation(player.getLocation().x, player.getLocation().y - 15);
+            } else
+            {
+                player.setLocation(player.getLocation().x, player.getLocation().y + 15);
+            }
+        } else if (!limitUp && (player.getLocation().y > 200 || player.getLocation().y < mBallObj.getLocation().y))
+        {
+            if (mBallObj.getLocation().y <= player.getLocation().y)
+            {
+                player.setLocation(player.getLocation().x, player.getLocation().y - 15);
+            } else
+            {
+                player.setLocation(player.getLocation().x, player.getLocation().y + 15);
+            }
+        }
+    }
+
+    private void movePlayers()
+    {
+        if (AppUtils.getNoPlayers() == 2)
+        {
+            movePlayerToBall(mPlayers.get(0));
+            movePlayerToBall(mPlayers.get(2));
+        } else if (AppUtils.getNoPlayers() == 4)
+        {
+            movePlayerToBall(mPlayers.get(0), true);
+            movePlayerToBall(mPlayers.get(1), false);
+            movePlayerToBall(mPlayers.get(2), true);
+            movePlayerToBall(mPlayers.get(3), false);
+        }
+    }
+
     private boolean isCollidingA(Point mPlayer, Point mBallObj)
     {
         return mBallObj.x >= mPlayer.x && mBallObj.x <= mPlayer.x + 32 &&
@@ -116,6 +168,65 @@ public class GameWorld
     {
         return mBallObj.x >= mPlayer.x - 32 && mBallObj.x <= mPlayer.x &&
                 mBallObj.y >= mPlayer.y && mBallObj.y <= mPlayer.y + 32;
+    }
+
+    private int randomNumber()
+    {
+        return (int) (Math.random() * ((3 - 1) + 1)) + 1;
+    }
+
+    private Directions randomDirection(Directions direction)
+    {
+        int randomNo = randomNumber();
+        switch (direction)
+        {
+            case DOWN:
+                if (randomNo == 1)
+                {
+                    return BOTTOM_LEFT;
+                } else if (randomNo == 2)
+                {
+                    return DOWN;
+                } else
+                {
+                    return BOTTOM_RIGHT;
+                }
+            case UP:
+                if (randomNo == 1)
+                {
+                    return UP_LEFT;
+                } else if (randomNo == 2)
+                {
+                    return UP;
+                } else
+                {
+                    return UP_RIGHT;
+                }
+            case LEFT:
+                if (randomNo == 1)
+                {
+                    return UP_LEFT;
+                } else if (randomNo == 2)
+                {
+                    return LEFT;
+                } else
+                {
+                    return BOTTOM_LEFT;
+                }
+            case RIGHT:
+                if (randomNo == 1)
+                {
+                    return UP_RIGHT;
+                } else if (randomNo == 2)
+                {
+                    return RIGHT;
+                } else
+                {
+                    return BOTTOM_RIGHT;
+                }
+            default:
+                return Directions.RIGHT;
+        }
     }
 
     private void moveBallTo(Directions direction)
@@ -130,7 +241,7 @@ public class GameWorld
                     AppUtils.setBallDirection(direction);
                 } else
                 {
-                    AppUtils.setBallDirection(Directions.UP);
+                    AppUtils.setBallDirection(randomDirection(Directions.UP));
                     moveBallTo(AppUtils.getBallDirection());
                 }
                 break;
@@ -141,7 +252,7 @@ public class GameWorld
                     AppUtils.setBallDirection(direction);
                 } else
                 {
-                    AppUtils.setBallDirection(Directions.DOWN);
+                    AppUtils.setBallDirection(randomDirection(Directions.DOWN));
                     moveBallTo(AppUtils.getBallDirection());
                 }
                 break;
@@ -167,6 +278,26 @@ public class GameWorld
                     moveBallTo(AppUtils.getBallDirection());
                 }
                 break;
+            case BOTTOM_LEFT:
+                moveBallTo(Directions.LEFT);
+                moveBallTo(Directions.DOWN);
+                AppUtils.setBallDirection(BOTTOM_LEFT);
+                break;
+            case BOTTOM_RIGHT:
+                moveBallTo(Directions.RIGHT);
+                moveBallTo(Directions.DOWN);
+                AppUtils.setBallDirection(BOTTOM_RIGHT);
+                break;
+            case UP_LEFT:
+                moveBallTo(Directions.LEFT);
+                moveBallTo(Directions.UP);
+                AppUtils.setBallDirection(UP_LEFT);
+                break;
+            case UP_RIGHT:
+                moveBallTo(Directions.RIGHT);
+                moveBallTo(Directions.UP);
+                AppUtils.setBallDirection(UP_RIGHT);
+                break;
             case DEFAULT:
                 moveBallTo(AppUtils.getBallDirection());
                 break;
@@ -191,6 +322,21 @@ public class GameWorld
                     }
                 }
             }
+        }
+
+        if (mBallObj.getLocation().x < 100)
+        {
+            goalScored();
+            AppUtils.teamB++;
+        } else if (mBallObj.getLocation().x > 450)
+        {
+            goalScored();
+            AppUtils.teamA++;
+        }
+
+        if (AppUtils.getBallSquare() != null)
+        {
+            AppUtils.getBallSquare().newSquare();
         }
 
     }
@@ -305,6 +451,7 @@ public class GameWorld
         mBallObj.setOpaque(false);
         mBallObj.add(ball);
         ballHolder.add(mBallObj);
+        AppUtils.setBallObj(mBallObj);
 
         gameWorldHolder.add(ballHolder, Integer.valueOf(2));
 

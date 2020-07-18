@@ -11,7 +11,7 @@
  */
 package app.utils;
 
-import app.enumerations.TeamMembers;
+import app.utils.enums.TeamMembers;
 import app.interfaces.*;
 import app.models.Ball;
 import app.models.Player;
@@ -36,6 +36,8 @@ public class AppUtils
 
     private static Directions ballDirection = Directions.RIGHT;
     private static JFrame mainActivityGlobal;
+    public static JPanel mBallObj;
+    public static int teamA = 0, teamB = 0;
 
     public static void setMainActivity(JFrame mainActivity)
     {
@@ -152,10 +154,24 @@ public class AppUtils
     {
         seconds = 0;
         gameStarted = false;
+        teamA = 0;
+        teamB = 0;
         ballDirection = Directions.RIGHT;
         if (mGameStarted != null)
         {
             mGameStarted.isRunning(gameStarted);
+        }
+        setPlayers(players);
+        initializePlayers();
+        initializeBall();
+    }
+
+    public static void goalScored()
+    {
+        ballDirection = Directions.RIGHT;
+        if (mGoalScored != null)
+        {
+            mGoalScored.scored();
         }
         setPlayers(players);
         initializePlayers();
@@ -228,6 +244,35 @@ public class AppUtils
     public static GameSpeed getGameSpeedCallback()
     {
         return mGameSpeedCallback;
+    }
+
+    public static String getBallPosition()
+    {
+        return mBallObj.getLocation().x/33 + "x" + (mBallObj.getLocation().y/26);
+    }
+
+    public static void setBallObj(JPanel ballObj)
+    {
+        mBallObj = ballObj;
+    }
+
+    private static BallSquare mBallSquare;
+
+    public static void addBallSquareCallback(BallSquare ballSquare)
+    {
+        mBallSquare = ballSquare;
+    }
+
+    public static BallSquare getBallSquare()
+    {
+        return mBallSquare;
+    }
+
+    private static GoalScored mGoalScored;
+
+    public static void addGoalScoredCallback(GoalScored goalScored)
+    {
+        mGoalScored = goalScored;
     }
 
 }

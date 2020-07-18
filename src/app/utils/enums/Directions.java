@@ -17,9 +17,13 @@ package app.utils.enums;
  */
 public enum Directions
 {
+    DEFAULT,
     LEFT,
     RIGHT,
     UP,
     DOWN,
-    DEFAULT
+    UP_LEFT,
+    UP_RIGHT,
+    BOTTOM_LEFT,
+    BOTTOM_RIGHT
 }
