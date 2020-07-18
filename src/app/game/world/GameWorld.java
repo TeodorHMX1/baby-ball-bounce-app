@@ -159,7 +159,7 @@ public class GameWorld
         mGameWorldHolder.setBackground(new Color(0, 0, 0, 0));
         mGameWorldHolder.setPreferredSize(new Dimension(530, 360));
         mGameWorldHolder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        mGameWorldHolder.setVisible(false);
+        mGameWorldHolder.setVisible(true);
 
         for (i = 0; i < rows; i++)
         {
@@ -172,13 +172,11 @@ public class GameWorld
         JPanel field = new JPanel();
         field.setBounds(0, 0, 530, 360);
         field.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        field.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        field.setBackground(Color.white);
-        field.setOpaque(true);
-        FlowLayout layout = (FlowLayout) field.getLayout();
-        layout.setVgap(0);
-        field.add(mGameWorldHolder);
+        field.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
+        field.setBackground(Color.black);
+        field.setOpaque(false);
         field.setLocation(0, 0);
+        field.add(mGameWorldHolder);
 
         gameWorldHolder.add(field, Integer.valueOf(1));
 
