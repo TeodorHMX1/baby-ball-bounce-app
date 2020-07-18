@@ -1,9 +1,24 @@
+/**
+ * Program: Assignment 2: Application – Baby Ball Bounce
+ * Filename: MaterialElements.java
+ *
+ * @author: © Teodor Grigor (GitHub - TeodorHMX1)
+ * Course: BSc Computing Year 1
+ * Module: CSY1020 Problem Solving & Programming
+ * Tutor: Gary Hill
+ * @version: 2.6 Ball Direction added
+ * Date: 23/06/20
+ */
 package app.utils.material;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
 
+/**
+ * MaterialElements Class can be used to create different
+ * material elements such as buttons, labels and sliders
+ */
 public class MaterialElements
 {
 
@@ -21,8 +36,8 @@ public class MaterialElements
         btn.setIcon(icon);
         btn.setBorder(
                 BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(new Color(0, 0, 0), 1),
-                    BorderFactory.createEmptyBorder(3, 8, 3, 8)
+                        BorderFactory.createLineBorder(new Color(0, 0, 0), 1),
+                        BorderFactory.createEmptyBorder(3, 8, 3, 8)
                 )
         );
         return btn;
