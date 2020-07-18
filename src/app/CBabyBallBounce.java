@@ -8,21 +8,22 @@ import java.awt.*;
 
 import static app.utils.AppUtils.setMainActivity;
 
-public class MainActivity extends JFrame
+public class CBabyBallBounce extends JFrame
 {
 
     public static void main(String[] args)
     {
 
-        EventQueue.invokeLater(() -> {
+        EventQueue.invokeLater(() ->
+        {
 
-            new MainActivity();
+            new CBabyBallBounce();
 
         });
 
     }
 
-    public MainActivity()
+    public CBabyBallBounce()
     {
 
         initializeWindow();
@@ -31,7 +32,8 @@ public class MainActivity extends JFrame
 
     }
 
-    private void initializeWindow() {
+    private void initializeWindow()
+    {
 
         // prepare window details
         // set window title
@@ -48,13 +50,14 @@ public class MainActivity extends JFrame
 
         // make the window to appear in the middle of the screen
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
     }
 
-    private void initializeAppUtils() {
+    private void initializeAppUtils()
+    {
 
-        setMainActivity(MainActivity.this);
+        setMainActivity(CBabyBallBounce.this);
 
     }
 
@@ -66,7 +69,8 @@ public class MainActivity extends JFrame
 
     }
 
-    private void createMenu() {
+    private void createMenu()
+    {
 
         //create app menu
         MenuActivity menuActivity = new MenuActivity();
@@ -74,7 +78,8 @@ public class MainActivity extends JFrame
 
     }
 
-    private void createGame() {
+    private void createGame()
+    {
 
         // create app game
         Game game = new Game();
