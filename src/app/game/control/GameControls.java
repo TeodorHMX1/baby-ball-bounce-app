@@ -1,6 +1,7 @@
 package app.game.control;
 
 import app.utils.AppUtils;
+import app.utils.enums.Directions;
 import app.utils.material.MaterialButton;
 import app.utils.material.MaterialElements;
 import app.utils.material.MaterialLabel;
@@ -35,7 +36,8 @@ public class GameControls
 
     }
 
-    private void prepareButtons() {
+    private void prepareButtons()
+    {
 
         loadActBtn();
         loadStateBtn();
@@ -43,26 +45,35 @@ public class GameControls
 
     }
 
-    private void loadActBtn() {
+    private void loadActBtn()
+    {
 
         Icon iconAct = new ImageIcon("assets/images/step.png");
         MaterialButton btnAct = materialElements.createButton(iconAct, "Act");
+        btnAct.addActionListener(actionEvent ->
+        {
+            if (AppUtils.getAutoMoveBall() != null)
+            {
+                AppUtils.getAutoMoveBall().moveTo(Directions.DEFAULT);
+            }
+        });
         gameControls.add(btnAct);
 
     }
 
-    private void loadStateBtn() {
+    private void loadStateBtn()
+    {
 
         Icon iconAct = new ImageIcon("assets/images/run.png");
         btnState = materialElements.createButton(iconAct, "Run");
-        btnState.addActionListener(actionEvent -> {
+        btnState.addActionListener(actionEvent ->
+        {
 
-            if(!AppUtils.isGameStarted())
+            if (!AppUtils.isGameStarted())
             {
                 btnState.setIcon(new ImageIcon("assets/images/pause.png"));
                 btnState.setText("Pause");
-            }
-            else
+            } else
             {
                 btnState.setIcon(new ImageIcon("assets/images/run.png"));
                 btnState.setText("Run");
@@ -73,11 +84,13 @@ public class GameControls
 
     }
 
-    private void loadResetBtn() {
+    private void loadResetBtn()
+    {
 
         Icon iconAct = new ImageIcon("assets/images/reset.png");
         MaterialButton btnReset = materialElements.createButton(iconAct, "Reset");
-        btnReset.addActionListener(actionEvent -> {
+        btnReset.addActionListener(actionEvent ->
+        {
             AppUtils.resetSeconds();
             btnState.setIcon(new ImageIcon("assets/images/run.png"));
             btnState.setText("Run");
@@ -108,5 +121,5 @@ public class GameControls
     {
         return gameControls;
     }
-    
+
 }

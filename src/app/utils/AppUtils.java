@@ -19,35 +19,44 @@ public class AppUtils
     }
 
     private static JFrame mainActivityGlobal;
+
     public static void setMainActivity(JFrame mainActivity)
     {
         mainActivityGlobal = mainActivity;
         initializePlayers();
         initializeBall();
     }
-    public static JFrame getAppWindow() {
+
+    public static JFrame getAppWindow()
+    {
         return mainActivityGlobal;
     }
 
     private static TeamMembersNumber mTeamMembersNumber;
-    public static void addOnTeamMembersListener(TeamMembersNumber teamMembersNumber) {
+
+    public static void addOnTeamMembersListener(TeamMembersNumber teamMembersNumber)
+    {
         mTeamMembersNumber = teamMembersNumber;
     }
 
     private static TeamMembers players = TeamMembers.players_2;
+
     public static void setPlayers(TeamMembers noPlayers)
     {
         players = noPlayers;
-        if(mTeamMembersNumber != null)
+        if (mTeamMembersNumber != null)
         {
             mTeamMembersNumber.onMembersChanged(noPlayers);
         }
     }
+
     public static int getNoPlayers()
     {
-        if (players == TeamMembers.players_2) {
+        if (players == TeamMembers.players_2)
+        {
             return 2;
-        } else if (players == TeamMembers.players_4) {
+        } else if (players == TeamMembers.players_4)
+        {
             return 4;
         }
         return 2;
@@ -55,6 +64,7 @@ public class AppUtils
 
 
     private static List<Player> mPlayers = new ArrayList<>();
+
     public static void initializePlayers()
     {
         ImageIcon imageIcon1 = new ImageIcon("assets/images/baby1.png");
@@ -77,16 +87,19 @@ public class AppUtils
         Player mPlayer4 = new Player(6, 11, imageIcon2, 2, 4);
         mPlayers.add(mPlayer4);
     }
+
     public static Player getPlayer(int player)
     {
         return mPlayers.get(player - 1);
     }
+
     public static List<Player> getPlayer()
     {
         return mPlayers;
     }
 
     private static Ball mBall;
+
     public static void initializeBall()
     {
         ImageIcon imageIcon = new ImageIcon("assets/images/ball.png");
@@ -95,21 +108,24 @@ public class AppUtils
         imageIcon = new ImageIcon(newimg);
         mBall = new Ball(6, 5, imageIcon);
     }
+
     public static Ball getBall()
     {
         return mBall;
     }
 
     private static int seconds = 0;
+
     public static void increaseSeconds()
     {
         seconds++;
     }
+
     public static void resetSeconds()
     {
         seconds = 0;
         gameStarted = false;
-        if(mGameStarted!=null)
+        if (mGameStarted != null)
         {
             mGameStarted.isRunning(gameStarted);
         }
@@ -117,44 +133,54 @@ public class AppUtils
         initializePlayers();
         initializeBall();
     }
+
     public static int getSeconds()
     {
         return seconds;
     }
 
     private static boolean gameStarted = false;
+
     public static void changeGameState()
     {
         gameStarted = !gameStarted;
-        if(mGameStarted!=null && gameStarted)
+        if (mGameStarted != null && gameStarted)
         {
             mGameStarted.isRunning(gameStarted);
         }
     }
+
     public static boolean isGameStarted()
     {
         return gameStarted;
     }
 
     private static GameTimer.GameStarted mGameStarted;
-    public static void addOnTimerCallback(GameTimer.GameStarted gameStarted) {
+
+    public static void addOnTimerCallback(GameTimer.GameStarted gameStarted)
+    {
         mGameStarted = gameStarted;
     }
 
     private static BallCallback.AutoMoveBall mAutoMoveBall;
-    public static void addOnAutoMoveBallCallback(BallCallback.AutoMoveBall autoMoveBall) {
+
+    public static void addOnAutoMoveBallCallback(BallCallback.AutoMoveBall autoMoveBall)
+    {
         mAutoMoveBall = autoMoveBall;
     }
+
     public static BallCallback.AutoMoveBall getAutoMoveBall()
     {
         return mAutoMoveBall;
     }
 
     private static int gameSpeed = 1;
+
     public static int getGameSpeed()
     {
         return gameSpeed;
     }
+
     public static void setGameSpeed(int speed)
     {
         gameSpeed = speed;
@@ -165,9 +191,12 @@ public class AppUtils
     }
 
     private static GameSpeed mGameSpeedCallback;
-    public static void addOnGameSpeedCallback(GameSpeed gameSpeed) {
+
+    public static void addOnGameSpeedCallback(GameSpeed gameSpeed)
+    {
         mGameSpeedCallback = gameSpeed;
     }
+
     public static GameSpeed getGameSpeedCallback()
     {
         return mGameSpeedCallback;

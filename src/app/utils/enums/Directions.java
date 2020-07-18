@@ -1,8 +1,10 @@
 package app.utils.enums;
 
-public enum Directions {
+public enum Directions
+{
     LEFT,
     RIGHT,
     UP,
-    DOWN
+    DOWN,
+    DEFAULT
 }
