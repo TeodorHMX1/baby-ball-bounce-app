@@ -1,3 +1,14 @@
+/**
+ * Program: Assignment 2: Application – Baby Ball Bounce
+ * Filename: GameWorld.java
+ *
+ * @author: © Teodor Grigor (GitHub - TeodorHMX1)
+ * Course: BSc Computing Year 1
+ * Module: CSY1020 Problem Solving & Programming
+ * Tutor: Gary Hill
+ * @version: 2.3 middle wall added
+ * Date: 19/06/20
+ */
 package app.game.world;
 
 import app.enumerations.TeamMembers;
@@ -15,7 +26,6 @@ import java.util.ArrayList;
 
 import static app.utils.AssetsUtils.IMG_BRICKS;
 import static app.utils.AssetsUtils.IMG_WHITE_SQUARE;
-import static java.lang.String.valueOf;
 
 public class GameWorld
 {
@@ -173,8 +183,7 @@ public class GameWorld
                     {
                         bounceBall();
                     }
-                }
-                else
+                } else
                 {
                     if (isCollidingB(mPlayers.get(i).getLocation(), mBallObj.getLocation()))
                     {
@@ -315,7 +324,7 @@ public class GameWorld
         Player mPlayer1 = AppUtils.getPlayer(1);
 
         MaterialLabel mPlayerLabel = materialElements.createLabel("");
-        mPlayerLabel.setIcon(mPlayer1.getBabyImage());
+        mPlayerLabel.setIcon(mPlayer1.getPlayerImg());
         mPlayerLabel.setLocation(0, 0);
 
         JPanel mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -330,7 +339,7 @@ public class GameWorld
         Player mPlayer3 = AppUtils.getPlayer(3);
 
         mPlayerLabel = materialElements.createLabel("");
-        mPlayerLabel.setIcon(mPlayer3.getBabyImage());
+        mPlayerLabel.setIcon(mPlayer3.getPlayerImg());
         mPlayerLabel.setLocation(0, 0);
 
         mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -355,7 +364,7 @@ public class GameWorld
         Player mPlayer1 = AppUtils.getPlayer(2);
 
         MaterialLabel mPlayerLabel = materialElements.createLabel("");
-        mPlayerLabel.setIcon(mPlayer1.getBabyImage());
+        mPlayerLabel.setIcon(mPlayer1.getPlayerImg());
         mPlayerLabel.setLocation(0, 0);
 
         JPanel mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -370,7 +379,7 @@ public class GameWorld
         Player mPlayer3 = AppUtils.getPlayer(4);
 
         mPlayerLabel = materialElements.createLabel("");
-        mPlayerLabel.setIcon(mPlayer3.getBabyImage());
+        mPlayerLabel.setIcon(mPlayer3.getPlayerImg());
         mPlayerLabel.setLocation(0, 0);
 
         mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));

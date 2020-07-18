@@ -1,3 +1,14 @@
+/**
+ * Program: Assignment 2: Application – Baby Ball Bounce
+ * Filename: GameControls.java
+ *
+ * @author: © Teodor Grigor (GitHub - TeodorHMX1)
+ * Course: BSc Computing Year 1
+ * Module: CSY1020 Problem Solving & Programming
+ * Tutor: Gary Hill
+ * @version: 1.8 speed added
+ * Date: 18/06/20
+ */
 package app.game.control;
 
 import app.utils.AppUtils;
@@ -8,11 +19,7 @@ import app.utils.material.MaterialLabel;
 import app.utils.material.MaterialSlider;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GameControls
 {

@@ -1,10 +1,25 @@
+/**
+ * Program: Assignment 2: Application – Baby Ball Bounce
+ * Filename: MenuActivity.java
+ *
+ * @author: © Teodor Grigor (GitHub - TeodorHMX1)
+ * Course: BSc Computing Year 1
+ * Module: CSY1020 Problem Solving & Programming
+ * Tutor: Gary Hill
+ * @version: 1.3 HelpOption Menu Added
+ * Date: 18/05/20
+ */
 package app.menu;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
 
 import static app.utils.AppUtils.getAppWindow;
 
+/**
+ * MenuActivity Class creates the menu from the top
+ * of the window
+ */
 public class MenuActivity
 {
 
@@ -40,7 +55,8 @@ public class MenuActivity
 
     }
 
-    private JMenu fileOptionMenu() {
+    private JMenu fileOptionMenu()
+    {
 
         var fileMenu = new JMenu("File");
         fileMenu.setMnemonic(KeyEvent.VK_F);
@@ -54,7 +70,8 @@ public class MenuActivity
 
     }
 
-    private JMenu scenarioOptionMenu() {
+    private JMenu scenarioOptionMenu()
+    {
 
         var scenarioMenu = new JMenu("Scenario");
         scenarioMenu.setMnemonic(KeyEvent.VK_S);
@@ -62,7 +79,8 @@ public class MenuActivity
 
     }
 
-    private JMenu editOptionMenu() {
+    private JMenu editOptionMenu()
+    {
 
         var editMenu = new JMenu("Edit");
         editMenu.setMnemonic(KeyEvent.VK_E);
@@ -70,7 +88,8 @@ public class MenuActivity
 
     }
 
-    private JMenu controlsOptionMenu() {
+    private JMenu controlsOptionMenu()
+    {
 
         var controlsMenu = new JMenu("Controls");
         controlsMenu.setMnemonic(KeyEvent.VK_C);
@@ -78,7 +97,8 @@ public class MenuActivity
 
     }
 
-    private JMenu toolsOptionMenu() {
+    private JMenu toolsOptionMenu()
+    {
 
         var controlsMenu = new JMenu("Tools");
         controlsMenu.setMnemonic(KeyEvent.VK_T);
@@ -86,7 +106,8 @@ public class MenuActivity
 
     }
 
-    private JMenu helpOptionMenu() {
+    private JMenu helpOptionMenu()
+    {
 
         var helpMenu = new JMenu("Help");
         helpMenu.setMnemonic(KeyEvent.VK_H);

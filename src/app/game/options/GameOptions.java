@@ -1,17 +1,25 @@
+/**
+ * Program: Assignment 2: Application – Baby Ball Bounce
+ * Filename: GameOptions.java
+ *
+ * @author: © Teodor Grigor (GitHub - TeodorHMX1)
+ * Course: BSc Computing Year 1
+ * Module: CSY1020 Problem Solving & Programming
+ * Tutor: Gary Hill
+ * @version: 1.9 compass label added
+ * Date: 17/06/20
+ */
 package app.game.options;
 
 import app.enumerations.TeamMembers;
-import app.game.world.GameWorld;
-import app.interfaces.GameSpeed;
 import app.utils.AppUtils;
-import app.utils.enums.*;
+import app.utils.enums.Directions;
 import app.utils.material.MaterialButton;
 import app.utils.material.MaterialElements;
 import app.utils.material.MaterialLabel;
 
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.Timer;
 
 public class GameOptions
 {

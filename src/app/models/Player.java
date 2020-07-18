@@ -1,40 +1,34 @@
+/**
+ * Program: Assignment 2: Application – Baby Ball Bounce
+ * Filename: Player.java
+ *
+ * @author: © Teodor Grigor (GitHub - TeodorHMX1)
+ * Course: BSc Computing Year 1
+ * Module: CSY1020 Problem Solving & Programming
+ * Tutor: Gary Hill
+ * @version: 1.6 Team variable removed
+ * Date: 16/06/20
+ */
 package app.models;
 
 import javax.swing.*;
 
-public class Player {
+/**
+ * Player Class contains all the relevant details for the player
+ */
+public class Player
+{
 
-    private ImageIcon babyImage;
-    private int x, y;
-    private int team;
-    private int id;
+    private final ImageIcon playerImg;
 
-    public Player(int x, int y, ImageIcon image, int team, int id) {
-        this.x = x;
-        this.y = y;
-        this.babyImage = image;
-        this.id = id;
-        this.team = team;
+    public Player(ImageIcon image)
+    {
+        this.playerImg = image;
     }
 
-    public int getY() {
-        return y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public ImageIcon getBabyImage() {
-        return babyImage;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public int getTeam() {
-        return team;
+    public ImageIcon getPlayerImg()
+    {
+        return playerImg;
     }
 
 }
