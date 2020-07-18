@@ -105,6 +105,11 @@ public class AppUtils
         direction = directionN;
     }
 
+    public static Directions getDirection()
+    {
+        return direction;
+    }
+
     private static Ball mBall;
 
     public static void initializeBall()
