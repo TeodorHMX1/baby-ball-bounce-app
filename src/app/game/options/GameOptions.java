@@ -1,6 +1,7 @@
 package app.game.options;
 
 import app.enumerations.TeamMembers;
+import app.game.world.GameWorld;
 import app.interfaces.GameSpeed;
 import app.utils.AppUtils;
 import app.utils.enums.*;
@@ -12,7 +13,8 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.Timer;
 
-public class GameOptions {
+public class GameOptions
+{
 
     private JPanel gameOptions;
     private MaterialElements materialElements;
@@ -22,12 +24,14 @@ public class GameOptions {
     private int teamLeft = 0, teamRight = 0;
     private MaterialLabel compassLabel;
 
-    enum Players {
+    enum Players
+    {
         TWO,
         FOUR
     }
 
-    public GameOptions() {
+    public GameOptions()
+    {
 
         materialElements = new MaterialElements();
         gameOptions = new JPanel();
@@ -44,7 +48,8 @@ public class GameOptions {
 
     }
 
-    private void createDigitalTimer() {
+    private void createDigitalTimer()
+    {
 
         JPanel timerLabelHolder = new JPanel();
         timerLabelHolder.setBackground(new Color(0, 0, 0, 0));
@@ -72,22 +77,24 @@ public class GameOptions {
 
         gameOptions.add(timerHolder);
 
-        Timer timer = new Timer(1000, actionEvent -> {
-            if(AppUtils.isGameStarted()) {
+        Timer timer = new Timer(1000, actionEvent ->
+        {
+            if (AppUtils.isGameStarted())
+            {
                 setTime();
             }
         });
         timer.setInitialDelay(0);
-        AppUtils.addOnTimerCallback(running -> {
+        AppUtils.addOnTimerCallback(running ->
+        {
             if (running)
             {
                 timer.start();
-            }
-            else
+            } else
             {
                 timer.restart();
-                timerHours.setText(timeBased(AppUtils.getSeconds()/(60*60)));
-                timerMinutes.setText(timeBased(AppUtils.getSeconds()/(60) % 60));
+                timerHours.setText(timeBased(AppUtils.getSeconds() / (60 * 60)));
+                timerMinutes.setText(timeBased(AppUtils.getSeconds() / (60) % 60));
                 timerSeconds.setText(timeBased(AppUtils.getSeconds() % 60));
             }
         });
@@ -95,27 +102,25 @@ public class GameOptions {
 
     }
 
-    private void setTime() {
+    private void setTime()
+    {
         AppUtils.increaseSeconds();
-        timerHours.setText(timeBased(AppUtils.getSeconds()/(60*60)));
-        timerMinutes.setText(timeBased(AppUtils.getSeconds()/(60) % 60));
+        timerHours.setText(timeBased(AppUtils.getSeconds() / (60 * 60)));
+        timerMinutes.setText(timeBased(AppUtils.getSeconds() / (60) % 60));
         timerSeconds.setText(timeBased(AppUtils.getSeconds() % 60));
-        if(AppUtils.getAutoMoveBall() != null)
-        {
-            AppUtils.getAutoMoveBall().moveTo(Directions.DOWN);
-        }
     }
 
     private String timeBased(int time)
     {
-        if(time<10)
+        if (time < 10)
         {
             return "0" + time;
         }
         return String.valueOf(time);
     }
 
-    private void createScoreContainer() {
+    private void createScoreContainer()
+    {
 
         JPanel scoreLabelHolder = new JPanel();
         scoreLabelHolder.setBackground(new Color(0, 0, 0, 0));
@@ -142,7 +147,8 @@ public class GameOptions {
 
     }
 
-    private void createOptions() {
+    private void createOptions()
+    {
 
         optionLabel = createOptionItem("2 Player");
         gameOptions.add(createOptionItem("Option:", optionLabel));
@@ -155,7 +161,8 @@ public class GameOptions {
 
     }
 
-    private void createBallMovementControls() {
+    private void createBallMovementControls()
+    {
 
         MaterialButton btnUp = createGridElementChoice("up");
         MaterialButton btnDown = createGridElementChoice("down");
@@ -186,7 +193,8 @@ public class GameOptions {
 
     }
 
-    private void createCompass() {
+    private void createCompass()
+    {
 
         JPanel optionItemChoseHolder = new JPanel();
         optionItemChoseHolder.setLayout(new GridBagLayout());
@@ -213,7 +221,8 @@ public class GameOptions {
 
     }
 
-    private void createChoices() {
+    private void createChoices()
+    {
 
         MaterialButton btnPlayers2 = createOptionChoice("2 Player");
         MaterialButton btnPlayers4 = createOptionChoice("4 Player");
@@ -240,7 +249,8 @@ public class GameOptions {
 
     }
 
-    private MaterialLabel createTimerElement(String text) {
+    private MaterialLabel createTimerElement(String text)
+    {
         MaterialLabel materialLabel = materialElements.createLabel(text);
         materialLabel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
         materialLabel.setOpaque(true);
@@ -249,9 +259,11 @@ public class GameOptions {
         return materialLabel;
     }
 
-    private MaterialLabel createScoreElement(int score) {
+    private MaterialLabel createScoreElement(int score)
+    {
         String content = String.valueOf(score);
-        if (score < 10) {
+        if (score < 10)
+        {
             content = "0" + content;
         }
         MaterialLabel materialLabel = materialElements.createLabel(content);
@@ -262,7 +274,8 @@ public class GameOptions {
         return materialLabel;
     }
 
-    private MaterialLabel createOptionItem(String text) {
+    private MaterialLabel createOptionItem(String text)
+    {
         MaterialLabel materialLabel = materialElements.createLabel(text);
         materialLabel.setBorder(BorderFactory.createEmptyBorder(2, 3, 2, 3));
         materialLabel.setOpaque(true);
@@ -270,7 +283,8 @@ public class GameOptions {
         return materialLabel;
     }
 
-    private JPanel createOptionItem(String content, MaterialLabel label) {
+    private JPanel createOptionItem(String content, MaterialLabel label)
+    {
 
         JPanel optionItemHolder = new JPanel();
         optionItemHolder.setBackground(new Color(0, 0, 0, 0));
@@ -292,7 +306,8 @@ public class GameOptions {
 
     }
 
-    private JPanel squareGridElement() {
+    private JPanel squareGridElement()
+    {
 
         JPanel squareElement = new JPanel();
         squareElement.setBackground(new Color(0, 0, 0, 0));
@@ -300,7 +315,8 @@ public class GameOptions {
 
     }
 
-    private JPanel createGridElementMiddle() {
+    private JPanel createGridElementMiddle()
+    {
 
         JPanel optionItemChoseHolder = new JPanel();
         optionItemChoseHolder.setLayout(new GridBagLayout());
@@ -315,7 +331,8 @@ public class GameOptions {
 
     }
 
-    private MaterialButton createGridElementChoice(String content) {
+    private MaterialButton createGridElementChoice(String content)
+    {
 
         MaterialButton optionItemChoseHolder = materialElements.createButton(null, "");
         optionItemChoseHolder.setLayout(new GridBagLayout());
@@ -328,12 +345,14 @@ public class GameOptions {
 
     }
 
-    private void ballTo(Directions direction) {
+    private void ballTo(Directions direction)
+    {
 
         ImageIcon imageIcon;
         Image image;
 
-        switch (direction) {
+        switch (direction)
+        {
             case DOWN:
                 imageIcon = new ImageIcon("assets/images/south.jpg");
                 image = imageIcon.getImage();
@@ -366,9 +385,15 @@ public class GameOptions {
                 break;
         }
 
+        if (AppUtils.getAutoMoveBall() != null)
+        {
+            AppUtils.getAutoMoveBall().moveTo(direction);
+        }
+
     }
 
-    private MaterialButton createOptionChoice(String content) {
+    private MaterialButton createOptionChoice(String content)
+    {
 
         MaterialButton optionItemChoseHolder = materialElements.createButton(null, "");
         optionItemChoseHolder.setLayout(new GridBagLayout());
@@ -381,9 +406,11 @@ public class GameOptions {
 
     }
 
-    private void playersChoice(Players choice) {
+    private void playersChoice(Players choice)
+    {
 
-        switch (choice) {
+        switch (choice)
+        {
             case TWO:
                 optionLabel.setText("2 Player");
                 AppUtils.setPlayers(TeamMembers.players_2);
@@ -398,11 +425,13 @@ public class GameOptions {
 
     }
 
-    private void multiChoice() {
+    private void multiChoice()
+    {
 
     }
 
-    public JPanel getGameOptionsContainer() {
+    public JPanel getGameOptionsContainer()
+    {
         return gameOptions;
     }
 

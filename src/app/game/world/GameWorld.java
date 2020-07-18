@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import static app.utils.AssetsUtils.IMG_BRICKS;
 import static app.utils.AssetsUtils.IMG_WHITE_SQUARE;
 
-public class GameWorld {
+public class GameWorld
+{
 
     private JPanel gameWorld;
     private MaterialElements materialElements;
@@ -24,10 +25,11 @@ public class GameWorld {
     private final int rows = 13;
     private final int columns = 16;
     private MaterialLabel[][] gameGrid = new MaterialLabel[rows][columns];
-    private JPanel mBallObj;
+    public JPanel mBallObj;
     private ArrayList<JPanel> mPlayers = new ArrayList<>();
 
-    public GameWorld() {
+    public GameWorld()
+    {
 
         materialElements = new MaterialElements();
         gameWorld = new JPanel();
@@ -39,59 +41,88 @@ public class GameWorld {
 
     }
 
-    private void initializeGameSubHolder() {
+    private void initializeGameSubHolder()
+    {
 
         initializeGameWorldHolder();
         initializeGameGrid();
         addGameObjects();
         gameWorld.add(gameWorldHolder);
 
-        Timer timer = new Timer(1000 - AppUtils.getGameSpeed() * 200, actionEvent -> {
-            if (AppUtils.isGameStarted()) {
+        Timer timer = new Timer(1000 - AppUtils.getGameSpeed() * 200, actionEvent ->
+        {
+            if (AppUtils.isGameStarted())
+            {
                 moveBallTo(Directions.RIGHT);
             }
         });
         timer.setInitialDelay(0);
         timer.start();
-        AppUtils.addOnGameSpeedCallback(() -> {
-            if (AppUtils.isGameStarted()) {
+        AppUtils.addOnGameSpeedCallback(() ->
+        {
+            if (AppUtils.isGameStarted())
+            {
                 timer.setDelay(1000 - AppUtils.getGameSpeed() * 200);
             }
         });
-        AppUtils.addOnTeamMembersListener(players -> {
-            if (players == TeamMembers.players_2) {
-                mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2);
+        AppUtils.addOnTeamMembersListener(players ->
+        {
+            if (players == TeamMembers.players_2)
+            {
+                mBallObj.setLocation(530 / 2 - 120 - 23 / 2, 360 / 2 - 23 / 2);
                 mPlayers.get(1).setVisible(false);
                 mPlayers.get(3).setVisible(false);
-                mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2);
-                mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2);
-            } else if (players == TeamMembers.players_4) {
-                mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2 - 60);
+                mPlayers.get(0).setLocation(530 / 2 - 150 - 31 / 2, 360 / 2 - 31 / 2);
+                mPlayers.get(2).setLocation(530 / 2 + 150 - 31 / 2, 360 / 2 - 31 / 2);
+            } else if (players == TeamMembers.players_4)
+            {
+                mBallObj.setLocation(530 / 2 - 120 - 23 / 2, 360 / 2 - 23 / 2 - 60);
                 mPlayers.get(1).setVisible(true);
                 mPlayers.get(3).setVisible(true);
-                mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2 - 60);
-                mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2 - 60);
-                mPlayers.get(1).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2 + 60);
-                mPlayers.get(3).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2 + 60);
+                mPlayers.get(0).setLocation(530 / 2 - 150 - 31 / 2, 360 / 2 - 31 / 2 - 60);
+                mPlayers.get(2).setLocation(530 / 2 + 150 - 31 / 2, 360 / 2 - 31 / 2 - 60);
+                mPlayers.get(1).setLocation(530 / 2 - 150 - 31 / 2, 360 / 2 - 31 / 2 + 60);
+                mPlayers.get(3).setLocation(530 / 2 + 150 - 31 / 2, 360 / 2 - 31 / 2 + 60);
             }
         });
         AppUtils.addOnAutoMoveBallCallback(this::moveBallTo);
 
-        mBallObj.setLocation(530/2 - 120 - 23/2, 360/2 - 23/2);
+        mBallObj.setLocation(530 / 2 - 120 - 23 / 2, 360 / 2 - 23 / 2);
         mPlayers.get(1).setVisible(false);
         mPlayers.get(3).setVisible(false);
-        mPlayers.get(0).setLocation(530/2 - 150 - 31/2, 360/2 - 31/2);
-        mPlayers.get(2).setLocation(530/2 + 150 - 31/2, 360/2 - 31/2);
+        mPlayers.get(0).setLocation(530 / 2 - 150 - 31 / 2, 360 / 2 - 31 / 2);
+        mPlayers.get(2).setLocation(530 / 2 + 150 - 31 / 2, 360 / 2 - 31 / 2);
 
     }
 
-    private void moveBallTo(Directions direction) {
+    private void moveBallTo(Directions direction)
+    {
 
-        mBallObj.setLocation(mBallObj.getLocation().x + 33, mBallObj.getLocation().y);
+        switch (direction)
+        {
+            case DOWN:
+                mBallObj.setLocation(mBallObj.getLocation().x, mBallObj.getLocation().y + 33);
+                break;
+            case UP:
+                mBallObj.setLocation(mBallObj.getLocation().x, mBallObj.getLocation().y - 33);
+                break;
+            case LEFT:
+                mBallObj.setLocation(mBallObj.getLocation().x - 33, mBallObj.getLocation().y);
+                break;
+            case RIGHT:
+                mBallObj.setLocation(mBallObj.getLocation().x + 33, mBallObj.getLocation().y);
+                break;
+            case DEFAULT:
+                mBallObj.setLocation(mBallObj.getLocation().x + 33, mBallObj.getLocation().y);
+                break;
+            default:
+                break;
+        }
 
     }
 
-    private void initializeGameWorldHolder() {
+    private void initializeGameWorldHolder()
+    {
 
         gameWorldHolder = new JLayeredPane();
         gameWorldHolder.setPreferredSize(new Dimension(530, 360));
@@ -102,15 +133,20 @@ public class GameWorld {
 
     }
 
-    private void initializeGameGrid() {
+    private void initializeGameGrid()
+    {
 
         int i, j;
-        for (i = 0; i < rows; i++) {
-            for (j = 0; j < columns; j++) {
-                if (j == columns / 2 || j == columns / 2 - 1) {
+        for (i = 0; i < rows; i++)
+        {
+            for (j = 0; j < columns; j++)
+            {
+                if (j == columns / 2 || j == columns / 2 - 1)
+                {
                     gameGrid[i][j] = materialElements.createLabel("");
                     gameGrid[i][j].setIcon(new AssetsUtils().getImageIcon(IMG_BRICKS));
-                } else {
+                } else
+                {
                     gameGrid[i][j] = materialElements.createLabel("");
                     gameGrid[i][j].setIcon(new AssetsUtils().getImageIcon(IMG_WHITE_SQUARE));
                 }
@@ -125,8 +161,10 @@ public class GameWorld {
         mGameWorldHolder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         mGameWorldHolder.setVisible(false);
 
-        for (i = 0; i < rows; i++) {
-            for (j = 0; j < columns; j++) {
+        for (i = 0; i < rows; i++)
+        {
+            for (j = 0; j < columns; j++)
+            {
                 mGameWorldHolder.add(gameGrid[i][j]);
             }
         }
@@ -146,14 +184,16 @@ public class GameWorld {
 
     }
 
-    private void addGameObjects() {
+    private void addGameObjects()
+    {
 
         addBall();
         addPlayers();
 
     }
 
-    private void addBall() {
+    private void addBall()
+    {
 
         JPanel ballHolder = new JPanel();
         ballHolder.setBounds(0, 0, 530, 360);
@@ -177,14 +217,16 @@ public class GameWorld {
 
     }
 
-    private void addPlayers() {
+    private void addPlayers()
+    {
 
         addTeamA();
         addTeamB();
 
     }
 
-    private void addTeamA() {
+    private void addTeamA()
+    {
 
         Player mPlayer1 = AppUtils.getPlayer(1);
 
@@ -216,13 +258,15 @@ public class GameWorld {
 
         gameWorldHolder.add(mPlayers.get(1), Integer.valueOf(4));
 
-        if (AppUtils.getNoPlayers() == 4) {
+        if (AppUtils.getNoPlayers() == 4)
+        {
 
         }
 
     }
 
-    private void addTeamB() {
+    private void addTeamB()
+    {
 
         Player mPlayer1 = AppUtils.getPlayer(2);
 
@@ -254,7 +298,8 @@ public class GameWorld {
 
         gameWorldHolder.add(mPlayers.get(3), Integer.valueOf(6));
 
-        if (AppUtils.getNoPlayers() == 4) {
+        if (AppUtils.getNoPlayers() == 4)
+        {
 
         }
 
@@ -267,7 +312,8 @@ public class GameWorld {
 
     }
 
-    public JPanel getGameWorldContainer() {
+    public JPanel getGameWorldContainer()
+    {
         return gameWorld;
     }
 
