@@ -11,6 +11,7 @@
  */
 package app.game.options;
 
+import app.interfaces.GoalScored;
 import app.utils.enums.TeamMembers;
 import app.interfaces.BallSquare;
 import app.utils.AppUtils;
@@ -32,7 +33,6 @@ public class GameOptions
     private MaterialLabel timerHours, timerMinutes, timerSeconds;
     private MaterialLabel scoreTeamLeft, scoreTeamRight;
     private MaterialLabel optionLabel, directionLabel, squareLabel;
-    private int teamLeft = 0, teamRight = 0;
     private MaterialLabel compassLabel;
 
     enum Players
@@ -147,12 +147,22 @@ public class GameOptions
         scoreHolder.setPreferredSize(new Dimension(255, 16));
         scoreHolder.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
 
-        scoreTeamLeft = createScoreElement(teamLeft);
-        scoreTeamRight = createScoreElement(teamRight);
+        scoreTeamLeft = createScoreElement(AppUtils.teamA);
+        scoreTeamRight = createScoreElement(AppUtils.teamB);
 
         scoreHolder.add(scoreTeamLeft);
         scoreHolder.add(materialElements.createLabel(" < L : R > "));
         scoreHolder.add(scoreTeamRight);
+
+        AppUtils.addGoalScoredCallback(new GoalScored()
+        {
+            @Override
+            public void scored()
+            {
+                scoreTeamLeft.setText(String.valueOf(AppUtils.teamA));
+                scoreTeamRight.setText(String.valueOf(AppUtils.teamB));
+            }
+        });
 
         gameOptions.add(scoreHolder);
 

@@ -1,19 +1,19 @@
 /**
  * Program: Assignment 2: Application – Baby Ball Bounce
- * Filename: BallSquare.java
+ * Filename: GoalScored.java
  *
  * @author: © Teodor Grigor (GitHub - TeodorHMX1)
  * Course: BSc Computing Year 1
  * Module: CSY1020 Problem Solving & Programming
  * Tutor: Gary Hill
  * @version: 1.0 File created
- * Date: 14/05/20
+ * Date: 05/06/20
  */
 package app.interfaces;
 
-public interface BallSquare
+public interface GoalScored
 {
 
-    void newSquare();
+    void scored();
 
 }
