@@ -12,14 +12,9 @@
 
 package app;
 
-import app.interfaces.BallSquare;
-import app.interfaces.GoalScored;
 import app.models.Ball;
 import app.models.Player;
-import app.utils.AppUtils;
 import app.utils.AssetsUtils;
-import app.utils.enums.Directions;
-import app.utils.enums.TeamMembers;
 import app.utils.material.MaterialButton;
 import app.utils.material.MaterialElements;
 import app.utils.material.MaterialLabel;
@@ -29,13 +24,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
-import static app.utils.AppUtils.*;
-import static app.utils.AppUtils.goalScored;
-import static app.utils.AssetsUtils.IMG_BRICKS;
-import static app.utils.AssetsUtils.IMG_WHITE_SQUARE;
-import static app.utils.enums.Directions.*;
-import static app.utils.enums.Directions.UP_RIGHT;
 
 public class CBabyBallBounce extends JFrame
 {
@@ -74,7 +62,7 @@ public class CBabyBallBounce extends JFrame
         // set window visible
         setVisible(true);
         // setting the JFrame Icon
-        setIconImage(new AssetsUtils().getImageIcon(IMG_BRICKS).getImage());
+        setIconImage(getImageIcon(IMG_BRICKS).getImage());
 
         // make the window to appear in the middle of the screen
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -253,9 +241,9 @@ public class CBabyBallBounce extends JFrame
         addGameObjects();
         gameWorld.add(gameWorldHolder);
 
-        Timer timer = new Timer(1000 - AppUtils.getGameSpeed() * 200, actionEvent ->
+        Timer timer = new Timer(1000 - getGameSpeed() * 200, actionEvent ->
         {
-            if (AppUtils.isGameStarted())
+            if (isGameStarted())
             {
                 moveBallTo(Directions.DEFAULT);
                 movePlayers();
@@ -263,14 +251,14 @@ public class CBabyBallBounce extends JFrame
         });
         timer.setInitialDelay(0);
         timer.start();
-        AppUtils.addOnGameSpeedCallback(() ->
+        addOnGameSpeedCallback(() ->
         {
-            if (AppUtils.isGameStarted())
+            if (isGameStarted())
             {
-                timer.setDelay(1000 - AppUtils.getGameSpeed() * 200);
+                timer.setDelay(1000 - getGameSpeed() * 200);
             }
         });
-        AppUtils.addOnTeamMembersListener(players ->
+        addOnTeamMembersListener(players ->
         {
             if (players == TeamMembers.players_2)
             {
@@ -290,7 +278,7 @@ public class CBabyBallBounce extends JFrame
                 mPlayers.get(3).setLocation(530 / 2 + 150 - 31 / 2, 360 / 2 - 31 / 2 + 60);
             }
         });
-        AppUtils.addOnAutoMoveBallCallback(this::moveBallTo);
+        addOnAutoMoveBallCallback(this::moveBallTo);
 
         mBallObj.setLocation(530 / 2 - 120 - 23 / 2, 360 / 2 - 23 / 2);
         mPlayers.get(1).setVisible(false);
@@ -336,11 +324,11 @@ public class CBabyBallBounce extends JFrame
 
     private void movePlayers()
     {
-        if (AppUtils.getNoPlayers() == 2)
+        if (getNoPlayers() == 2)
         {
             movePlayerToBall(mPlayers.get(0));
             movePlayerToBall(mPlayers.get(2));
-        } else if (AppUtils.getNoPlayers() == 4)
+        } else if (getNoPlayers() == 4)
         {
             movePlayerToBall(mPlayers.get(0), true);
             movePlayerToBall(mPlayers.get(1), false);
@@ -374,46 +362,46 @@ public class CBabyBallBounce extends JFrame
             case DOWN:
                 if (randomNo == 1)
                 {
-                    return BOTTOM_LEFT;
+                    return Directions.BOTTOM_LEFT;
                 } else if (randomNo == 2)
                 {
-                    return DOWN;
+                    return Directions.DOWN;
                 } else
                 {
-                    return BOTTOM_RIGHT;
+                    return Directions.BOTTOM_RIGHT;
                 }
             case UP:
                 if (randomNo == 1)
                 {
-                    return UP_LEFT;
+                    return Directions.UP_LEFT;
                 } else if (randomNo == 2)
                 {
-                    return UP;
+                    return Directions.UP;
                 } else
                 {
-                    return UP_RIGHT;
+                    return Directions.UP_RIGHT;
                 }
             case LEFT:
                 if (randomNo == 1)
                 {
-                    return UP_LEFT;
+                    return Directions.UP_LEFT;
                 } else if (randomNo == 2)
                 {
-                    return LEFT;
+                    return Directions.LEFT;
                 } else
                 {
-                    return BOTTOM_LEFT;
+                    return Directions.BOTTOM_LEFT;
                 }
             case RIGHT:
                 if (randomNo == 1)
                 {
-                    return UP_RIGHT;
+                    return Directions.UP_RIGHT;
                 } else if (randomNo == 2)
                 {
-                    return RIGHT;
+                    return Directions.RIGHT;
                 } else
                 {
-                    return BOTTOM_RIGHT;
+                    return Directions.BOTTOM_RIGHT;
                 }
             default:
                 return Directions.RIGHT;
@@ -429,68 +417,68 @@ public class CBabyBallBounce extends JFrame
                 if (mBallObj.getLocation().y + 33 <= 334)
                 {
                     mBallObj.setLocation(mBallObj.getLocation().x, mBallObj.getLocation().y + 33);
-                    AppUtils.setBallDirection(direction);
+                    setBallDirection(direction);
                 } else
                 {
-                    AppUtils.setBallDirection(randomDirection(Directions.UP));
-                    moveBallTo(AppUtils.getBallDirection());
+                    setBallDirection(randomDirection(Directions.UP));
+                    moveBallTo(getBallDirection());
                 }
                 break;
             case UP:
                 if (mBallObj.getLocation().y - 33 >= 4)
                 {
                     mBallObj.setLocation(mBallObj.getLocation().x, mBallObj.getLocation().y - 33);
-                    AppUtils.setBallDirection(direction);
+                    setBallDirection(direction);
                 } else
                 {
-                    AppUtils.setBallDirection(randomDirection(Directions.DOWN));
-                    moveBallTo(AppUtils.getBallDirection());
+                    setBallDirection(randomDirection(Directions.DOWN));
+                    moveBallTo(getBallDirection());
                 }
                 break;
             case LEFT:
                 if (mBallObj.getLocation().x - 33 >= 2)
                 {
                     mBallObj.setLocation(mBallObj.getLocation().x - 33, mBallObj.getLocation().y);
-                    AppUtils.setBallDirection(direction);
+                    setBallDirection(direction);
                 } else
                 {
-                    AppUtils.setBallDirection(randomDirection(Directions.RIGHT));
-                    moveBallTo(AppUtils.getBallDirection());
+                    setBallDirection(randomDirection(Directions.RIGHT));
+                    moveBallTo(getBallDirection());
                 }
                 break;
             case RIGHT:
                 if (mBallObj.getLocation().x + 33 <= 497)
                 {
                     mBallObj.setLocation(mBallObj.getLocation().x + 33, mBallObj.getLocation().y);
-                    AppUtils.setBallDirection(direction);
+                    setBallDirection(direction);
                 } else
                 {
-                    AppUtils.setBallDirection(randomDirection(Directions.LEFT));
-                    moveBallTo(AppUtils.getBallDirection());
+                    setBallDirection(randomDirection(Directions.LEFT));
+                    moveBallTo(getBallDirection());
                 }
                 break;
             case BOTTOM_LEFT:
                 moveBallTo(Directions.LEFT);
                 moveBallTo(Directions.DOWN);
-                AppUtils.setBallDirection(BOTTOM_LEFT);
+                setBallDirection(Directions.BOTTOM_LEFT);
                 break;
             case BOTTOM_RIGHT:
                 moveBallTo(Directions.RIGHT);
                 moveBallTo(Directions.DOWN);
-                AppUtils.setBallDirection(BOTTOM_RIGHT);
+                setBallDirection(Directions.BOTTOM_RIGHT);
                 break;
             case UP_LEFT:
                 moveBallTo(Directions.LEFT);
                 moveBallTo(Directions.UP);
-                AppUtils.setBallDirection(UP_LEFT);
+                setBallDirection(Directions.UP_LEFT);
                 break;
             case UP_RIGHT:
                 moveBallTo(Directions.RIGHT);
                 moveBallTo(Directions.UP);
-                AppUtils.setBallDirection(UP_RIGHT);
+                setBallDirection(Directions.UP_RIGHT);
                 break;
             case DEFAULT:
-                moveBallTo(AppUtils.getBallDirection());
+                moveBallTo(getBallDirection());
                 break;
             default:
                 break;
@@ -518,38 +506,38 @@ public class CBabyBallBounce extends JFrame
         if (mBallObj.getLocation().x < 100)
         {
             goalScored();
-            AppUtils.teamB++;
+            teamB++;
         } else if (mBallObj.getLocation().x > 450)
         {
             goalScored();
-            AppUtils.teamA++;
+            teamA++;
         }
 
-        if (AppUtils.getBallSquare() != null)
+        if (getBallSquare() != null)
         {
-            AppUtils.getBallSquare().newSquare();
+            getBallSquare().newSquare();
         }
 
     }
 
     private void bounceBall()
     {
-        if (AppUtils.getBallDirection() == Directions.RIGHT)
+        if (getBallDirection() == Directions.RIGHT)
         {
-            AppUtils.setBallDirection(randomDirection(Directions.LEFT));
-            moveBallTo(AppUtils.getBallDirection());
-        } else if (AppUtils.getBallDirection() == Directions.LEFT)
+            setBallDirection(randomDirection(Directions.LEFT));
+            moveBallTo(getBallDirection());
+        } else if (getBallDirection() == Directions.LEFT)
         {
-            AppUtils.setBallDirection(randomDirection(Directions.RIGHT));
-            moveBallTo(AppUtils.getBallDirection());
-        } else if (AppUtils.getBallDirection() == Directions.UP)
+            setBallDirection(randomDirection(Directions.RIGHT));
+            moveBallTo(getBallDirection());
+        } else if (getBallDirection() == Directions.UP)
         {
-            AppUtils.setBallDirection(randomDirection(Directions.DOWN));
-            moveBallTo(AppUtils.getBallDirection());
-        } else if (AppUtils.getBallDirection() == Directions.DOWN)
+            setBallDirection(randomDirection(Directions.DOWN));
+            moveBallTo(getBallDirection());
+        } else if (getBallDirection() == Directions.DOWN)
         {
-            AppUtils.setBallDirection(randomDirection(Directions.UP));
-            moveBallTo(AppUtils.getBallDirection());
+            setBallDirection(randomDirection(Directions.UP));
+            moveBallTo(getBallDirection());
         }
     }
 
@@ -576,11 +564,11 @@ public class CBabyBallBounce extends JFrame
                 if (j == columns / 2 || j == columns / 2 - 1)
                 {
                     gameGrid[i][j] = materialElements.createLabel("");
-                    gameGrid[i][j].setIcon(new AssetsUtils().getImageIcon(IMG_BRICKS));
+                    gameGrid[i][j].setIcon(getImageIcon(IMG_BRICKS));
                 } else
                 {
                     gameGrid[i][j] = materialElements.createLabel("");
-                    gameGrid[i][j].setIcon(new AssetsUtils().getImageIcon(IMG_WHITE_SQUARE));
+                    gameGrid[i][j].setIcon(getImageIcon(IMG_WHITE_SQUARE));
                 }
             }
         }
@@ -631,7 +619,7 @@ public class CBabyBallBounce extends JFrame
         ballHolder.setOpaque(false);
         ballHolder.setLayout(null);
 
-        Ball mBall = AppUtils.getBall();
+        Ball mBall = getBall();
         MaterialLabel ball = materialElements.createLabel("");
         ball.setIcon(mBall.getBallImage());
         ball.setLocation(0, 0);
@@ -642,7 +630,7 @@ public class CBabyBallBounce extends JFrame
         mBallObj.setOpaque(false);
         mBallObj.add(ball);
         ballHolder.add(mBallObj);
-        AppUtils.setBallObj(mBallObj);
+        setBallObj(mBallObj);
 
         gameWorldHolder.add(ballHolder, Integer.valueOf(2));
 
@@ -659,7 +647,7 @@ public class CBabyBallBounce extends JFrame
     private void addTeamA()
     {
 
-        Player mPlayer1 = AppUtils.getPlayer(1);
+        Player mPlayer1 = getPlayer(1);
 
         MaterialLabel mPlayerLabel = materialElements.createLabel("");
         mPlayerLabel.setIcon(mPlayer1.getPlayerImg());
@@ -674,7 +662,7 @@ public class CBabyBallBounce extends JFrame
 
         gameWorldHolder.add(mPlayers.get(0), Integer.valueOf(3));
 
-        Player mPlayer3 = AppUtils.getPlayer(3);
+        Player mPlayer3 = getPlayer(3);
 
         mPlayerLabel = materialElements.createLabel("");
         mPlayerLabel.setIcon(mPlayer3.getPlayerImg());
@@ -694,7 +682,7 @@ public class CBabyBallBounce extends JFrame
     private void addTeamB()
     {
 
-        Player mPlayer1 = AppUtils.getPlayer(2);
+        Player mPlayer1 = getPlayer(2);
 
         MaterialLabel mPlayerLabel = materialElements.createLabel("");
         mPlayerLabel.setIcon(mPlayer1.getPlayerImg());
@@ -709,7 +697,7 @@ public class CBabyBallBounce extends JFrame
 
         gameWorldHolder.add(mPlayers.get(2), Integer.valueOf(5));
 
-        Player mPlayer3 = AppUtils.getPlayer(4);
+        Player mPlayer3 = getPlayer(4);
 
         mPlayerLabel = materialElements.createLabel("");
         mPlayerLabel.setIcon(mPlayer3.getPlayerImg());
@@ -787,13 +775,13 @@ public class CBabyBallBounce extends JFrame
 
         Timer timer = new Timer(1000, actionEvent ->
         {
-            if (AppUtils.isGameStarted())
+            if (isGameStarted())
             {
                 setTime();
             }
         });
         timer.setInitialDelay(0);
-        AppUtils.addOnTimerCallback(running ->
+        addOnTimerCallback(running ->
         {
             if (running)
             {
@@ -801,9 +789,9 @@ public class CBabyBallBounce extends JFrame
             } else
             {
                 timer.restart();
-                timerHours.setText(timeBased(AppUtils.getSeconds() / (60 * 60)));
-                timerMinutes.setText(timeBased(AppUtils.getSeconds() / (60) % 60));
-                timerSeconds.setText(timeBased(AppUtils.getSeconds() % 60));
+                timerHours.setText(timeBased(getSeconds() / (60 * 60)));
+                timerMinutes.setText(timeBased(getSeconds() / (60) % 60));
+                timerSeconds.setText(timeBased(getSeconds() % 60));
             }
         });
 
@@ -812,10 +800,10 @@ public class CBabyBallBounce extends JFrame
 
     private void setTime()
     {
-        AppUtils.increaseSeconds();
-        timerHours.setText(timeBased(AppUtils.getSeconds() / (60 * 60)));
-        timerMinutes.setText(timeBased(AppUtils.getSeconds() / (60) % 60));
-        timerSeconds.setText(timeBased(AppUtils.getSeconds() % 60));
+        increaseSeconds();
+        timerHours.setText(timeBased(getSeconds() / (60 * 60)));
+        timerMinutes.setText(timeBased(getSeconds() / (60) % 60));
+        timerSeconds.setText(timeBased(getSeconds() % 60));
     }
 
     private String timeBased(int time)
@@ -844,21 +832,17 @@ public class CBabyBallBounce extends JFrame
         scoreHolder.setPreferredSize(new Dimension(255, 16));
         scoreHolder.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
 
-        scoreTeamLeft = createScoreElement(AppUtils.teamA);
-        scoreTeamRight = createScoreElement(AppUtils.teamB);
+        scoreTeamLeft = createScoreElement(teamA);
+        scoreTeamRight = createScoreElement(teamB);
 
         scoreHolder.add(scoreTeamLeft);
         scoreHolder.add(materialElements.createLabel(" < L : R > "));
         scoreHolder.add(scoreTeamRight);
 
-        AppUtils.addGoalScoredCallback(new GoalScored()
+        addGoalScoredCallback(() ->
         {
-            @Override
-            public void scored()
-            {
-                scoreTeamLeft.setText(String.valueOf(AppUtils.teamA));
-                scoreTeamRight.setText(String.valueOf(AppUtils.teamB));
-            }
+            scoreTeamLeft.setText(String.valueOf(teamA));
+            scoreTeamRight.setText(String.valueOf(teamB));
         });
 
         gameOptions.add(scoreHolder);
@@ -874,7 +858,7 @@ public class CBabyBallBounce extends JFrame
         squareLabel = createOptionItem(getBallPosition());
         gameOptions.add(createOptionItem("Square:", squareLabel));
 
-        AppUtils.addBallSquareCallback((BallSquare) () -> squareLabel.setText(getBallPosition()));
+        addBallSquareCallback(() -> squareLabel.setText(getBallPosition()));
 
         directionLabel = createOptionItem("E");
         gameOptions.add(createOptionItem("Direction:", directionLabel));
@@ -1109,10 +1093,7 @@ public class CBabyBallBounce extends JFrame
                 break;
         }
 
-        if (AppUtils.getAutoMoveBall() != null)
-        {
-            AppUtils.getAutoMoveBall().moveTo(direction);
-        }
+        getAutoMoveBall().moveTo(direction);
 
     }
 
@@ -1137,11 +1118,11 @@ public class CBabyBallBounce extends JFrame
         {
             case TWO:
                 optionLabel.setText("2 Player");
-                AppUtils.setPlayers(TeamMembers.players_2);
+                setPlayers(TeamMembers.players_2);
                 break;
             case FOUR:
                 optionLabel.setText("4 Player");
-                AppUtils.setPlayers(TeamMembers.players_4);
+                setPlayers(TeamMembers.players_4);
                 break;
             default:
                 break;
@@ -1188,9 +1169,9 @@ public class CBabyBallBounce extends JFrame
         MaterialButton btnAct = materialElements.createButton(iconAct, "Act");
         btnAct.addActionListener(actionEvent ->
         {
-            if (AppUtils.getAutoMoveBall() != null)
+            if (getAutoMoveBall() != null)
             {
-                AppUtils.getAutoMoveBall().moveTo(Directions.DEFAULT);
+                getAutoMoveBall().moveTo(Directions.DEFAULT);
             }
         });
         gameControls.add(btnAct);
@@ -1205,7 +1186,7 @@ public class CBabyBallBounce extends JFrame
         btnState.addActionListener(actionEvent ->
         {
 
-            if (!AppUtils.isGameStarted())
+            if (!isGameStarted())
             {
                 btnState.setIcon(new ImageIcon("assets/images/pause.png"));
                 btnState.setText("Pause");
@@ -1214,7 +1195,7 @@ public class CBabyBallBounce extends JFrame
                 btnState.setIcon(new ImageIcon("assets/images/run.png"));
                 btnState.setText("Run");
             }
-            AppUtils.changeGameState();
+            changeGameState();
         });
         gameControls.add(btnState);
 
@@ -1227,7 +1208,7 @@ public class CBabyBallBounce extends JFrame
         MaterialButton btnReset = materialElements.createButton(iconAct, "Reset");
         btnReset.addActionListener(actionEvent ->
         {
-            AppUtils.resetSeconds();
+            resetSeconds();
             btnState.setIcon(new ImageIcon("assets/images/run.png"));
             btnState.setText("Run");
         });
@@ -1242,7 +1223,7 @@ public class CBabyBallBounce extends JFrame
         sliderTitle.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 0));
         gameControls.add(sliderTitle);
 
-        slider = materialElements.createHorizontalSlider(1, 5, AppUtils.getGameSpeed());
+        slider = materialElements.createHorizontalSlider(1, 5, getGameSpeed());
         slider.addChangeListener(changed -> sliderChanged());
         gameControls.add(slider);
 
@@ -1250,7 +1231,7 @@ public class CBabyBallBounce extends JFrame
 
     private void sliderChanged()
     {
-        AppUtils.setGameSpeed(slider.getValue());
+        setGameSpeed(slider.getValue());
     }
 
     public interface BallCallback
@@ -1307,5 +1288,257 @@ public class CBabyBallBounce extends JFrame
         BOTTOM_LEFT,
         BOTTOM_RIGHT
     }
+
+
+
+    private Directions ballDirection = Directions.RIGHT;
+    private JFrame mainActivityGlobal;
+    public int teamA = 0, teamB = 0;
+
+    public void setMainActivity(JFrame mainActivity)
+    {
+        mainActivityGlobal = mainActivity;
+        initializePlayers();
+        initializeBall();
+    }
+
+    public JFrame getAppWindow()
+    {
+        return mainActivityGlobal;
+    }
+
+    private TeamMembersNumber mTeamMembersNumber;
+
+    public void addOnTeamMembersListener(TeamMembersNumber teamMembersNumber)
+    {
+        mTeamMembersNumber = teamMembersNumber;
+    }
+
+    private TeamMembers players = TeamMembers.players_2;
+
+    public void setPlayers(TeamMembers noPlayers)
+    {
+        players = noPlayers;
+        if (mTeamMembersNumber != null)
+        {
+            mTeamMembersNumber.onMembersChanged(noPlayers);
+        }
+    }
+
+    public int getNoPlayers()
+    {
+        if (players == TeamMembers.players_2)
+        {
+            return 2;
+        } else if (players == TeamMembers.players_4)
+        {
+            return 4;
+        }
+        return 2;
+    }
+
+
+    private final java.util.List<Player> mPlayersData = new ArrayList<>();
+
+    public void initializePlayers()
+    {
+        ImageIcon imageIcon1 = new ImageIcon("assets/images/baby1.png");
+        Image image1 = imageIcon1.getImage();
+        Image newimg1 = image1.getScaledInstance(31, 31, Image.SCALE_SMOOTH);
+        imageIcon1 = new ImageIcon(newimg1);
+
+        ImageIcon imageIcon2 = new ImageIcon("assets/images/baby2.png");
+        Image image2 = imageIcon2.getImage();
+        Image newimg2 = image2.getScaledInstance(31, 31, Image.SCALE_SMOOTH);
+        imageIcon2 = new ImageIcon(newimg2);
+
+        mPlayersData.clear();
+        Player mPlayer1 = new Player(imageIcon1);
+        mPlayersData.add(mPlayer1);
+        Player mPlayer2 = new Player(imageIcon2);
+        mPlayersData.add(mPlayer2);
+        Player mPlayer3 = new Player(imageIcon1);
+        mPlayersData.add(mPlayer3);
+        Player mPlayer4 = new Player(imageIcon2);
+        mPlayersData.add(mPlayer4);
+    }
+
+    public Player getPlayer(int player)
+    {
+        return mPlayersData.get(player - 1);
+    }
+
+    public java.util.List<Player> getPlayer()
+    {
+        return mPlayersData;
+    }
+
+    public void setBallDirection(Directions directionN)
+    {
+        ballDirection = directionN;
+    }
+
+    public Directions getBallDirection()
+    {
+        return ballDirection;
+    }
+
+    private Ball mBall;
+
+    public void initializeBall()
+    {
+        ImageIcon imageIcon = new ImageIcon("assets/images/ball.png");
+        Image image = imageIcon.getImage();
+        Image newimg = image.getScaledInstance(23, 23, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(newimg);
+        mBall = new Ball(imageIcon);
+    }
+
+    public Ball getBall()
+    {
+        return mBall;
+    }
+
+    private int seconds = 0;
+
+    public void increaseSeconds()
+    {
+        seconds++;
+    }
+
+    public void resetSeconds()
+    {
+        seconds = 0;
+        gameStarted = false;
+        teamA = 0;
+        teamB = 0;
+        ballDirection = Directions.RIGHT;
+        if (mGameStarted != null)
+        {
+            mGameStarted.isRunning(gameStarted);
+        }
+        setPlayers(players);
+        initializePlayers();
+        initializeBall();
+    }
+
+    public void goalScored()
+    {
+        ballDirection = Directions.RIGHT;
+        if (mGoalScored != null)
+        {
+            mGoalScored.scored();
+        }
+        setPlayers(players);
+        initializePlayers();
+        initializeBall();
+    }
+
+    public int getSeconds()
+    {
+        return seconds;
+    }
+
+    private boolean gameStarted = false;
+
+    public void changeGameState()
+    {
+        gameStarted = !gameStarted;
+        if (mGameStarted != null && gameStarted)
+        {
+            mGameStarted.isRunning(gameStarted);
+        }
+    }
+
+    public boolean isGameStarted()
+    {
+        return gameStarted;
+    }
+
+    private GameTimer.GameStarted mGameStarted;
+
+    public void addOnTimerCallback(GameTimer.GameStarted gameStarted)
+    {
+        mGameStarted = gameStarted;
+    }
+
+    private BallCallback.AutoMoveBall mAutoMoveBall;
+
+    public void addOnAutoMoveBallCallback(BallCallback.AutoMoveBall autoMoveBall)
+    {
+        mAutoMoveBall = autoMoveBall;
+    }
+
+    public BallCallback.AutoMoveBall getAutoMoveBall()
+    {
+        return mAutoMoveBall;
+    }
+
+    private int gameSpeed = 1;
+
+    public int getGameSpeed()
+    {
+        return gameSpeed;
+    }
+
+    public void setGameSpeed(int speed)
+    {
+        gameSpeed = speed;
+        if (mGameSpeedCallback != null)
+        {
+            mGameSpeedCallback.onSpeedChanged();
+        }
+    }
+
+    private GameSpeed mGameSpeedCallback;
+
+    public void addOnGameSpeedCallback(GameSpeed gameSpeed)
+    {
+        mGameSpeedCallback = gameSpeed;
+    }
+
+    public GameSpeed getGameSpeedCallback()
+    {
+        return mGameSpeedCallback;
+    }
+
+    public String getBallPosition()
+    {
+        return mBallObj.getLocation().x/33 + "x" + (mBallObj.getLocation().y/26);
+    }
+
+    public void setBallObj(JPanel ballObj)
+    {
+    }
+
+    private BallSquare mBallSquare;
+
+    public void addBallSquareCallback(BallSquare ballSquare)
+    {
+        mBallSquare = ballSquare;
+    }
+
+    public BallSquare getBallSquare()
+    {
+        return mBallSquare;
+    }
+
+    private GoalScored mGoalScored;
+
+    public void addGoalScoredCallback(GoalScored goalScored)
+    {
+        mGoalScored = goalScored;
+    }
+
+    // method that retries the relevant image based on the image path
+    // the path is passed as a parameter into the function
+    // the parameter name is 'img'
+    public ImageIcon getImageIcon(String img)
+    {
+        return new ImageIcon(img);
+    }
+
+    public static final String IMG_BRICKS = "assets/images/bricks2.jpg";
+    public static final String IMG_WHITE_SQUARE = "assets/images/white32x32.jpg";
 
 }
