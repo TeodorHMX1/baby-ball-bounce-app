@@ -204,7 +204,6 @@ public class CBabyBallBounce extends JFrame
     }
 
     private JPanel gameWorld;
-    private MaterialElements materialElements;
     private JLayeredPane gameWorldHolder;
     private final int rows = 13;
     private final int columns = 16;
@@ -215,7 +214,6 @@ public class CBabyBallBounce extends JFrame
     public void gameWorld()
     {
 
-        materialElements = new MaterialElements();
         gameWorld = new JPanel();
         gameWorld.setBorder(BorderFactory.createEmptyBorder(50, 20, 50, 20));
         gameWorld.setPreferredSize(new Dimension(570, 440));
@@ -555,11 +553,11 @@ public class CBabyBallBounce extends JFrame
             {
                 if (j == columns / 2 || j == columns / 2 - 1)
                 {
-                    gameGrid[i][j] = materialElements.createLabel("");
+                    gameGrid[i][j] = new JLabel("");
                     gameGrid[i][j].setIcon(getImageIcon(IMG_BRICKS));
                 } else
                 {
-                    gameGrid[i][j] = materialElements.createLabel("");
+                    gameGrid[i][j] = new JLabel("");
                     gameGrid[i][j].setIcon(getImageIcon(IMG_WHITE_SQUARE));
                 }
             }
@@ -612,7 +610,7 @@ public class CBabyBallBounce extends JFrame
         ballHolder.setLayout(null);
 
         Ball mBall = getBall();
-        JLabel ball = materialElements.createLabel("");
+        JLabel ball = new JLabel("");
         ball.setIcon(mBall.getBallImage());
         ball.setLocation(0, 0);
 
@@ -641,7 +639,7 @@ public class CBabyBallBounce extends JFrame
 
         Player mPlayer1 = getPlayer(1);
 
-        JLabel mPlayerLabel = materialElements.createLabel("");
+        JLabel mPlayerLabel = new JLabel("");
         mPlayerLabel.setIcon(mPlayer1.getPlayerImg());
         mPlayerLabel.setLocation(0, 0);
 
@@ -656,7 +654,7 @@ public class CBabyBallBounce extends JFrame
 
         Player mPlayer3 = getPlayer(3);
 
-        mPlayerLabel = materialElements.createLabel("");
+        mPlayerLabel = new JLabel("");
         mPlayerLabel.setIcon(mPlayer3.getPlayerImg());
         mPlayerLabel.setLocation(0, 0);
 
@@ -676,7 +674,7 @@ public class CBabyBallBounce extends JFrame
 
         Player mPlayer1 = getPlayer(2);
 
-        JLabel mPlayerLabel = materialElements.createLabel("");
+        JLabel mPlayerLabel = new JLabel("");
         mPlayerLabel.setIcon(mPlayer1.getPlayerImg());
         mPlayerLabel.setLocation(0, 0);
 
@@ -691,7 +689,7 @@ public class CBabyBallBounce extends JFrame
 
         Player mPlayer3 = getPlayer(4);
 
-        mPlayerLabel = materialElements.createLabel("");
+        mPlayerLabel = new JLabel("");
         mPlayerLabel.setIcon(mPlayer3.getPlayerImg());
         mPlayerLabel.setLocation(0, 0);
 
@@ -721,7 +719,6 @@ public class CBabyBallBounce extends JFrame
     public void gameOptions()
     {
 
-        materialElements = new MaterialElements();
         gameOptions = new JPanel();
         gameOptions.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         gameOptions.setBackground(new Color(241, 241, 241));
@@ -744,7 +741,7 @@ public class CBabyBallBounce extends JFrame
         timerLabelHolder.setBorder(BorderFactory.createEmptyBorder(7, 0, 0, 0));
         timerLabelHolder.setLayout(new BorderLayout());
 
-        JLabel timerLabel = materialElements.createLabel("DIGITAL TIMER");
+        JLabel timerLabel = new JLabel("DIGITAL TIMER");
         timerLabelHolder.add(timerLabel, BorderLayout.CENTER);
         gameOptions.add(timerLabelHolder);
 
@@ -758,9 +755,9 @@ public class CBabyBallBounce extends JFrame
         timerSeconds = createTimerElement("00");
 
         timerHolder.add(timerHours);
-        timerHolder.add(materialElements.createLabel(" : "));
+        timerHolder.add(new JLabel(" : "));
         timerHolder.add(timerMinutes);
-        timerHolder.add(materialElements.createLabel(" : "));
+        timerHolder.add(new JLabel(" : "));
         timerHolder.add(timerSeconds);
 
         gameOptions.add(timerHolder);
@@ -815,7 +812,7 @@ public class CBabyBallBounce extends JFrame
         scoreLabelHolder.setBorder(BorderFactory.createEmptyBorder(7, 0, 0, 0));
         scoreLabelHolder.setLayout(new BorderLayout());
 
-        JLabel scoreLabel = materialElements.createLabel("SCORE");
+        JLabel scoreLabel = new JLabel("SCORE");
         scoreLabelHolder.add(scoreLabel, BorderLayout.CENTER);
         gameOptions.add(scoreLabelHolder);
 
@@ -828,7 +825,7 @@ public class CBabyBallBounce extends JFrame
         scoreTeamRight = createScoreElement(teamB);
 
         scoreHolder.add(scoreTeamLeft);
-        scoreHolder.add(materialElements.createLabel(" < L : R > "));
+        scoreHolder.add(new JLabel(" < L : R > "));
         scoreHolder.add(scoreTeamRight);
 
         addGoalScoredCallback(() ->
@@ -860,10 +857,10 @@ public class CBabyBallBounce extends JFrame
     private void createBallMovementControls()
     {
 
-        MaterialButton btnUp = createGridElementChoice("up");
-        MaterialButton btnDown = createGridElementChoice("down");
-        MaterialButton btnLeft = createGridElementChoice("left");
-        MaterialButton btnRight = createGridElementChoice("right");
+        JButton btnUp = createGridElementChoice("up");
+        JButton btnDown = createGridElementChoice("down");
+        JButton btnLeft = createGridElementChoice("left");
+        JButton btnRight = createGridElementChoice("right");
 
         btnUp.addActionListener(actionEvent -> ballTo(Directions.UP));
         btnDown.addActionListener(actionEvent -> ballTo(Directions.DOWN));
@@ -895,7 +892,7 @@ public class CBabyBallBounce extends JFrame
         JPanel optionItemChoseHolder = new JPanel();
         optionItemChoseHolder.setLayout(new GridBagLayout());
         optionItemChoseHolder.setBackground(new Color(0, 0, 0, 0));
-        compassLabel = materialElements.createLabel("");
+        compassLabel = new JLabel("");
         compassLabel.setBackground(new Color(0, 0, 0, 0));
 
         ImageIcon imageIcon = new ImageIcon("assets/images/east.jpg");
@@ -920,10 +917,10 @@ public class CBabyBallBounce extends JFrame
     private void createChoices()
     {
 
-        MaterialButton btnPlayers2 = createOptionChoice("2 Player");
-        MaterialButton btnPlayers4 = createOptionChoice("4 Player");
-        MaterialButton btnMulti = createOptionChoice("Multi");
-        MaterialButton btnExit = createOptionChoice("Exit");
+        JButton btnPlayers2 = createOptionChoice("2 Player");
+        JButton btnPlayers4 = createOptionChoice("4 Player");
+        JButton btnMulti = createOptionChoice("Multi");
+        JButton btnExit = createOptionChoice("Exit");
 
         btnPlayers2.addActionListener(actionEvent -> playersChoice(Players.TWO));
         btnPlayers4.addActionListener(actionEvent -> playersChoice(Players.FOUR));
@@ -947,7 +944,7 @@ public class CBabyBallBounce extends JFrame
 
     private JLabel createTimerElement(String text)
     {
-        JLabel materialLabel = materialElements.createLabel(text);
+        JLabel materialLabel = new JLabel(text);
         materialLabel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
         materialLabel.setOpaque(true);
         materialLabel.setBackground(Color.black);
@@ -962,7 +959,7 @@ public class CBabyBallBounce extends JFrame
         {
             content = "0" + content;
         }
-        JLabel materialLabel = materialElements.createLabel(content);
+        JLabel materialLabel = new JLabel(content);
         materialLabel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
         materialLabel.setOpaque(true);
         materialLabel.setBackground(Color.black);
@@ -972,7 +969,7 @@ public class CBabyBallBounce extends JFrame
 
     private JLabel createOptionItem(String text)
     {
-        JLabel materialLabel = materialElements.createLabel(text);
+        JLabel materialLabel = new JLabel(text);
         materialLabel.setBorder(BorderFactory.createEmptyBorder(2, 3, 2, 3));
         materialLabel.setOpaque(true);
         materialLabel.setBackground(Color.white);
@@ -988,7 +985,7 @@ public class CBabyBallBounce extends JFrame
         optionItemHolder.setBorder(BorderFactory.createEmptyBorder(7, 35, 0, 20));
         optionItemHolder.setLayout(new BorderLayout());
 
-        JLabel contentLabel = materialElements.createLabel(content);
+        JLabel contentLabel = new JLabel(content);
         optionItemHolder.add(contentLabel, BorderLayout.WEST);
 
         JPanel optionItemChoseHolder = new JPanel();
@@ -1018,7 +1015,7 @@ public class CBabyBallBounce extends JFrame
         optionItemChoseHolder.setLayout(new GridBagLayout());
         optionItemChoseHolder.setBackground(new Color(255, 255, 255));
         optionItemChoseHolder.setPreferredSize(new Dimension(80, 25));
-        JLabel contentLabel = materialElements.createLabel("");
+        JLabel contentLabel = new JLabel("");
         Icon iconAct = new ImageIcon("assets/images/ball.png");
         contentLabel.setIcon(iconAct);
         optionItemChoseHolder.add(contentLabel);
@@ -1027,14 +1024,14 @@ public class CBabyBallBounce extends JFrame
 
     }
 
-    private MaterialButton createGridElementChoice(String content)
+    private JButton createGridElementChoice(String content)
     {
 
-        MaterialButton optionItemChoseHolder = materialElements.createButton(null, "");
+        JButton optionItemChoseHolder = createButton(null, "");
         optionItemChoseHolder.setLayout(new GridBagLayout());
         optionItemChoseHolder.setBackground(new Color(255, 255, 255));
         optionItemChoseHolder.setPreferredSize(new Dimension(80, 25));
-        JLabel contentLabel = materialElements.createLabel(content);
+        JLabel contentLabel = new JLabel(content);
         optionItemChoseHolder.add(contentLabel);
 
         return optionItemChoseHolder;
@@ -1089,14 +1086,14 @@ public class CBabyBallBounce extends JFrame
 
     }
 
-    private MaterialButton createOptionChoice(String content)
+    private JButton createOptionChoice(String content)
     {
 
-        MaterialButton optionItemChoseHolder = materialElements.createButton(null, "");
+        JButton optionItemChoseHolder = createButton(null, "");
         optionItemChoseHolder.setLayout(new GridBagLayout());
         optionItemChoseHolder.setBackground(new Color(255, 255, 255));
         optionItemChoseHolder.setPreferredSize(new Dimension(80, 30));
-        JLabel contentLabel = materialElements.createLabel(content);
+        JLabel contentLabel = new JLabel(content);
         optionItemChoseHolder.add(contentLabel);
 
         return optionItemChoseHolder;
@@ -1128,13 +1125,12 @@ public class CBabyBallBounce extends JFrame
     }
 
     private JPanel gameControls;
-    private MaterialButton btnState;
+    private JButton btnState;
     private JSlider slider;
 
     public void gameControls()
     {
 
-        materialElements = new MaterialElements();
         gameControls = new JPanel();
         gameControls.setLayout(new FlowLayout());
         gameControls.setBackground(new Color(241, 241, 241));
@@ -1158,7 +1154,7 @@ public class CBabyBallBounce extends JFrame
     {
 
         Icon iconAct = new ImageIcon("assets/images/step.png");
-        MaterialButton btnAct = materialElements.createButton(iconAct, "Act");
+        JButton btnAct = createButton(iconAct, "Act");
         btnAct.addActionListener(actionEvent ->
         {
             if (getAutoMoveBall() != null)
@@ -1174,7 +1170,7 @@ public class CBabyBallBounce extends JFrame
     {
 
         Icon iconAct = new ImageIcon("assets/images/run.png");
-        btnState = materialElements.createButton(iconAct, "Run");
+        btnState = createButton(iconAct, "Run");
         btnState.addActionListener(actionEvent ->
         {
 
@@ -1197,7 +1193,7 @@ public class CBabyBallBounce extends JFrame
     {
 
         Icon iconAct = new ImageIcon("assets/images/reset.png");
-        MaterialButton btnReset = materialElements.createButton(iconAct, "Reset");
+        JButton btnReset = createButton(iconAct, "Reset");
         btnReset.addActionListener(actionEvent ->
         {
             resetSeconds();
@@ -1211,11 +1207,11 @@ public class CBabyBallBounce extends JFrame
     private void prepareSlider()
     {
 
-        JLabel sliderTitle = materialElements.createLabel("Speed:");
+        JLabel sliderTitle = new JLabel("Speed:");
         sliderTitle.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 0));
         gameControls.add(sliderTitle);
 
-        slider = materialElements.createHorizontalSlider(1, 5, getGameSpeed());
+        slider = createHorizontalSlider(getGameSpeed());
         slider.addChangeListener(changed -> sliderChanged());
         gameControls.add(slider);
 
@@ -1562,6 +1558,36 @@ public class CBabyBallBounce extends JFrame
         {
             return playerImg;
         }
+
+    }
+
+    public JButton createButton(Icon icon, String text)
+    {
+        JButton btn = new JButton(text);
+        btn.setBackground(new Color(255, 255, 255));
+        btn.setIcon(icon);
+        btn.setBorder(
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(new Color(0, 0, 0), 1),
+                        BorderFactory.createEmptyBorder(3, 8, 3, 8)
+                )
+        );
+        return btn;
+    }
+
+    JSlider createHorizontalSlider(int current)
+    {
+
+        JSlider materialSlider = new JSlider(1, 5);
+        materialSlider.setMajorTickSpacing(1);
+        materialSlider.setMinorTickSpacing(1);
+        materialSlider.setBackground(new Color(241, 241, 241));
+        materialSlider.setPaintTicks(true);
+        materialSlider.setPaintLabels(true);
+        materialSlider.setValue(current);
+        Font font = new Font("Serif", Font.PLAIN, 13);
+        materialSlider.setFont(font);
+        return materialSlider;
 
     }
 
