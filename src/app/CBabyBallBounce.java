@@ -13,7 +13,6 @@
 package app;
 
 import app.game.control.GameControls;
-import app.game.options.GameOptions;
 import app.interfaces.BallSquare;
 import app.interfaces.GoalScored;
 import app.models.Ball;
@@ -25,6 +24,7 @@ import app.utils.enums.TeamMembers;
 import app.utils.material.MaterialButton;
 import app.utils.material.MaterialElements;
 import app.utils.material.MaterialLabel;
+import app.utils.material.MaterialSlider;
 
 import javax.swing.*;
 import java.awt.*;
@@ -219,8 +219,8 @@ public class CBabyBallBounce extends JFrame
         windowContainer.add(gameOptions, BorderLayout.EAST);
 
         //add the game controls to the container
-        GameControls gameControls = new GameControls();
-        windowContainer.add(gameControls.getGameControlsContainer(), BorderLayout.SOUTH);
+        gameControls();
+        windowContainer.add(gameControls, BorderLayout.SOUTH);
 
     }
 
@@ -1153,6 +1153,105 @@ public class CBabyBallBounce extends JFrame
     private void multiChoice()
     {
 
+    }
+
+    private JPanel gameControls;
+    private MaterialButton btnState;
+    private MaterialSlider slider;
+
+    public void gameControls()
+    {
+
+        materialElements = new MaterialElements();
+        gameControls = new JPanel();
+        gameControls.setLayout(new FlowLayout());
+        gameControls.setBackground(new Color(241, 241, 241));
+        gameControls.setPreferredSize(new Dimension(570, 60));
+
+        prepareButtons();
+        prepareSlider();
+
+    }
+
+    private void prepareButtons()
+    {
+
+        loadActBtn();
+        loadStateBtn();
+        loadResetBtn();
+
+    }
+
+    private void loadActBtn()
+    {
+
+        Icon iconAct = new ImageIcon("assets/images/step.png");
+        MaterialButton btnAct = materialElements.createButton(iconAct, "Act");
+        btnAct.addActionListener(actionEvent ->
+        {
+            if (AppUtils.getAutoMoveBall() != null)
+            {
+                AppUtils.getAutoMoveBall().moveTo(Directions.DEFAULT);
+            }
+        });
+        gameControls.add(btnAct);
+
+    }
+
+    private void loadStateBtn()
+    {
+
+        Icon iconAct = new ImageIcon("assets/images/run.png");
+        btnState = materialElements.createButton(iconAct, "Run");
+        btnState.addActionListener(actionEvent ->
+        {
+
+            if (!AppUtils.isGameStarted())
+            {
+                btnState.setIcon(new ImageIcon("assets/images/pause.png"));
+                btnState.setText("Pause");
+            } else
+            {
+                btnState.setIcon(new ImageIcon("assets/images/run.png"));
+                btnState.setText("Run");
+            }
+            AppUtils.changeGameState();
+        });
+        gameControls.add(btnState);
+
+    }
+
+    private void loadResetBtn()
+    {
+
+        Icon iconAct = new ImageIcon("assets/images/reset.png");
+        MaterialButton btnReset = materialElements.createButton(iconAct, "Reset");
+        btnReset.addActionListener(actionEvent ->
+        {
+            AppUtils.resetSeconds();
+            btnState.setIcon(new ImageIcon("assets/images/run.png"));
+            btnState.setText("Run");
+        });
+        gameControls.add(btnReset);
+
+    }
+
+    private void prepareSlider()
+    {
+
+        MaterialLabel sliderTitle = materialElements.createLabel("Speed:");
+        sliderTitle.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 0));
+        gameControls.add(sliderTitle);
+
+        slider = materialElements.createHorizontalSlider(1, 5, AppUtils.getGameSpeed());
+        slider.addChangeListener(changed -> sliderChanged());
+        gameControls.add(slider);
+
+    }
+
+    private void sliderChanged()
+    {
+        AppUtils.setGameSpeed(slider.getValue());
     }
 
 }
