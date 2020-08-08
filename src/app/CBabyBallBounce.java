@@ -1555,6 +1555,21 @@ public class CBabyBallBounce extends JFrame
         }
     }
 
-    
+    class Player
+    {
+
+        private final ImageIcon playerImg;
+
+        public Player(ImageIcon image)
+        {
+            this.playerImg = image;
+        }
+
+        public ImageIcon getPlayerImg()
+        {
+            return playerImg;
+        }
+
+    }
 
 }
