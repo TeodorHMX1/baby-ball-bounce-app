@@ -1289,4 +1289,23 @@ public class CBabyBallBounce extends JFrame
         void onMembersChanged(TeamMembers players);
     }
 
+    public enum TeamMembers
+    {
+        players_2,
+        players_4
+    }
+
+    public enum Directions
+    {
+        DEFAULT,
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN,
+        UP_LEFT,
+        UP_RIGHT,
+        BOTTOM_LEFT,
+        BOTTOM_RIGHT
+    }
+
 }
