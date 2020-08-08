@@ -12,9 +12,7 @@
 
 package app;
 
-import app.models.Ball;
 import app.models.Player;
-import app.utils.AssetsUtils;
 import app.utils.material.MaterialButton;
 import app.utils.material.MaterialElements;
 import app.utils.material.MaterialLabel;
@@ -1540,5 +1538,23 @@ public class CBabyBallBounce extends JFrame
 
     public static final String IMG_BRICKS = "assets/images/bricks2.jpg";
     public static final String IMG_WHITE_SQUARE = "assets/images/white32x32.jpg";
+
+    class Ball
+    {
+
+        private final ImageIcon ballImage;
+
+        public Ball(ImageIcon image)
+        {
+            this.ballImage = image;
+        }
+
+        public ImageIcon getBallImage()
+        {
+            return ballImage;
+        }
+    }
+
+    
 
 }
