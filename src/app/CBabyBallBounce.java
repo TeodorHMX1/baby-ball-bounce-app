@@ -12,7 +12,6 @@
 
 package app;
 
-import app.game.control.GameControls;
 import app.interfaces.BallSquare;
 import app.interfaces.GoalScored;
 import app.models.Ball;
@@ -1252,6 +1251,42 @@ public class CBabyBallBounce extends JFrame
     private void sliderChanged()
     {
         AppUtils.setGameSpeed(slider.getValue());
+    }
+
+    public interface BallCallback
+    {
+        interface AutoMoveBall
+        {
+            void moveTo(Directions direction);
+        }
+    }
+
+    public interface BallSquare
+    {
+        void newSquare();
+    }
+
+    public interface GameSpeed
+    {
+        void onSpeedChanged();
+    }
+
+    public interface GameTimer
+    {
+        interface GameStarted
+        {
+            void isRunning(boolean running);
+        }
+    }
+
+    public interface GoalScored
+    {
+        void scored();
+    }
+
+    public interface TeamMembersNumber
+    {
+        void onMembersChanged(TeamMembers players);
     }
 
 }
