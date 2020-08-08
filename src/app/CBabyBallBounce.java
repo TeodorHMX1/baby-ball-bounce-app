@@ -2,23 +2,24 @@
  * Program: Assignment 2: Application – Baby Ball Bounce
  * Filename: CBabyBallBounce.java
  *
- * @author: © Teodor Grigor (GitHub - TeodorHMX1)
+ * @author: © Teodor Grigor
  * Course: BSc Computing Year 1
  * Module: CSY1020 Problem Solving & Programming
- * Tutor: Gary Hill
- * @version: 1.6 Icon added to the JFrame
- * Date: 18/06/20
+ * Tutor: Apkar Salatian
+ * @version: 4.6 All classes merged into this class
+ * Date: 08/08/20
  */
 
 package app;
 
 import app.game.Game;
-import app.menu.MenuActivity;
 import app.utils.AssetsUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
+import static app.utils.AppUtils.getAppWindow;
 import static app.utils.AppUtils.setMainActivity;
 import static app.utils.AssetsUtils.IMG_BRICKS;
 
@@ -28,13 +29,8 @@ public class CBabyBallBounce extends JFrame
     public static void main(String[] args)
     {
 
-        EventQueue.invokeLater(() ->
-        {
-
-            //creating the app screen
-            new CBabyBallBounce();
-
-        });
+        //creating the app screen
+        EventQueue.invokeLater(CBabyBallBounce::new);
 
     }
 
@@ -91,8 +87,96 @@ public class CBabyBallBounce extends JFrame
     {
 
         //create app menu
-        MenuActivity menuActivity = new MenuActivity();
-        menuActivity.prepareMenu();
+        var menuBar = new JMenuBar();
+
+        //prepare file option from menu
+        menuBar.add(fileOptionMenu());
+
+        //prepare scenario option from menu
+        menuBar.add(scenarioOptionMenu());
+
+        //prepare edit option from menu
+        menuBar.add(editOptionMenu());
+
+        //prepare controls option from menu
+        menuBar.add(controlsOptionMenu());
+
+        //prepare controls option from menu
+        menuBar.add(toolsOptionMenu());
+
+        //prepare help option from menu
+        menuBar.add(helpOptionMenu());
+
+        getAppWindow().setJMenuBar(menuBar);
+
+    }
+
+    private JMenu fileOptionMenu()
+    {
+
+        var fileMenu = new JMenu("File");
+        fileMenu.setMnemonic(KeyEvent.VK_F);
+
+        var eMenuItem = new JMenuItem("Exit");
+        eMenuItem.setMnemonic(KeyEvent.VK_E);
+        eMenuItem.addActionListener((event) -> System.exit(0));
+        fileMenu.add(eMenuItem);
+
+        return fileMenu;
+
+    }
+
+    private JMenu scenarioOptionMenu()
+    {
+
+        var scenarioMenu = new JMenu("Scenario");
+        scenarioMenu.setMnemonic(KeyEvent.VK_S);
+        return scenarioMenu;
+
+    }
+
+    private JMenu editOptionMenu()
+    {
+
+        var editMenu = new JMenu("Edit");
+        editMenu.setMnemonic(KeyEvent.VK_E);
+        return editMenu;
+
+    }
+
+    private JMenu controlsOptionMenu()
+    {
+
+        var controlsMenu = new JMenu("Controls");
+        controlsMenu.setMnemonic(KeyEvent.VK_C);
+        return controlsMenu;
+
+    }
+
+    private JMenu toolsOptionMenu()
+    {
+
+        var controlsMenu = new JMenu("Tools");
+        controlsMenu.setMnemonic(KeyEvent.VK_T);
+        return controlsMenu;
+
+    }
+
+    private JMenu helpOptionMenu()
+    {
+
+        var helpMenu = new JMenu("Help");
+        helpMenu.setMnemonic(KeyEvent.VK_H);
+
+        var hMenuItem1 = new JMenuItem("Help Topic");
+        hMenuItem1.setMnemonic(KeyEvent.VK_H);
+        helpMenu.add(hMenuItem1);
+
+        var hMenuItem2 = new JMenuItem("About");
+        hMenuItem2.setMnemonic(KeyEvent.VK_A);
+        helpMenu.add(hMenuItem2);
+
+        return helpMenu;
 
     }
 
