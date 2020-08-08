@@ -27,6 +27,17 @@ public class CBabyBallBounce extends JFrame
     // path to different assets
     private final String IMG_BRICKS = "assets/images/bricks2.jpg"; // path to the brick image
     private final String IMG_WHITE_SQUARE = "assets/images/white32x32.jpg"; // path to the white square
+    private final String IMG_COMPASS_EAST = "assets/images/east.jpg"; // path to the east image - compass
+    private final String IMG_COMPASS_WEST = "assets/images/west.jpg"; // path to the west image - compass
+    private final String IMG_COMPASS_NORTH = "assets/images/north.jpg"; // path to the north image - compass
+    private final String IMG_COMPASS_SOUTH = "assets/images/south.jpg"; // path to the south image - compass
+    private final String IMG_STEP = "assets/images/step.png"; // path to the step icon
+    private final String IMG_RUN = "assets/images/run.png"; // path to the run icon
+    private final String IMG_PAUSE = "assets/images/pause.png"; // path to the pause icon
+    private final String IMG_RESET = "assets/images/reset.png"; // path to the reset icon
+    private final String IMG_BALL = "assets/images/ball.png"; // path to the ball icon
+    private final String IMG_BABY1 = "assets/images/baby1.png"; // path to the baby1 icon
+    private final String IMG_BABY2 = "assets/images/baby2.png"; // path to the baby2 icon
 
     // integers
     private final int rows = 13; // number of rows
@@ -1059,7 +1070,7 @@ public class CBabyBallBounce extends JFrame
         compassLabel = new JLabel("");
         compassLabel.setBackground(new Color(0, 0, 0, 0));
 
-        ImageIcon imageIcon = new ImageIcon("assets/images/east.jpg");
+        ImageIcon imageIcon = new ImageIcon(IMG_COMPASS_EAST);
         Image image = imageIcon.getImage();
         Image newimg = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(newimg);
@@ -1180,7 +1191,7 @@ public class CBabyBallBounce extends JFrame
         optionItemChoseHolder.setBackground(new Color(255, 255, 255));
         optionItemChoseHolder.setPreferredSize(new Dimension(80, 25));
         JLabel contentLabel = new JLabel("");
-        Icon iconAct = new ImageIcon("assets/images/ball.png");
+        Icon iconAct = new ImageIcon(IMG_BALL);
         contentLabel.setIcon(iconAct);
         optionItemChoseHolder.add(contentLabel);
 
@@ -1211,7 +1222,7 @@ public class CBabyBallBounce extends JFrame
         switch (direction)
         {
             case DOWN:
-                imageIcon = new ImageIcon("assets/images/south.jpg");
+                imageIcon = new ImageIcon(IMG_COMPASS_SOUTH);
                 image = imageIcon.getImage();
                 image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
@@ -1219,7 +1230,7 @@ public class CBabyBallBounce extends JFrame
                 directionLabel.setText("S");
                 break;
             case UP:
-                imageIcon = new ImageIcon("assets/images/north.jpg");
+                imageIcon = new ImageIcon(IMG_COMPASS_NORTH);
                 image = imageIcon.getImage();
                 image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
@@ -1227,7 +1238,7 @@ public class CBabyBallBounce extends JFrame
                 directionLabel.setText("N");
                 break;
             case LEFT:
-                imageIcon = new ImageIcon("assets/images/west.jpg");
+                imageIcon = new ImageIcon(IMG_COMPASS_WEST);
                 image = imageIcon.getImage();
                 image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
@@ -1235,7 +1246,7 @@ public class CBabyBallBounce extends JFrame
                 directionLabel.setText("W");
                 break;
             case RIGHT:
-                imageIcon = new ImageIcon("assets/images/east.jpg");
+                imageIcon = new ImageIcon(IMG_COMPASS_EAST);
                 image = imageIcon.getImage();
                 image = image.getScaledInstance(110, 110, Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(image);
@@ -1313,7 +1324,7 @@ public class CBabyBallBounce extends JFrame
     private void loadActBtn()
     {
 
-        Icon iconAct = new ImageIcon("assets/images/step.png");
+        Icon iconAct = new ImageIcon(IMG_STEP);
         JButton btnAct = createButton(iconAct, "Act");
         btnAct.addActionListener(actionEvent ->
         {
@@ -1329,18 +1340,18 @@ public class CBabyBallBounce extends JFrame
     private void loadStateBtn()
     {
 
-        Icon iconAct = new ImageIcon("assets/images/run.png");
+        Icon iconAct = new ImageIcon(IMG_RUN);
         btnState = createButton(iconAct, "Run");
         btnState.addActionListener(actionEvent ->
         {
 
             if (!isGameStarted())
             {
-                btnState.setIcon(new ImageIcon("assets/images/pause.png"));
+                btnState.setIcon(new ImageIcon(IMG_PAUSE));
                 btnState.setText("Pause");
             } else
             {
-                btnState.setIcon(new ImageIcon("assets/images/run.png"));
+                btnState.setIcon(new ImageIcon(IMG_RUN));
                 btnState.setText("Run");
             }
             changeGameState();
@@ -1352,12 +1363,12 @@ public class CBabyBallBounce extends JFrame
     private void loadResetBtn()
     {
 
-        Icon iconAct = new ImageIcon("assets/images/reset.png");
+        Icon iconAct = new ImageIcon(IMG_RESET);
         JButton btnReset = createButton(iconAct, "Reset");
         btnReset.addActionListener(actionEvent ->
         {
             resetSeconds();
-            btnState.setIcon(new ImageIcon("assets/images/run.png"));
+            btnState.setIcon(new ImageIcon(IMG_RUN));
             btnState.setText("Run");
         });
         gameControls.add(btnReset);
@@ -1394,7 +1405,6 @@ public class CBabyBallBounce extends JFrame
         return mainActivityGlobal;
     }
 
-
     private void addOnTeamMembersListener(TeamMembersNumber teamMembersNumber)
     {
         mTeamMembersNumber = teamMembersNumber;
@@ -1421,15 +1431,14 @@ public class CBabyBallBounce extends JFrame
         return 2;
     }
 
-
     private void initializePlayers()
     {
-        ImageIcon imageIcon1 = new ImageIcon("assets/images/baby1.png");
+        ImageIcon imageIcon1 = new ImageIcon(IMG_BABY1);
         Image image1 = imageIcon1.getImage();
         Image newimg1 = image1.getScaledInstance(31, 31, Image.SCALE_SMOOTH);
         imageIcon1 = new ImageIcon(newimg1);
 
-        ImageIcon imageIcon2 = new ImageIcon("assets/images/baby2.png");
+        ImageIcon imageIcon2 = new ImageIcon(IMG_BABY2);
         Image image2 = imageIcon2.getImage();
         Image newimg2 = image2.getScaledInstance(31, 31, Image.SCALE_SMOOTH);
         imageIcon2 = new ImageIcon(newimg2);
@@ -1460,10 +1469,9 @@ public class CBabyBallBounce extends JFrame
         return ballDirection;
     }
 
-
     private void initializeBall()
     {
-        ImageIcon imageIcon = new ImageIcon("assets/images/ball.png");
+        ImageIcon imageIcon = new ImageIcon(IMG_BALL);
         Image image = imageIcon.getImage();
         Image newimg = image.getScaledInstance(23, 23, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(newimg);
@@ -1474,7 +1482,6 @@ public class CBabyBallBounce extends JFrame
     {
         return mBall;
     }
-
 
     private void increaseSeconds()
     {
@@ -1514,7 +1521,6 @@ public class CBabyBallBounce extends JFrame
         return seconds;
     }
 
-
     private void changeGameState()
     {
         gameStarted = !gameStarted;
@@ -1529,12 +1535,10 @@ public class CBabyBallBounce extends JFrame
         return gameStarted;
     }
 
-
     private void addOnTimerCallback(GameStarted gameStarted)
     {
         mGameStarted = gameStarted;
     }
-
 
     private void addOnAutoMoveBallCallback(AutoMoveBall autoMoveBall)
     {
@@ -1545,7 +1549,6 @@ public class CBabyBallBounce extends JFrame
     {
         return mAutoMoveBall;
     }
-
 
     private int getGameSpeed()
     {
@@ -1560,7 +1563,6 @@ public class CBabyBallBounce extends JFrame
             mGameSpeedCallback.onSpeedChanged();
         }
     }
-
 
     private void addOnGameSpeedCallback(GameSpeed gameSpeed)
     {
@@ -1585,7 +1587,6 @@ public class CBabyBallBounce extends JFrame
     {
         return mBallSquare;
     }
-
 
     private void addGoalScoredCallback(GoalScored goalScored)
     {
