@@ -7,7 +7,7 @@
  * Module: CSY1020 Problem Solving & Programming
  * Tutor: Apkar Salatian
  * @version: 4.6 All classes merged into one class
- * Date: 08/08/20
+ * Updated: 08/08/20
  */
 
 package app;
@@ -773,118 +773,6 @@ public class CBabyBallBounce extends JFrame
 
     }
 
-    private void addGameObjects()
-    {
-
-        addBall();
-        addPlayers();
-
-    }
-
-    private void addBall()
-    {
-
-        JPanel ballHolder = new JPanel();
-        ballHolder.setBounds(0, 0, 530, 360);
-        ballHolder.setLocation(0, 0);
-        ballHolder.setOpaque(false);
-        ballHolder.setLayout(null);
-
-        Ball mBall = getBall();
-        JLabel ball = new JLabel("");
-        ball.setIcon(mBall.getBallImage());
-        ball.setLocation(0, 0);
-
-        mBallObj = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mBallObj.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        mBallObj.setBounds(0, 0, 23, 23);
-        mBallObj.setOpaque(false);
-        mBallObj.add(ball);
-        ballHolder.add(mBallObj);
-        setBallObj();
-
-        gameWorldHolder.add(ballHolder, Integer.valueOf(2));
-
-    }
-
-    private void addPlayers()
-    {
-
-        addTeamA();
-        addTeamB();
-
-    }
-
-    private void addTeamA()
-    {
-
-        Player mPlayer1 = getPlayer(1);
-
-        JLabel mPlayerLabel = new JLabel("");
-        mPlayerLabel.setIcon(mPlayer1.getPlayerImg());
-        mPlayerLabel.setLocation(0, 0);
-
-        JPanel mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        mPlayerJPanel.setBounds(0, 0, 31, 31);
-        mPlayerJPanel.setOpaque(false);
-        mPlayerJPanel.add(mPlayerLabel);
-        mPlayers.add(mPlayerJPanel);
-
-        gameWorldHolder.add(mPlayers.get(0), Integer.valueOf(3));
-
-        Player mPlayer3 = getPlayer(3);
-
-        mPlayerLabel = new JLabel("");
-        mPlayerLabel.setIcon(mPlayer3.getPlayerImg());
-        mPlayerLabel.setLocation(0, 0);
-
-        mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        mPlayerJPanel.setBounds(0, 0, 31, 31);
-        mPlayerJPanel.setOpaque(false);
-        mPlayerJPanel.add(mPlayerLabel);
-        mPlayers.add(mPlayerJPanel);
-
-        gameWorldHolder.add(mPlayers.get(1), Integer.valueOf(4));
-
-    }
-
-    private void addTeamB()
-    {
-
-        Player mPlayer1 = getPlayer(2);
-
-        JLabel mPlayerLabel = new JLabel("");
-        mPlayerLabel.setIcon(mPlayer1.getPlayerImg());
-        mPlayerLabel.setLocation(0, 0);
-
-        JPanel mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        mPlayerJPanel.setBounds(0, 0, 31, 31);
-        mPlayerJPanel.setOpaque(false);
-        mPlayerJPanel.add(mPlayerLabel);
-        mPlayers.add(mPlayerJPanel);
-
-        gameWorldHolder.add(mPlayers.get(2), Integer.valueOf(5));
-
-        Player mPlayer3 = getPlayer(4);
-
-        mPlayerLabel = new JLabel("");
-        mPlayerLabel.setIcon(mPlayer3.getPlayerImg());
-        mPlayerLabel.setLocation(0, 0);
-
-        mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        mPlayerJPanel.setBounds(0, 0, 31, 31);
-        mPlayerJPanel.setOpaque(false);
-        mPlayerJPanel.add(mPlayerLabel);
-        mPlayers.add(mPlayerJPanel);
-
-        gameWorldHolder.add(mPlayers.get(3), Integer.valueOf(6));
-
-    }
-
     enum Players
     {
         TWO,
@@ -960,14 +848,6 @@ public class CBabyBallBounce extends JFrame
         });
 
 
-    }
-
-    private void setTime()
-    {
-        increaseSeconds();
-        timerHours.setText(timeBased(getSeconds() / (60 * 60)));
-        timerMinutes.setText(timeBased(getSeconds() / (60) % 60));
-        timerSeconds.setText(timeBased(getSeconds() % 60));
     }
 
     private String timeBased(int time)
@@ -1393,44 +1273,6 @@ public class CBabyBallBounce extends JFrame
         setGameSpeed(slider.getValue());
     }
 
-    private void setMainActivity(JFrame mainActivity)
-    {
-        mainActivityGlobal = mainActivity;
-        initializePlayers();
-        initializeBall();
-    }
-
-    private JFrame getAppWindow()
-    {
-        return mainActivityGlobal;
-    }
-
-    private void addOnTeamMembersListener(TeamMembersNumber teamMembersNumber)
-    {
-        mTeamMembersNumber = teamMembersNumber;
-    }
-
-    private void setPlayers(TeamMembers noPlayers)
-    {
-        players = noPlayers;
-        if (mTeamMembersNumber != null)
-        {
-            mTeamMembersNumber.onMembersChanged(noPlayers);
-        }
-    }
-
-    private int getNoPlayers()
-    {
-        if (players == TeamMembers.players_2)
-        {
-            return 2;
-        } else if (players == TeamMembers.players_4)
-        {
-            return 4;
-        }
-        return 2;
-    }
-
     private void initializePlayers()
     {
         ImageIcon imageIcon1 = new ImageIcon(IMG_BABY1);
@@ -1454,21 +1296,6 @@ public class CBabyBallBounce extends JFrame
         mPlayersData.add(mPlayer4);
     }
 
-    private Player getPlayer(int player)
-    {
-        return mPlayersData.get(player - 1);
-    }
-
-    private void setBallDirection(Directions directionN)
-    {
-        ballDirection = directionN;
-    }
-
-    private Directions getBallDirection()
-    {
-        return ballDirection;
-    }
-
     private void initializeBall()
     {
         ImageIcon imageIcon = new ImageIcon(IMG_BALL);
@@ -1476,11 +1303,6 @@ public class CBabyBallBounce extends JFrame
         Image newimg = image.getScaledInstance(23, 23, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(newimg);
         mBall = new Ball(imageIcon);
-    }
-
-    private Ball getBall()
-    {
-        return mBall;
     }
 
     private void increaseSeconds()
@@ -1516,11 +1338,6 @@ public class CBabyBallBounce extends JFrame
         initializeBall();
     }
 
-    private int getSeconds()
-    {
-        return seconds;
-    }
-
     private void changeGameState()
     {
         gameStarted = !gameStarted;
@@ -1535,14 +1352,83 @@ public class CBabyBallBounce extends JFrame
         return gameStarted;
     }
 
-    private void addOnTimerCallback(GameStarted gameStarted)
+    private void setTime()
     {
-        mGameStarted = gameStarted;
+        increaseSeconds();
+        timerHours.setText(timeBased(getSeconds() / (60 * 60)));
+        timerMinutes.setText(timeBased(getSeconds() / (60) % 60));
+        timerSeconds.setText(timeBased(getSeconds() % 60));
     }
 
-    private void addOnAutoMoveBallCallback(AutoMoveBall autoMoveBall)
+    private void setMainActivity(JFrame mainActivity)
     {
-        mAutoMoveBall = autoMoveBall;
+        mainActivityGlobal = mainActivity;
+        initializePlayers();
+        initializeBall();
+    }
+
+    private void setPlayers(TeamMembers noPlayers)
+    {
+        players = noPlayers;
+        if (mTeamMembersNumber != null)
+        {
+            mTeamMembersNumber.onMembersChanged(noPlayers);
+        }
+    }
+
+    private void setBallDirection(Directions directionN)
+    {
+        ballDirection = directionN;
+    }
+
+    private void setGameSpeed(int speed)
+    {
+        gameSpeed = speed;
+        if (mGameSpeedCallback != null)
+        {
+            mGameSpeedCallback.onSpeedChanged();
+        }
+    }
+
+    private void setBallObj()
+    {
+    }
+
+    private JFrame getAppWindow()
+    {
+        return mainActivityGlobal;
+    }
+
+    private int getNoPlayers()
+    {
+        if (players == TeamMembers.players_2)
+        {
+            return 2;
+        } else if (players == TeamMembers.players_4)
+        {
+            return 4;
+        }
+        return 2;
+    }
+
+    private Player getPlayer(int player)
+    {
+        return mPlayersData.get(player - 1);
+    }
+
+    private Directions getBallDirection()
+    {
+        return ballDirection;
+    }
+
+    private Ball getBall()
+    {
+        return mBall;
+    }
+
+    private int getSeconds()
+    {
+        return seconds;
     }
 
     private AutoMoveBall getAutoMoveBall()
@@ -1555,27 +1441,121 @@ public class CBabyBallBounce extends JFrame
         return gameSpeed;
     }
 
-    private void setGameSpeed(int speed)
-    {
-        gameSpeed = speed;
-        if (mGameSpeedCallback != null)
-        {
-            mGameSpeedCallback.onSpeedChanged();
-        }
-    }
-
-    private void addOnGameSpeedCallback(GameSpeed gameSpeed)
-    {
-        mGameSpeedCallback = gameSpeed;
-    }
-
     private String getBallPosition()
     {
         return mBallObj.getLocation().x / 33 + "x" + (mBallObj.getLocation().y / 26);
     }
 
-    private void setBallObj()
+    private void addGameObjects()
     {
+
+        addBall();
+        addPlayers();
+
+    }
+
+    private void addBall()
+    {
+
+        JPanel ballHolder = new JPanel();
+        ballHolder.setBounds(0, 0, 530, 360);
+        ballHolder.setLocation(0, 0);
+        ballHolder.setOpaque(false);
+        ballHolder.setLayout(null);
+
+        Ball mBall = getBall();
+        JLabel ball = new JLabel("");
+        ball.setIcon(mBall.getBallImage());
+        ball.setLocation(0, 0);
+
+        mBallObj = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        mBallObj.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mBallObj.setBounds(0, 0, 23, 23);
+        mBallObj.setOpaque(false);
+        mBallObj.add(ball);
+        ballHolder.add(mBallObj);
+        setBallObj();
+
+        gameWorldHolder.add(ballHolder, Integer.valueOf(2));
+
+    }
+
+    private void addPlayers()
+    {
+
+        addTeamA();
+        addTeamB();
+
+    }
+
+    private void addTeamA()
+    {
+
+        Player mPlayer1 = getPlayer(1);
+
+        JLabel mPlayerLabel = new JLabel("");
+        mPlayerLabel.setIcon(mPlayer1.getPlayerImg());
+        mPlayerLabel.setLocation(0, 0);
+
+        JPanel mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mPlayerJPanel.setBounds(0, 0, 31, 31);
+        mPlayerJPanel.setOpaque(false);
+        mPlayerJPanel.add(mPlayerLabel);
+        mPlayers.add(mPlayerJPanel);
+
+        gameWorldHolder.add(mPlayers.get(0), Integer.valueOf(3));
+
+        Player mPlayer3 = getPlayer(3);
+
+        mPlayerLabel = new JLabel("");
+        mPlayerLabel.setIcon(mPlayer3.getPlayerImg());
+        mPlayerLabel.setLocation(0, 0);
+
+        mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mPlayerJPanel.setBounds(0, 0, 31, 31);
+        mPlayerJPanel.setOpaque(false);
+        mPlayerJPanel.add(mPlayerLabel);
+        mPlayers.add(mPlayerJPanel);
+
+        gameWorldHolder.add(mPlayers.get(1), Integer.valueOf(4));
+
+    }
+
+    private void addTeamB()
+    {
+
+        Player mPlayer1 = getPlayer(2);
+
+        JLabel mPlayerLabel = new JLabel("");
+        mPlayerLabel.setIcon(mPlayer1.getPlayerImg());
+        mPlayerLabel.setLocation(0, 0);
+
+        JPanel mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mPlayerJPanel.setBounds(0, 0, 31, 31);
+        mPlayerJPanel.setOpaque(false);
+        mPlayerJPanel.add(mPlayerLabel);
+        mPlayers.add(mPlayerJPanel);
+
+        gameWorldHolder.add(mPlayers.get(2), Integer.valueOf(5));
+
+        Player mPlayer3 = getPlayer(4);
+
+        mPlayerLabel = new JLabel("");
+        mPlayerLabel.setIcon(mPlayer3.getPlayerImg());
+        mPlayerLabel.setLocation(0, 0);
+
+        mPlayerJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        mPlayerJPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        mPlayerJPanel.setBounds(0, 0, 31, 31);
+        mPlayerJPanel.setOpaque(false);
+        mPlayerJPanel.add(mPlayerLabel);
+        mPlayers.add(mPlayerJPanel);
+
+        gameWorldHolder.add(mPlayers.get(3), Integer.valueOf(6));
+
     }
 
     private void addBallSquareCallback(BallSquare ballSquare)
@@ -1583,14 +1563,34 @@ public class CBabyBallBounce extends JFrame
         mBallSquare = ballSquare;
     }
 
-    private BallSquare getBallSquare()
-    {
-        return mBallSquare;
-    }
-
     private void addGoalScoredCallback(GoalScored goalScored)
     {
         mGoalScored = goalScored;
+    }
+
+    private void addOnGameSpeedCallback(GameSpeed gameSpeed)
+    {
+        mGameSpeedCallback = gameSpeed;
+    }
+
+    private void addOnTimerCallback(GameStarted gameStarted)
+    {
+        mGameStarted = gameStarted;
+    }
+
+    private void addOnAutoMoveBallCallback(AutoMoveBall autoMoveBall)
+    {
+        mAutoMoveBall = autoMoveBall;
+    }
+
+    private void addOnTeamMembersListener(TeamMembersNumber teamMembersNumber)
+    {
+        mTeamMembersNumber = teamMembersNumber;
+    }
+
+    private BallSquare getBallSquare()
+    {
+        return mBallSquare;
     }
 
     // method that retries the relevant image based on the image path
