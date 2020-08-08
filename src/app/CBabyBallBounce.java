@@ -53,7 +53,7 @@ public class CBabyBallBounce extends JFrame
 
         // prepare window details
         // set window title
-        setTitle("CBabyBallBounce – Baby Ball Bounce Application");
+        setTitle("CBabyBallBounce - Baby Ball Bounce Application");
         // set screen size
         setSize(825, 585);
         // make the screen to always be at the same size

@@ -166,7 +166,7 @@ public class GameWorld
 
     private boolean isCollidingB(Point mPlayer, Point mBallObj)
     {
-        return mBallObj.x >= mPlayer.x - 32 && mBallObj.x <= mPlayer.x &&
+        return mBallObj.x >= mPlayer.x && mBallObj.x <= mPlayer.x + 32 &&
                 mBallObj.y >= mPlayer.y && mBallObj.y <= mPlayer.y + 32;
     }
 
@@ -263,7 +263,7 @@ public class GameWorld
                     AppUtils.setBallDirection(direction);
                 } else
                 {
-                    AppUtils.setBallDirection(Directions.RIGHT);
+                    AppUtils.setBallDirection(randomDirection(Directions.RIGHT));
                     moveBallTo(AppUtils.getBallDirection());
                 }
                 break;
@@ -274,7 +274,7 @@ public class GameWorld
                     AppUtils.setBallDirection(direction);
                 } else
                 {
-                    AppUtils.setBallDirection(Directions.LEFT);
+                    AppUtils.setBallDirection(randomDirection(Directions.LEFT));
                     moveBallTo(AppUtils.getBallDirection());
                 }
                 break;
@@ -345,20 +345,20 @@ public class GameWorld
     {
         if (AppUtils.getBallDirection() == Directions.RIGHT)
         {
-            moveBallTo(Directions.LEFT);
-            moveBallTo(Directions.LEFT);
+        	AppUtils.setBallDirection(randomDirection(Directions.LEFT));
+            moveBallTo(AppUtils.getBallDirection());
         } else if (AppUtils.getBallDirection() == Directions.LEFT)
         {
-            moveBallTo(Directions.RIGHT);
-            moveBallTo(Directions.RIGHT);
+        	AppUtils.setBallDirection(randomDirection(Directions.RIGHT));
+            moveBallTo(AppUtils.getBallDirection());
         } else if (AppUtils.getBallDirection() == Directions.UP)
         {
-            moveBallTo(Directions.DOWN);
-            moveBallTo(Directions.DOWN);
+        	AppUtils.setBallDirection(randomDirection(Directions.DOWN));
+            moveBallTo(AppUtils.getBallDirection());
         } else if (AppUtils.getBallDirection() == Directions.DOWN)
         {
-            moveBallTo(Directions.UP);
-            moveBallTo(Directions.UP);
+        	AppUtils.setBallDirection(randomDirection(Directions.UP));
+            moveBallTo(AppUtils.getBallDirection());
         }
     }
 
@@ -498,11 +498,6 @@ public class GameWorld
 
         gameWorldHolder.add(mPlayers.get(1), Integer.valueOf(4));
 
-        if (AppUtils.getNoPlayers() == 4)
-        {
-
-        }
-
     }
 
     private void addTeamB()
@@ -537,18 +532,6 @@ public class GameWorld
         mPlayers.add(mPlayerJPanel);
 
         gameWorldHolder.add(mPlayers.get(3), Integer.valueOf(6));
-
-        if (AppUtils.getNoPlayers() == 4)
-        {
-
-        }
-
-//        Player mPlayer1 = AppUtils.getPlayer(2);
-//        gameGrid[mPlayer1.getX()][mPlayer1.getY()].setIcon(mPlayer1.getBabyImage());
-//        if (AppUtils.getNoPlayers() == 4) {
-//            Player mPlayer2 = AppUtils.getPlayer(4);
-//            gameGrid[mPlayer2.getX()][mPlayer2.getY()].setIcon(mPlayer2.getBabyImage());
-//        }
 
     }
 
