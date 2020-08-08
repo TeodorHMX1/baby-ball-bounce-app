@@ -6,7 +6,7 @@
  * Course: BSc Computing Year 1
  * Module: CSY1020 Problem Solving & Programming
  * Tutor: Apkar Salatian
- * @version: 4.6 All classes merged into this class
+ * @version: 4.6 All classes merged into one class
  * Date: 08/08/20
  */
 
@@ -20,6 +20,161 @@ import java.util.ArrayList;
 public class CBabyBallBounce extends JFrame
 {
 
+    // variables declaration section
+
+    // final variables
+    // strings
+    // path to different assets
+    private final String IMG_BRICKS = "assets/images/bricks2.jpg"; // path to the brick image
+    private final String IMG_WHITE_SQUARE = "assets/images/white32x32.jpg"; // path to the white square
+
+    // integers
+    private final int rows = 13; // number of rows
+    private final int columns = 16; // number of columns
+
+    // JLabel Array
+    private final JLabel[][] gameGrid = new JLabel[rows][columns]; // game grid
+
+    // JPanel ArrayList
+    private final ArrayList<JPanel> mPlayers = new ArrayList<>();
+
+    // List
+    private final java.util.List<Player> mPlayersData = new ArrayList<>();
+
+    // normal variables
+    // JPanels
+    private JPanel gameWorld;
+    private JPanel mBallObj;
+    private JPanel gameControls;
+    private JPanel gameOptions;
+
+    // JButtons
+    private JButton btnState;
+
+    // JLabels
+    private JLabel timerHours, timerMinutes, timerSeconds;
+    private JLabel scoreTeamLeft, scoreTeamRight;
+    private JLabel optionLabel, directionLabel, squareLabel;
+    private JLabel compassLabel;
+
+    // JLayeredPane
+    private JLayeredPane gameWorldHolder;
+
+    // JSlider
+    private JSlider slider;
+
+    // JFrame
+    private JFrame mainActivityGlobal;
+
+    // boolean
+    private boolean gameStarted = false;
+
+    // integers
+    private int teamA = 0, teamB = 0;
+    private int seconds = 0;
+    private int gameSpeed = 1;
+
+    // interfaces variables
+    private BallSquare mBallSquare;
+    private GameStarted mGameStarted;
+    private AutoMoveBall mAutoMoveBall;
+    private GameSpeed mGameSpeedCallback;
+    private GoalScored mGoalScored;
+    private TeamMembersNumber mTeamMembersNumber;
+
+    // enum variables
+    private Directions ballDirection = Directions.RIGHT;
+    private TeamMembers players = TeamMembers.players_2;
+
+    // models variables
+    private Ball mBall;
+
+    // interfaces models
+    interface AutoMoveBall
+    {
+        void moveTo(Directions direction);
+    }
+
+    interface BallSquare
+    {
+        void newSquare();
+    }
+
+    interface GameSpeed
+    {
+        void onSpeedChanged();
+    }
+
+    interface GameStarted
+    {
+        void isRunning(boolean running);
+    }
+
+    interface GoalScored
+    {
+        void scored();
+    }
+
+    interface TeamMembersNumber
+    {
+        void onMembersChanged(TeamMembers players);
+    }
+
+    // enum declaration
+    private enum TeamMembers
+    {
+        players_2,
+        players_4
+    }
+
+    private enum Directions
+    {
+        DEFAULT,
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN,
+        UP_LEFT,
+        UP_RIGHT,
+        BOTTOM_LEFT,
+        BOTTOM_RIGHT
+    }
+
+    // models declaration
+    static class Ball
+    {
+
+        private final ImageIcon ballImage;
+
+        private Ball(ImageIcon image)
+        {
+            this.ballImage = image;
+        }
+
+        private ImageIcon getBallImage()
+        {
+            return ballImage;
+        }
+    }
+
+    static class Player
+    {
+
+        private final ImageIcon playerImg;
+
+        private Player(ImageIcon image)
+        {
+            this.playerImg = image;
+        }
+
+        private ImageIcon getPlayerImg()
+        {
+            return playerImg;
+        }
+
+    }
+
+    // main method
     public static void main(String[] args)
     {
 
@@ -28,8 +183,8 @@ public class CBabyBallBounce extends JFrame
 
     }
 
-    //the class method
-    public CBabyBallBounce()
+    // the class method
+    private CBabyBallBounce()
     {
 
         initializeWindow();
@@ -38,6 +193,7 @@ public class CBabyBallBounce extends JFrame
 
     }
 
+    // initialize the JFrame with the System Requirements
     private void initializeWindow()
     {
 
@@ -62,21 +218,28 @@ public class CBabyBallBounce extends JFrame
 
     }
 
+    // initialize background runner
     private void initializeAppUtils()
     {
 
+        // setting the main activity
+        // *useful when more classes are present*
         setMainActivity(CBabyBallBounce.this);
 
     }
 
+    // create the UI and UX for the Application
     private void createUIX()
     {
 
+        // start the menu creation
         createMenu();
+        // start the game creation
         createGame();
 
     }
 
+    // create the top menu with the 'file', 'scenario', etc. options
     private void createMenu()
     {
 
@@ -174,6 +337,7 @@ public class CBabyBallBounce extends JFrame
 
     }
 
+    // create the game
     private void createGame()
     {
 
@@ -182,7 +346,8 @@ public class CBabyBallBounce extends JFrame
 
     }
 
-    public void prepareGame()
+    // prepare the game environment
+    private void prepareGame()
     {
 
         Container windowContainer = getAppWindow().getContentPane();
@@ -203,15 +368,8 @@ public class CBabyBallBounce extends JFrame
 
     }
 
-    private JPanel gameWorld;
-    private JLayeredPane gameWorldHolder;
-    private final int rows = 13;
-    private final int columns = 16;
-    private JLabel[][] gameGrid = new JLabel[rows][columns];
-    public JPanel mBallObj;
-    private ArrayList<JPanel> mPlayers = new ArrayList<>();
-
-    public void gameWorld()
+    // prepare the game world
+    private void gameWorld()
     {
 
         gameWorld = new JPanel();
@@ -223,6 +381,7 @@ public class CBabyBallBounce extends JFrame
 
     }
 
+    // initialize the game world subholder with its content
     private void initializeGameSubHolder()
     {
 
@@ -278,6 +437,7 @@ public class CBabyBallBounce extends JFrame
 
     }
 
+    // move a player towards the ball
     private void movePlayerToBall(JPanel player)
     {
         if (mBallObj.getLocation().y <= player.getLocation().y)
@@ -289,6 +449,8 @@ public class CBabyBallBounce extends JFrame
         }
     }
 
+    // move a player towards the ball
+    // *used when in a team ar 2 members*
     private void movePlayerToBall(JPanel player, boolean limitUp)
     {
         if (limitUp && (player.getLocation().y < 160 || player.getLocation().y > mBallObj.getLocation().y))
@@ -312,6 +474,7 @@ public class CBabyBallBounce extends JFrame
         }
     }
 
+    // move the players on the field
     private void movePlayers()
     {
         if (getNoPlayers() == 2)
@@ -327,23 +490,28 @@ public class CBabyBallBounce extends JFrame
         }
     }
 
+    // check if team a is colliding with the ball
     private boolean isCollidingA(Point mPlayer, Point mBallObj)
     {
         return mBallObj.x >= mPlayer.x && mBallObj.x <= mPlayer.x + 32 &&
                 mBallObj.y >= mPlayer.y && mBallObj.y <= mPlayer.y + 32;
     }
 
+    // check if team b is colliding with the ball
     private boolean isCollidingB(Point mPlayer, Point mBallObj)
     {
         return mBallObj.x >= mPlayer.x && mBallObj.x <= mPlayer.x + 32 &&
                 mBallObj.y >= mPlayer.y && mBallObj.y <= mPlayer.y + 32;
     }
 
+    // return a random number
+    // used for random direction
     private int randomNumber()
     {
         return (int) (Math.random() * ((3 - 1) + 1)) + 1;
     }
 
+    // based on the random number retrieve a direction
     private Directions randomDirection(Directions direction)
     {
         int randomNo = randomNumber();
@@ -398,6 +566,7 @@ public class CBabyBallBounce extends JFrame
         }
     }
 
+    // move the ball to a direction
     private void moveBallTo(Directions direction)
     {
 
@@ -510,6 +679,7 @@ public class CBabyBallBounce extends JFrame
 
     }
 
+    // bounce the ball against the borders or players
     private void bounceBall()
     {
         if (getBallDirection() == Directions.RIGHT)
@@ -620,7 +790,7 @@ public class CBabyBallBounce extends JFrame
         mBallObj.setOpaque(false);
         mBallObj.add(ball);
         ballHolder.add(mBallObj);
-        setBallObj(mBallObj);
+        setBallObj();
 
         gameWorldHolder.add(ballHolder, Integer.valueOf(2));
 
@@ -704,19 +874,13 @@ public class CBabyBallBounce extends JFrame
 
     }
 
-    private JPanel gameOptions;
-    private JLabel timerHours, timerMinutes, timerSeconds;
-    private JLabel scoreTeamLeft, scoreTeamRight;
-    private JLabel optionLabel, directionLabel, squareLabel;
-    private JLabel compassLabel;
-
     enum Players
     {
         TWO,
         FOUR
     }
 
-    public void gameOptions()
+    private void gameOptions()
     {
 
         gameOptions = new JPanel();
@@ -750,9 +914,9 @@ public class CBabyBallBounce extends JFrame
         timerHolder.setPreferredSize(new Dimension(255, 18));
         timerHolder.setBorder(BorderFactory.createEmptyBorder(-3, 0, 0, 0));
 
-        timerHours = createTimerElement("00");
-        timerMinutes = createTimerElement("00");
-        timerSeconds = createTimerElement("00");
+        timerHours = createTimerElement();
+        timerMinutes = createTimerElement();
+        timerSeconds = createTimerElement();
 
         timerHolder.add(timerHours);
         timerHolder.add(new JLabel(" : "));
@@ -942,9 +1106,9 @@ public class CBabyBallBounce extends JFrame
 
     }
 
-    private JLabel createTimerElement(String text)
+    private JLabel createTimerElement()
     {
-        JLabel materialLabel = new JLabel(text);
+        JLabel materialLabel = new JLabel("00");
         materialLabel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
         materialLabel.setOpaque(true);
         materialLabel.setBackground(Color.black);
@@ -1124,11 +1288,7 @@ public class CBabyBallBounce extends JFrame
 
     }
 
-    private JPanel gameControls;
-    private JButton btnState;
-    private JSlider slider;
-
-    public void gameControls()
+    private void gameControls()
     {
 
         gameControls = new JPanel();
@@ -1222,88 +1382,25 @@ public class CBabyBallBounce extends JFrame
         setGameSpeed(slider.getValue());
     }
 
-    public interface BallCallback
-    {
-        interface AutoMoveBall
-        {
-            void moveTo(Directions direction);
-        }
-    }
-
-    public interface BallSquare
-    {
-        void newSquare();
-    }
-
-    public interface GameSpeed
-    {
-        void onSpeedChanged();
-    }
-
-    public interface GameTimer
-    {
-        interface GameStarted
-        {
-            void isRunning(boolean running);
-        }
-    }
-
-    public interface GoalScored
-    {
-        void scored();
-    }
-
-    public interface TeamMembersNumber
-    {
-        void onMembersChanged(TeamMembers players);
-    }
-
-    public enum TeamMembers
-    {
-        players_2,
-        players_4
-    }
-
-    public enum Directions
-    {
-        DEFAULT,
-        LEFT,
-        RIGHT,
-        UP,
-        DOWN,
-        UP_LEFT,
-        UP_RIGHT,
-        BOTTOM_LEFT,
-        BOTTOM_RIGHT
-    }
-
-
-    private Directions ballDirection = Directions.RIGHT;
-    private JFrame mainActivityGlobal;
-    public int teamA = 0, teamB = 0;
-
-    public void setMainActivity(JFrame mainActivity)
+    private void setMainActivity(JFrame mainActivity)
     {
         mainActivityGlobal = mainActivity;
         initializePlayers();
         initializeBall();
     }
 
-    public JFrame getAppWindow()
+    private JFrame getAppWindow()
     {
         return mainActivityGlobal;
     }
 
-    private TeamMembersNumber mTeamMembersNumber;
 
-    public void addOnTeamMembersListener(TeamMembersNumber teamMembersNumber)
+    private void addOnTeamMembersListener(TeamMembersNumber teamMembersNumber)
     {
         mTeamMembersNumber = teamMembersNumber;
     }
 
-    private TeamMembers players = TeamMembers.players_2;
-
-    public void setPlayers(TeamMembers noPlayers)
+    private void setPlayers(TeamMembers noPlayers)
     {
         players = noPlayers;
         if (mTeamMembersNumber != null)
@@ -1312,7 +1409,7 @@ public class CBabyBallBounce extends JFrame
         }
     }
 
-    public int getNoPlayers()
+    private int getNoPlayers()
     {
         if (players == TeamMembers.players_2)
         {
@@ -1325,9 +1422,7 @@ public class CBabyBallBounce extends JFrame
     }
 
 
-    private final java.util.List<Player> mPlayersData = new ArrayList<>();
-
-    public void initializePlayers()
+    private void initializePlayers()
     {
         ImageIcon imageIcon1 = new ImageIcon("assets/images/baby1.png");
         Image image1 = imageIcon1.getImage();
@@ -1350,29 +1445,23 @@ public class CBabyBallBounce extends JFrame
         mPlayersData.add(mPlayer4);
     }
 
-    public Player getPlayer(int player)
+    private Player getPlayer(int player)
     {
         return mPlayersData.get(player - 1);
     }
 
-    public java.util.List<Player> getPlayer()
-    {
-        return mPlayersData;
-    }
-
-    public void setBallDirection(Directions directionN)
+    private void setBallDirection(Directions directionN)
     {
         ballDirection = directionN;
     }
 
-    public Directions getBallDirection()
+    private Directions getBallDirection()
     {
         return ballDirection;
     }
 
-    private Ball mBall;
 
-    public void initializeBall()
+    private void initializeBall()
     {
         ImageIcon imageIcon = new ImageIcon("assets/images/ball.png");
         Image image = imageIcon.getImage();
@@ -1381,19 +1470,18 @@ public class CBabyBallBounce extends JFrame
         mBall = new Ball(imageIcon);
     }
 
-    public Ball getBall()
+    private Ball getBall()
     {
         return mBall;
     }
 
-    private int seconds = 0;
 
-    public void increaseSeconds()
+    private void increaseSeconds()
     {
         seconds++;
     }
 
-    public void resetSeconds()
+    private void resetSeconds()
     {
         seconds = 0;
         gameStarted = false;
@@ -1402,14 +1490,14 @@ public class CBabyBallBounce extends JFrame
         ballDirection = Directions.RIGHT;
         if (mGameStarted != null)
         {
-            mGameStarted.isRunning(gameStarted);
+            mGameStarted.isRunning(false);
         }
         setPlayers(players);
         initializePlayers();
         initializeBall();
     }
 
-    public void goalScored()
+    private void goalScored()
     {
         ballDirection = Directions.RIGHT;
         if (mGoalScored != null)
@@ -1421,54 +1509,50 @@ public class CBabyBallBounce extends JFrame
         initializeBall();
     }
 
-    public int getSeconds()
+    private int getSeconds()
     {
         return seconds;
     }
 
-    private boolean gameStarted = false;
 
-    public void changeGameState()
+    private void changeGameState()
     {
         gameStarted = !gameStarted;
         if (mGameStarted != null && gameStarted)
         {
-            mGameStarted.isRunning(gameStarted);
+            mGameStarted.isRunning(true);
         }
     }
 
-    public boolean isGameStarted()
+    private boolean isGameStarted()
     {
         return gameStarted;
     }
 
-    private GameTimer.GameStarted mGameStarted;
 
-    public void addOnTimerCallback(GameTimer.GameStarted gameStarted)
+    private void addOnTimerCallback(GameStarted gameStarted)
     {
         mGameStarted = gameStarted;
     }
 
-    private BallCallback.AutoMoveBall mAutoMoveBall;
 
-    public void addOnAutoMoveBallCallback(BallCallback.AutoMoveBall autoMoveBall)
+    private void addOnAutoMoveBallCallback(AutoMoveBall autoMoveBall)
     {
         mAutoMoveBall = autoMoveBall;
     }
 
-    public BallCallback.AutoMoveBall getAutoMoveBall()
+    private AutoMoveBall getAutoMoveBall()
     {
         return mAutoMoveBall;
     }
 
-    private int gameSpeed = 1;
 
-    public int getGameSpeed()
+    private int getGameSpeed()
     {
         return gameSpeed;
     }
 
-    public void setGameSpeed(int speed)
+    private void setGameSpeed(int speed)
     {
         gameSpeed = speed;
         if (mGameSpeedCallback != null)
@@ -1477,42 +1561,33 @@ public class CBabyBallBounce extends JFrame
         }
     }
 
-    private GameSpeed mGameSpeedCallback;
 
-    public void addOnGameSpeedCallback(GameSpeed gameSpeed)
+    private void addOnGameSpeedCallback(GameSpeed gameSpeed)
     {
         mGameSpeedCallback = gameSpeed;
     }
 
-    public GameSpeed getGameSpeedCallback()
-    {
-        return mGameSpeedCallback;
-    }
-
-    public String getBallPosition()
+    private String getBallPosition()
     {
         return mBallObj.getLocation().x / 33 + "x" + (mBallObj.getLocation().y / 26);
     }
 
-    public void setBallObj(JPanel ballObj)
+    private void setBallObj()
     {
     }
 
-    private BallSquare mBallSquare;
-
-    public void addBallSquareCallback(BallSquare ballSquare)
+    private void addBallSquareCallback(BallSquare ballSquare)
     {
         mBallSquare = ballSquare;
     }
 
-    public BallSquare getBallSquare()
+    private BallSquare getBallSquare()
     {
         return mBallSquare;
     }
 
-    private GoalScored mGoalScored;
 
-    public void addGoalScoredCallback(GoalScored goalScored)
+    private void addGoalScoredCallback(GoalScored goalScored)
     {
         mGoalScored = goalScored;
     }
@@ -1520,48 +1595,12 @@ public class CBabyBallBounce extends JFrame
     // method that retries the relevant image based on the image path
     // the path is passed as a parameter into the function
     // the parameter name is 'img'
-    public ImageIcon getImageIcon(String img)
+    private ImageIcon getImageIcon(String img)
     {
         return new ImageIcon(img);
     }
 
-    public static final String IMG_BRICKS = "assets/images/bricks2.jpg";
-    public static final String IMG_WHITE_SQUARE = "assets/images/white32x32.jpg";
-
-    static class Ball
-    {
-
-        private final ImageIcon ballImage;
-
-        public Ball(ImageIcon image)
-        {
-            this.ballImage = image;
-        }
-
-        public ImageIcon getBallImage()
-        {
-            return ballImage;
-        }
-    }
-
-    static class Player
-    {
-
-        private final ImageIcon playerImg;
-
-        public Player(ImageIcon image)
-        {
-            this.playerImg = image;
-        }
-
-        public ImageIcon getPlayerImg()
-        {
-            return playerImg;
-        }
-
-    }
-
-    public JButton createButton(Icon icon, String text)
+    private JButton createButton(Icon icon, String text)
     {
         JButton btn = new JButton(text);
         btn.setBackground(new Color(255, 255, 255));
